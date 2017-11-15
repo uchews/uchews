@@ -1,0 +1,12 @@
+#Compiled files#
+public/client
+public/index.js
+
+#Dependencies#
+node_modules
+
+#Floobits#
+.floo
+.floobit
+.floo
+.flooignore

@@ -1,0 +1,35 @@
+{
+  "name": "uchews",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-client": "babel client --watch --out-dir public --presets=react --ignore=node_modules,compiled --source-maps inline",
+    "start-server": "nodemon server/index.js --inspect"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pray4mojo/uchews.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pray4mojo/uchews/issues"
+  },
+  "homepage": "https://github.com/pray4mojo/uchews#readme",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "mongoose": "^4.13.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react": "^6.24.1",
+    "nodemon": "^1.12.1"
+  }
+}
