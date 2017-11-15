@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://uchews:catdog@ds163745.mlab.com:63745/uchews', { mongoUseClient: true});
+mongoose.connect(`mongodb://uchews:catdog@ds163745.mlab.com:63745/uchews`, { mongoUseClient: true});
 
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
