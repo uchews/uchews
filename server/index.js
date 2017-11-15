@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const db = require('../database/index.js');
 
 const app = express();
-const port = 1337;
-
+app.set('port', (process.env.PORT || 1337));
+const port = app.get('port');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
