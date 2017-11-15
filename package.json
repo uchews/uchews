@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel client --watch --out-dir public --presets=react --ignore=node_modules,compiled --source-maps inline | nodemon server/index.js --inspect",
     "start-client": "babel client --watch --out-dir public --presets=react --ignore=node_modules,compiled --source-maps inline",
     "start-server": "nodemon server/index.js --inspect"
   },
