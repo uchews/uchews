@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const db = require('../database/index.js');
+const google = require('./googlePlacesHelpers.js');
 
 require('dotenv').config();
 
@@ -15,6 +16,13 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(express.static(__dirname + '/../public'));
+
+//This must be changed to app.post to interact with the front-end
+app.get('/input/findRestaurants', (req, res) => {
+  google.handleQueries(req.body, (results) => {
+    res.send(results);
+  });
+});
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`);

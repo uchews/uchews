@@ -12,3 +12,5 @@ node_modules
 .flooignore
 
 .env
+
+server/rankResults.txt
