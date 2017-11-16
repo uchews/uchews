@@ -1,0 +1,15 @@
+{
+  "extends": "plugin:react/recommended",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "window": true
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-no-undef": "off"
+  }
+}
