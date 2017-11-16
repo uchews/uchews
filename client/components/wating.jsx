@@ -1,7 +1,8 @@
 const Waiting = () => {
   return (
     <div>
-      <h1>Waiting</h1>
+      <img src="/assets/loading.gif"/>
+      <h3>Compiling your results!</h3>
     </div>
   )
 }
