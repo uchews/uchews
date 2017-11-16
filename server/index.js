@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const db = require('../database/index.js');
 
+require('dotenv').config();
+
 const app = express();
 app.set('port', (process.env.PORT || 1337));
 const port = app.get('port');
