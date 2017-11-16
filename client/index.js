@@ -4,55 +4,63 @@ class Index extends React.Component {
     this.state= {
       appView: 'home'
     }
+    this.clickHandle = this.clickHandle.bind(this);
   }
+
+  clickHandle(view) {
+    this.setState({
+      appView: view
+    });
+  }
+
   render() {
     if (this.state.appView === 'home') {
       return (
         <div>
           <h1>uChews</h1>
-          <Home appView={this.state.appView}/>
+          <Home appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       )
     } else if (this.state.appView === 'login') {
       return (
         <div>
           <h1>uChews</h1>
-          <Login appView={this.state.appView}/>
+          <Login appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       );
     } else if (this.state.appView === 'input') {
       return (
         <div>
           <h1>uChews</h1>
-          <Input/>
+          <Input appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       );
     } else if (this.state.appView === 'types') {
       return (
         <div>
           <h1>uChews</h1>
-          <Types/>
+          <Types appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       );
     } else if (this.state.appView === 'waiting') {
       return (
         <div>
           <h1>uChews</h1>
-          <Waiting/>
+          <Waiting appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       );
     } else if (this.state.appView === 'results') {
       return (
         <div>
           <h1>uChews</h1>
-          <Results/>
+          <Results appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       );
     } else if (this.state.appView === 'signup') {
       return (
         <div>
           <h1>uChews</h1>
-          <Signup/>
+          <Signup appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       );
     }
