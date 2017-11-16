@@ -1,4 +1,5 @@
 const axios = require('axios');
+const Nodegeocoder = require('node-geocoder');
 
 
 const requestRestaurants = function(foodType, latitude, longitude, radius, cb) {
@@ -11,7 +12,30 @@ const requestRestaurants = function(foodType, latitude, longitude, radius, cb) {
   })
     .then(cb)
     .catch(cb);
+}
+
+const handleQueries = function(body, cb) {
+  let geocoder = Nodegeocoder({
+    provider: 'google',
+    apiKey: process.env.GOOGLE_API_KEY
+  });
+  geocoder.geocode(req.body.location, (err, locationObject) => {
+
+  });
 
 }
 
+const
+
 module.exports.requestRestaurants = requestRestaurants;
+module.exports.handleQueries = handleQueries;
+
+
+
+req.body: {
+  location: '123 Fake St',
+  budget: 2,
+  radius: 500,
+  wantToEat: ['chinese', 'sushi', 'italian'],
+  willNotEat: ['italian', 'bar']
+}
