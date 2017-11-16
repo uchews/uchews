@@ -1,16 +1,31 @@
 const Login = ({clickHandle}) => {
   return (
-    <div>
-      <h1>Login</h1>
-      <h3>username</h3>
-      <input type="text"/>
-      <h3>password</h3>
-      <input type="text"/>
+
+    <form action="/login" method="post">
+
       <div>
-        <button onClick={() => clickHandle('home')}>login</button>
-        <button onClick={() => clickHandle('signup')}>signup</button>
+
+        <label>Username:</label>
+        <input type="text" name="username"/>
+
       </div>
-    </div>
+
+      <div>
+
+        <label>Password:</label>
+        <input type="password" name="password"/>
+
+      </div>
+
+      <div>
+
+        <input type="submit" value="Log In"
+            onClick={() => clickHandle('home')}
+        />
+
+      </div>
+
+    </form>
   )
 }
 
