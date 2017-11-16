@@ -17,25 +17,13 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static(__dirname + '/../public'));
 
-app.get('/findRestaurants', (req, res) => {
+//This must be changed to app.post to interact with the front-end
+app.get('/input/findRestaurants', (req, res) => {
   google.handleQueries(req.body, (results) => {
-
+    res.send(results);
   });
-  google.requestRestaurants('Indian', 40.712775, -74.005973, 500, (data) => {
-    console.log('results===================', data.data.results);
-    res.send();
-  });
-})
+});
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
 });
-
-
-// req.body: {
-//   budget: 2,
-//   radius: 500,
-//   wantToEat: ['chinese', 'sushi', 'italian'],
-//   willNotEat: ['italian', 'bar']
-// }
-
