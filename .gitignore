@@ -1,6 +1,6 @@
 #Compiled files#
-public/client
 public/index.js
+public/components
 
 #Dependencies#
 node_modules
