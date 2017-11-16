@@ -25,17 +25,16 @@ const handleQueries = function(body, cb) {
 
 }
 
-const
 
 module.exports.requestRestaurants = requestRestaurants;
 module.exports.handleQueries = handleQueries;
 
 
 
-req.body: {
-  location: '123 Fake St',
-  budget: 2,
-  radius: 500,
-  wantToEat: ['chinese', 'sushi', 'italian'],
-  willNotEat: ['italian', 'bar']
-}
+// req.body: {
+//   location: '123 Fake St',
+//   budget: 2,
+//   radius: 500,
+//   wantToEat: ['chinese', 'sushi', 'italian'],
+//   willNotEat: ['italian', 'bar']
+// }

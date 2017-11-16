@@ -32,10 +32,10 @@ app.listen(port, () => {
 });
 
 
-req.body: {
-  budget: 2,
-  radius: 500,
-  wantToEat: ['chinese', 'sushi', 'italian'],
-  willNotEat: ['italian', 'bar']
-}
+// req.body: {
+//   budget: 2,
+//   radius: 500,
+//   wantToEat: ['chinese', 'sushi', 'italian'],
+//   willNotEat: ['italian', 'bar']
+// }
 
