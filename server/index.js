@@ -22,28 +22,42 @@ passport.use(new GoogleStrategy({
     });
   }
 ));
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 const app = express();
-
-
-//set up the route to Google for authentication
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
-//set up the return handler after Google has authenticated
-app.get('auth/google/callback',
-  passport.authenticate('google', {failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-
-
-app.set('port', (process.env.PORT || 1337));
-const port = app.get('port');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+app.use(passport.initialize());
+//set up the route to Google for authentication
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login']
+}));
+//set up the return handler after Google has authenticated
+app.get('/auth/google/callback',
+  passport.authenticate('google', {failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+});
+
+//needs to be rewritten to reflect actual login page
+app.get('/login', function(req, res) {
+  //req.logout();
+  res.send('google authentication failed');
+});
+
+app.set('port', (process.env.PORT || 1337));
+const port = app.get('port');
+
 
 app.use(express.static(__dirname + '/../client/dist'));
 

@@ -34,11 +34,12 @@ const saveNewUser = (user, cb) => {
 
 const findOrCreateUser = (query, cb) => {
   User.findOne(query, (err, user) => {
-    if (err) {
-      saveNewUser(user, cb)
+    if (!user) {
+      saveNewUser(query, cb)
     }
     cb(err, user);
   });
 }
 
 module.exports.findOrCreateUser = findOrCreateUser;
+module.exports.User = User;
