@@ -6,35 +6,35 @@ import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
 
 const style = {
-  height: 143,
-  width: 300,
-  margin: 40,
-  textAlign: 'center',
-  display: 'inline-block',
-};
-
-const styleOutside = {
-  height: 400,
-  width: 700,
-  margin: 100,
-  textAlign: 'center',
-  display: 'inline-block',
-}
-
-const button = {
-  margin: 10,
+  text: {
+    height: '50%',
+    width: '50%',
+    margin: 40,
+    textAlign: 'center',
+    display: 'inline-block',
+  },
+  box: {
+    height: '50%',
+    width: '50%',
+    margin: 100,
+    textAlign: 'center',
+    display: 'inline-block',
+  },
+  button: {
+    margin: 10,
+  }
 };
 
 const Login = ({clickHandle}) => {
   return (
     <form action="/login" method="post">
-      <Paper style={styleOutside}>
+      <Paper style={style.box}>
       <AppBar
         title="Log In"
         iconClassNameRight="muidocs-icon-navigation-expand-more"
         />
         <div>
-          <Paper style={style} zDepth={1}>
+          <Paper style={style.text} zDepth={1}>
               <div>
                 <TextField
                   hintText="Username Field"
@@ -55,12 +55,12 @@ const Login = ({clickHandle}) => {
           </Paper>
               <div>
                 <RaisedButton
-                  style={button}
+                  style={style.button}
                   label="SIGNUP"
                   onClick={() => clickHandle('login')}
                 />
                 <RaisedButton
-                  style={button}
+                  style={style.button}
                   label="LOGIN"
                   onClick={() => clickHandle('home')}
                 />

@@ -7,35 +7,36 @@ import AppBar from 'material-ui/AppBar';
 
 
 const style = {
-  height: '50%',
-  width: '50%',
-  margin: 40,
-  textAlign: 'center',
-  display: 'inline-block',
+  text: {
+    height: '50%',
+    width: '50%',
+    margin: 40,
+    textAlign: 'center',
+    display: 'inline-block',
+  },
+  box: {
+    height: '50%',
+    width: '50%',
+    margin: 100,
+    textAlign: 'center',
+    display: 'inline-block',
+  },
+  button: {
+    margin: 10,
+  }
 };
 
-const styleOutside = {
-  height: '50%',
-  width: '50%',
-  margin: 100,
-  textAlign: 'center',
-  display: 'inline-block',
-}
-
-const button = {
-  margin: 10,
-};
 
 const Signup = ({clickHandle}) => {
   return (
       <form action="/signup" method="post">
-        <Paper style={styleOutside}>
+        <Paper style={style.box}>
         <AppBar
           title="Sign Up"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
           />
           <div>
-            <Paper style={style} zDepth={1}>
+            <Paper style={style.text} zDepth={1}>
                 <div>
                   <TextField
                     hintText="Username Field"
@@ -56,11 +57,11 @@ const Signup = ({clickHandle}) => {
             </Paper>
                 <div>
                   <RaisedButton
-                    style={button}
+                    style={style.button}
                     label="SIGNUP"
                   />
                   <RaisedButton
-                    style={button}
+                    style={style.button}
                     label="LOGIN"
                     onClick={() => clickHandle('login')}
                   />
