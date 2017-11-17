@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Home from './components/home.jsx';
+import Signup from './components/signup.jsx';
+import Login from './components/login.jsx';
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      appView: 'home'
+      appView: 'signup'
     };
     this.clickHandle = this.clickHandle.bind(this);
   }
