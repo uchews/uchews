@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Login = ({clickHandle}) => {
   return (
 
@@ -17,4 +19,4 @@ const Login = ({clickHandle}) => {
   )
 }
 
-window.Login = Login;
+export default Login;

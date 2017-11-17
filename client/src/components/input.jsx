@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Input = (props) => {
 
   return (
@@ -24,4 +26,4 @@ const Input = (props) => {
 
 }
 
-window.Input = Input;
+export default Input;
