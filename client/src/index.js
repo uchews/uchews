@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Home from './components/home.jsx';
+import Signup from './components/signup.jsx';
+import Login from './components/login.jsx';
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      appView: 'home'
+      appView: 'signup'
     };
     this.clickHandle = this.clickHandle.bind(this);
   }
@@ -28,9 +30,9 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'login') {
       return (
-        <div>
+        <MuiThemeProvider>
           <Login appView={this.state.appView} clickHandle={this.clickHandle}/>
-        </div>
+        </MuiThemeProvider>
       )
     } else if (this.state.appView === 'input') {
       return (
@@ -58,9 +60,9 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'signup') {
       return (
-        <div>
+        <MuiThemeProvider>
           <Signup appView={this.state.appView} clickHandle={this.clickHandle}/>
-        </div>
+        </MuiThemeProvider>
       )
     }
   }
