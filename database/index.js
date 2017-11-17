@@ -15,21 +15,30 @@ db.once('open', function() {
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true
-  },
+  username: { type: String },
   password: { type: String },
+  googleId: { type: String },
   ateAt: [String]
 });
 
 const User = mongoose.model('User', UserSchema);
 
-const saveNewUser = (username, password, cb) => {
+const saveNewUser = (user, cb) => {
   return new User({
-    username: username,
-    password: password,
+    username: user.username,
+    password: user.password,
+    googleId: user.googleId,
     ateAt: []
   }).save(cb);
 }
+
+const findOrCreateUser = (query, cb) => {
+  User.findOne(query, (err, user) => {
+    if (err) {
+      saveNewUser(user, cb)
+    }
+    cb(err, user);
+  });
+}
+
+module.exports.findOrCreateUser = findOrCreateUser;
