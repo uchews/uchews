@@ -29,6 +29,7 @@ const Types = (props) => {
   // enable changeHandle on radio buttons
   // enable get request on button click
     // do props.clickHandle("waiting") in get request function
+  // add dealbreakers
 
   return (
     <div>

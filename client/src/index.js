@@ -14,37 +14,55 @@ import Waiting from './components/wating.jsx';
 // when a response is received from server
 // load results page (this is done either here or in Index)
 
+// HTTP:
+// body = { location, budget, radius, wantToEat, willNotEat }
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
       appView: 'home',
-      data: {
-        location: '',
-        peopleNum: '',
-        distance: '',
-        budget: '',
-        types: []
-      }
+      location: '',
+      peopleNum: '',
+      distance: '',
+      budget: '',
+      types: [],
+      errorText: ''
     };
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
+  }
+
+  errorHandle(e) {
+    if (e.target.value === '') {
+      this.setState({
+        errorText: 'Required'
+      });
+    }
+  }
+
+  updateState(e) {
+    let key = e.target.name;
+    let val = e.target.value;
+    let stateObj = function() {
+      var obj = {};
+      obj[key] = val;
+      return obj;
+    }.bind(e)();
+
+    this.setState( stateObj );
   }
 
   clickHandle(view) {
     this.setState({
       appView: view
     });
+    console.log(this.state);
   }
 
   changeHandle(e) {
-    let stateObj = function() {
-      var obj = {};
-      obj[e.target.name] = e.target.value;
-      return obj;
-    }.bind(e)();
-
-    this.setState( stateObj );
+    this.errorHandle(e);
+    this.updateState(e);
   }
 
   render() {
@@ -70,7 +88,8 @@ class Index extends React.Component {
           <MuiThemeProvider>
             <Input data={this.state.data}
                    clickHandle={this.clickHandle}
-                   changeHandle={this.changeHandle} />
+                   changeHandle={this.changeHandle}
+                   errorText={this.state.errorText}/>
           </MuiThemeProvider>
         </div>
       )
