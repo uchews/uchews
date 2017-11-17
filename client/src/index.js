@@ -5,14 +5,30 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Home from './components/home.jsx';
 import Signup from './components/signup.jsx';
 import Login from './components/login.jsx';
+import Input from './components/input.jsx';
+import Results from './components/results.jsx';
+import Types from './components/types.jsx';
+import Waiting from './components/wating.jsx';
+
+// TODO:
+// when a response is received from server
+// load results page (this is done either here or in Index)
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      appView: 'signup'
+      appView: 'home',
+      data: {
+        location: '',
+        peopleNum: '',
+        distance: '',
+        budget: '',
+        types: []
+      }
     };
     this.clickHandle = this.clickHandle.bind(this);
+    this.changeHandle = this.changeHandle.bind(this);
   }
 
   clickHandle(view) {
@@ -21,12 +37,25 @@ class Index extends React.Component {
     });
   }
 
+  changeHandle(e) {
+    let stateObj = function() {
+      var obj = {};
+      obj[e.target.name] = e.target.value;
+      return obj;
+    }.bind(e)();
+
+    this.setState( stateObj );
+  }
+
   render() {
     if (this.state.appView === 'home') {
       return (
-        <MuiThemeProvider>
-          <Home appView={this.state.appView} clickHandle={this.clickHandle}/>
-        </MuiThemeProvider>
+        <div>
+          <h1>uChews</h1>
+          <MuiThemeProvider>
+            <Home appView={this.state.appView} clickHandle={this.clickHandle}/>
+          </MuiThemeProvider>
+        </div>
       )
     } else if (this.state.appView === 'login') {
       return (
@@ -37,25 +66,39 @@ class Index extends React.Component {
     } else if (this.state.appView === 'input') {
       return (
         <div>
-          <Input appView={this.state.appView} clickHandle={this.clickHandle}/>
+          <h1>uChews</h1>
+          <MuiThemeProvider>
+            <Input data={this.state.data}
+                   clickHandle={this.clickHandle}
+                   changeHandle={this.changeHandle} />
+          </MuiThemeProvider>
         </div>
       )
     } else if (this.state.appView === 'types') {
       return (
         <div>
-          <Types appView={this.state.appView} clickHandle={this.clickHandle}/>
+          <h1>uChews</h1>
+          <MuiThemeProvider>
+            <Types appView={this.state.appView} clickHandle={this.clickHandle}/>
+          </MuiThemeProvider>
         </div>
       )
     } else if (this.state.appView === 'waiting') {
       return (
         <div>
-          <Waiting appView={this.state.appView} clickHandle={this.clickHandle}/>
+          <h1>uChews</h1>
+          <MuiThemeProvider>
+            <Waiting appView={this.state.appView} clickHandle={this.clickHandle}/>
+          </MuiThemeProvider>
         </div>
       )
     } else if (this.state.appView === 'results') {
       return (
         <div>
-          <Results appView={this.state.appView} clickHandle={this.clickHandle}/>
+          <h1>uChews</h1>
+          <MuiThemeProvider>
+            <Results appView={this.state.appView} clickHandle={this.clickHandle}/>
+          </MuiThemeProvider>
         </div>
       )
     } else if (this.state.appView === 'signup') {
