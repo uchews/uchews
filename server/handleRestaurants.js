@@ -1,15 +1,13 @@
-const rankCusine = function(...args){
+const rankCusine = function(body){
   let cusineTypeCounter = {};
-  args.forEach(arg =>{
-    const reqByType = arg;
-    const wantToEat = reqByType.wantToEat;
-    wantToEat.forEach(wantToEatType => {
-      cusineTypeCounter[wantToEatType] =  cusineTypeCounter[wantToEatType] ?  cusineTypeCounter[wantToEatType] + 1 : 1;
-    });
-    const willNotEat = reqByType.willNotEat;
-    willNotEat.forEach(willNotEatType => {
-      cusineTypeCounter[willNotEat] =  cusineTypeCounter[willNotEat] ?  cusineTypeCounter[willNotEat] - 1 : -1;
-    });
+  const reqByType = body.types;
+  const wantToEat = reqByType.wantToEat;
+  wantToEat.forEach(wantToEatType => {
+    cusineTypeCounter[wantToEatType] =  cusineTypeCounter[wantToEatType] ?  cusineTypeCounter[wantToEatType] + 1 : 1;
+  });
+  const willNotEat = reqByType.willNotEat;
+  willNotEat.forEach(willNotEatType => {
+    cusineTypeCounter[willNotEat] =  cusineTypeCounter[willNotEat] ?  cusineTypeCounter[willNotEat] - 1 : -1;
   });
    cusineTypeSorted = Object.keys(cusineTypeCounter).sort((a,b) => {
     return cusineTypeCounter[b]-cusineTypeCounter[a];
@@ -27,10 +25,11 @@ const sortRestaurantByRating = function(a, b)
       return 0;
 };
 
-const rankRestaurant = function(data, budgetlevel)
+const rankRestaurant = function(data, budget)
 {
-  const budget_level = budgetlevel || 2;
+  const budget_level = budget || 2;
   //const restaurantsByCusine = data.results;
+  //filter non-restaurant data
   let restaurantsByCusine = [];
   data.results.forEach((result) => {
     restaurantsByCusine.push({name:result.name, rating:result.rating, price_level:result.price_level
