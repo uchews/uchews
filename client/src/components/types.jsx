@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Types = (props) => {
 
   return (
@@ -47,4 +49,4 @@ const Types = (props) => {
 
 }
 
-window.Types = Types;
+export default Types;

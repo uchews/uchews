@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Results = () => {
   return (
     <div>
@@ -6,4 +8,4 @@ const Results = () => {
   )
 }
 
-window.Results = Results;
+export default Results;

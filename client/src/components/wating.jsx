@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Waiting = () => {
   return (
     <div>
@@ -7,4 +9,4 @@ const Waiting = () => {
   )
 }
 
-window.Waiting = Waiting;
+export default Waiting;

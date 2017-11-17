@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Signup = () => {
   return (
     <form action="/signup" method="post">
@@ -16,4 +18,4 @@ const Signup = () => {
   )
 }
 
-window.Signup = Signup;
+export default Signup;

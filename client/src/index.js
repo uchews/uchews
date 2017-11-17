@@ -1,3 +1,7 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Home from './components/home.jsx';
 
 class Index extends React.Component {
@@ -18,50 +22,43 @@ class Index extends React.Component {
   render() {
     if (this.state.appView === 'home') {
       return (
-        <div>
-          <h1>uChews</h1>
+        <MuiThemeProvider>
           <Home appView={this.state.appView} clickHandle={this.clickHandle}/>
-        </div>
+        </MuiThemeProvider>
       )
     } else if (this.state.appView === 'login') {
       return (
         <div>
-          <h1>uChews</h1>
           <Login appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       )
     } else if (this.state.appView === 'input') {
       return (
         <div>
-          <h1>uChews</h1>
           <Input appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       )
     } else if (this.state.appView === 'types') {
       return (
         <div>
-          <h1>uChews</h1>
           <Types appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       )
     } else if (this.state.appView === 'waiting') {
       return (
         <div>
-          <h1>uChews</h1>
           <Waiting appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       )
     } else if (this.state.appView === 'results') {
       return (
         <div>
-          <h1>uChews</h1>
           <Results appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       )
     } else if (this.state.appView === 'signup') {
       return (
         <div>
-          <h1>uChews</h1>
           <Signup appView={this.state.appView} clickHandle={this.clickHandle}/>
         </div>
       )
