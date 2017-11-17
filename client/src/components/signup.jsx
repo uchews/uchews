@@ -8,10 +8,10 @@ import AppBar from 'material-ui/AppBar';
 
 const style = {
   text: {
-    height: '50%',
-    width: '50%',
+    height: '80%',
+    width: '80%',
     margin: 40,
-    textAlign: 'center',
+    textAlign: 'left',
     display: 'inline-block',
   },
   box: {
@@ -19,7 +19,7 @@ const style = {
     width: '50%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 300,
+    marginTop: 250,
     textAlign: 'center',
   },
   button: {
@@ -38,7 +38,7 @@ const Signup = ({clickHandle}) => {
           <Paper style={style.box}>
           <AppBar
             title="Sign Up"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
+            showMenuIconButton={false}
             />
             <div>
               <Paper style={style.text} zDepth={1}>
