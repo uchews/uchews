@@ -68,6 +68,25 @@ app.get('/input/findRestaurants', (req, res) => {
   });
 });
 
+app.get('/findRestaurants', (req, res) => {
+  google.handleQueries(req.body, (results) => {
+
+  });
+  google.requestRestaurants('Indian', 40.712775, -74.005973, 500, (data) => {
+    console.log('results===================', data.data.results);
+    res.send();
+  });
+})
+
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
 });
+
+
+// req.body: {
+//   budget: 2,
+//   radius: 500,
+//   wantToEat: ['chinese', 'sushi', 'italian'],
+//   willNotEat: ['italian', 'bar']
+// }
+
