@@ -2,16 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuthStrategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const db = require('../database/index.js');
 const google = require('./googlePlacesHelpers.js');
 
 require('dotenv').config();
 
+
 //Set up google login protocol
 passport.use(new GoogleStrategy({
-  consumerKey: process.env.GOOGLE_CLIENT_ID,
-  consumerSecret: process.env.GOOGLE_CLIENT_SECRET,
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: process.env.LOCAL_GOOGLE_REDIRECT || 'https://frozen-beach-49440.herokuapp.com/auth/google/callback'
   },
   //lookup or create a new user using the googleId (no associated username or password)
