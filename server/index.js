@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-app.use(express.static(__dirname + '/../public'));
+app.use(express.static(__dirname + '/../client/dist'));
 
 //This must be changed to app.post to interact with the front-end
 app.get('/input/findRestaurants', (req, res) => {
