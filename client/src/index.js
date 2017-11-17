@@ -1,3 +1,5 @@
+import Home from './components/home.jsx';
+
 class Index extends React.Component {
   constructor(props) {
     super(props);

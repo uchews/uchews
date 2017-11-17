@@ -9,4 +9,4 @@ const Home = ({clickHandle}) => {
 }
 
 
-window.Home = Home;
+export default Home;
