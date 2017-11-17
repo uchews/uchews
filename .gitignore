@@ -15,3 +15,8 @@ node_modules
 
 server/rankResults.txt
 client/dist/bundle.js
+
+.DS_Store
+client/.DS_Store
+
+
