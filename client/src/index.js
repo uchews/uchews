@@ -28,9 +28,9 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'login') {
       return (
-        <div>
+        <MuiThemeProvider>
           <Login appView={this.state.appView} clickHandle={this.clickHandle}/>
-        </div>
+        </MuiThemeProvider>
       )
     } else if (this.state.appView === 'input') {
       return (
@@ -58,9 +58,9 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'signup') {
       return (
-        <div>
+        <MuiThemeProvider>
           <Signup appView={this.state.appView} clickHandle={this.clickHandle}/>
-        </div>
+        </MuiThemeProvider>
       )
     }
   }
