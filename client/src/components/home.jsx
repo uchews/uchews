@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 
+// sets styles for material ui components
 const style = {
   paper: {
     display: 'inline-block',
