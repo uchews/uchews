@@ -6,6 +6,7 @@ import SelectField from 'material-ui/SelectField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
+// sets styles for material ui components
 const style = {
   paper: {
     display: 'inline-block',
@@ -25,19 +26,37 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      people: 2
+      people: 0,
+      distance: 0,
     };
     this.setPeople = this.setPeople.bind(this);
+    this.setRadio = this.setRadio.bind(this);
   }
-  // TODO:
-  // enable changeHandle on radio buttons
-  setPeople(e) {
+
+  /*
+    Material UI SelectField behaves differently than the other input fields,
+    so it needs it own setState function to pass the correct data between components
+  */
+  setPeople(e, i, val) {
     this.setState({
-      people: e.target.innerText
+      people: val
+    }, function() {
+      e.target.value = val;
+      e.target.name = 'peopleNum';
+      this.props.changeHandle(e, i, val);
     });
-    e.target.value = e.target.innerText;
-    e.target.name = 'peopleNum';
-    this.props.changeHandle(e);
+  }
+
+  setRadio(e, i) {
+    e.persist();  // lets us access event properties asynchronously
+    let val = e.target.value;
+    let key = e.target.name;
+
+    this.setState({
+      key: val
+    }, function() {
+      this.props.changeHandle(e, i, val);
+    });
   }
 
   render() {
@@ -68,7 +87,10 @@ class Input extends React.Component {
           </SelectField><br />
 
           <h2>Maximum Distance:</h2>
-          <RadioButtonGroup name="distance" style={style.radio} required>
+          <RadioButtonGroup value={this.state.distance}
+                            name="distance"
+                            style={style.radio}
+                            onChange={this.setRadio}>
             <RadioButton value={1} label="less than 1 mi" />
             <RadioButton value={2} label="up to 2 mi" />
             <RadioButton value={5} label="up to 5 mi" />
@@ -76,7 +98,10 @@ class Input extends React.Component {
           </RadioButtonGroup><br />
 
           <h2>Budget:</h2>
-          <RadioButtonGroup name="budget" style={style.radio} required>
+          <RadioButtonGroup value={this.state.budget}
+                            name="budget"
+                            style={style.radio}
+                            onChange={this.setRadio}>
             <RadioButton value={1} label="$" />
             <RadioButton value={2} label="$$" />
             <RadioButton value={3} label="$$$" />

@@ -18,67 +18,59 @@ const style = {
     margin: '0 auto',
     padding: 50,
     textAlign: 'center',
-    width: '50%'
-  }
+    width: '50%',
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  checks: {
+    padding: '10px',
+    width: '175px',
+  },
 };
 
-const Types = (props) => {
-
+class Types extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false,
+      types: ['American', 'Asian', 'Chinese', 'Dessert', 'Greek', 'Hamburgers', 'Healthy', 'Indian',
+              'Italian', 'Japanese', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Pasta', 'Pizza',
+              'Salads', 'Sandwiches', 'Seafood', 'Soup', 'Sushi', 'Thai', 'Vegetarian', 'Wings', 'Wraps'],
+    };
+  }
   // TODO:
-  // Enable required input error handling
-  // enable changeHandle on radio buttons
+  // enable changeHandle on checkboxes buttons
   // enable get request on button click
     // do props.clickHandle("waiting") in get request function
-  // add dealbreakers
+  resetChecks() {
+    this.props.clickHandle("waiting");
+  }
 
-  return (
-    <div>
-    <Paper style={style.paper} zDepth={3}>
-      <h2>What are you in the mood for?</h2>
-      <Table>
-        <TableBody displayRowCheckbox={false}>
-          <TableRow>
-            <TableRowColumn><Checkbox label="American" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Asian" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Chinese" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Dessert" /></TableRowColumn>
-          </TableRow>
-          <TableRow>
-            <TableRowColumn><Checkbox label="Greek" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Hambergers" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Healthy" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Indian" /></TableRowColumn>
-          </TableRow>
-          <TableRow>
-            <TableRowColumn><Checkbox label="Italian" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Japanese" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Mediterranean" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Mexican" /></TableRowColumn>
-          </TableRow>
-          <TableRow>
-            <TableRowColumn><Checkbox label="Middle Eastern" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Pasta" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Pizza" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Salads" /></TableRowColumn>
-          </TableRow>
-          <TableRow>
-            <TableRowColumn><Checkbox label="Sandwiches" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Seafood" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Soup" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Sushi" /></TableRowColumn>
-          </TableRow>
-          <TableRow>
-            <TableRowColumn><Checkbox label="Thai" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Vegetarian" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Wings" /></TableRowColumn>
-            <TableRowColumn><Checkbox label="Wraps" /></TableRowColumn>
-          </TableRow>
-        </TableBody>
-      </Table>
-      <RaisedButton label="Next" primary={true} onClick={() => props.clickHandle("waiting")} />
-    </Paper>
-    </div>
-  )
+  render() {
+    return (
+      <div>
+      <Paper style={style.paper} zDepth={3}>
+        <h1>Chewser #{this.props.counter}</h1>
+        <h2>What are you in the mood for?</h2>
+        <div style={style.container}>
+          {this.state.types.map(function(type) {
+            return <Checkbox name="wantToEat" style={style.checks} label={type} />
+          })}
+        </div>
+        <h2>Any dealbreakers?</h2>
+        <div style={style.container}>
+          {this.state.types.map(function(type) {
+            return <Checkbox name="willNotEat" style={style.checks} label={type} />
+          })}
+        </div>
+        <RaisedButton label="Next" primary={true} onClick={() => { this.props.clickHandle("waiting") }} />
+      </Paper>
+      </div>
+    )
+  }
 
 }
 

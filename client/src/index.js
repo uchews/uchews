@@ -13,7 +13,6 @@ import Waiting from './components/wating.jsx';
 // TODO:
 // when a response is received from server
 // load results page (this is done either here or in Index)
-
 // HTTP:
 // body = { location, budget, radius, wantToEat, willNotEat }
 
@@ -27,23 +26,25 @@ class Index extends React.Component {
       distance: '',
       budget: '',
       types: [],
-      errorText: ''
+      errorText: '',
+      counter: 1,
     };
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
   }
 
-  errorHandle(e) {
-    if (e.target.value === '') {
+  // handles empty value errors in input.jsx
+  errorHandle(val) {
+    if (val === '') {
       this.setState({
         errorText: 'Required'
       });
     }
   }
 
-  updateState(e) {
+  updateState(e, val) {
+    val === undefined ? val = e.target.value : val;  // to catch location value
     let key = e.target.name;
-    let val = e.target.value;
     let stateObj = function() {
       var obj = {};
       obj[key] = val;
@@ -53,16 +54,28 @@ class Index extends React.Component {
     this.setState( stateObj );
   }
 
+  // handles button clicks at the bottom of the app
+  // as forms are completed
   clickHandle(view) {
-    this.setState({
-      appView: view
-    });
-    console.log(this.state);
+    // this if statement handles how many types forms are loaded based on peopleNum
+    if (view === 'waiting') {
+      console.log(this.state.peopleNum);
+      if (this.state.counter < this.state.peopleNum) {
+        let increment = this.state.counter + 1;
+        this.setState({ counter: increment });
+      } else {
+        this.setState({ appView: view });
+      }
+    } else {
+      this.setState({ appView: view });
+    }
   }
 
-  changeHandle(e) {
-    this.errorHandle(e);
-    this.updateState(e);
+  // handles changes in input fields from input.jsx
+  // and routes to handle errors and to update this state
+  changeHandle(e, i, val) {
+    this.errorHandle(val);
+    this.updateState(e, val);
   }
 
   render() {
@@ -98,7 +111,9 @@ class Index extends React.Component {
         <div>
           <h1>uChews</h1>
           <MuiThemeProvider>
-            <Types appView={this.state.appView} clickHandle={this.clickHandle}/>
+            <Types appView={this.state.appView}
+                   clickHandle={this.clickHandle}
+                   counter={this.state.counter}/>
           </MuiThemeProvider>
         </div>
       )

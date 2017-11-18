@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import CircularProgress from 'material-ui/CircularProgress';
 
+// sets styles for material ui components
 const style = {
   paper: {
     display: 'inline-block',

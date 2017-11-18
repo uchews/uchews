@@ -14,30 +14,31 @@ const requestRestaurants = function(cuisine, latitude, longitude, radius) {
 }
 
 
-const handleQueries = function(body, cb) {
-  //rankedCuisines = handleRestaurants.rankCuisine(body);
+// const handleQueries = function(body, cb) {
+//   //rankedCuisines = handleRestaurants.rankCuisine(body);
 
-  //dummy data
-  rankedCuisines = ['Chinese', 'Italian', 'Greek']
-  body = {
-    location: '2333 Keara Way, Charlotte, NC 28270',
-    budget: 2,
-    radius: 500,
-  }
+//   //dummy data
+//   rankedCuisines = ['Chinese', 'Italian', 'Greek']
+//   body = {
+//     location: '2333 Keara Way, Charlotte, NC 28270',
+//     budget: 2,
+//     radius: 500,
+//   }
+// }
 
   //use Google's geocoder API to transform an address into latitude & longitude
 
-const requestRestaurants = function(foodType, latitude, longitude, radius, cb) {
-  const searchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${foodType}+Restaurant&sensor=true&location=${latitude},${longitude}&radius=${radius}&key=${process.env.GOOGLE_API_KEY}`;
+// const requestRestaurants = function(foodType, latitude, longitude, radius, cb) {
+//   const searchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${foodType}+Restaurant&sensor=true&location=${latitude},${longitude}&radius=${radius}&key=${process.env.GOOGLE_API_KEY}`;
 
-  axios({
-    method: 'get',
-    url: searchURL,
-    responseType: 'json'
-  })
-    .then(cb)
-    .catch(cb);
-}
+//   axios({
+//     method: 'get',
+//     url: searchURL,
+//     responseType: 'json'
+//   })
+//     .then(cb)
+//     .catch(cb);
+// }
 
 const handleQueries = function(body, cb) {
   //
@@ -67,10 +68,10 @@ const handleQueries = function(body, cb) {
         cb(restaurants);
       });
 
-  geocoder.geocode(req.body.location, (err, locationObject) => {
+    geocoder.geocode(req.body.location, (err, locationObject) => {
 
+    });
   });
-
 }
 
 
@@ -92,4 +93,3 @@ module.exports.handleQueries = handleQueries;
 //   send a get request to google places for THE TOP 3 keys in the search object
 //   add the associated search object value to each returned restaurant object
 //   add a cuisine property to each restaurant object
->>>>>>> 6a84396364083fe1022f5c9572c259d31e20837b
