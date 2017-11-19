@@ -1,15 +1,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import Checkbox from 'material-ui/Checkbox';
+import Check from './checkbox.jsx';
 import RaisedButton from 'material-ui/RaisedButton';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
 
 const style = {
   paper: {
@@ -25,31 +17,22 @@ const style = {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  checks: {
-    padding: '10px',
-    width: '175px',
-  },
 };
 
 class Types extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false,
       types: ['American', 'Asian', 'Chinese', 'Dessert', 'Greek', 'Hamburgers', 'Healthy', 'Indian',
               'Italian', 'Japanese', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Pasta', 'Pizza',
               'Salads', 'Sandwiches', 'Seafood', 'Soup', 'Sushi', 'Thai', 'Vegetarian', 'Wings', 'Wraps'],
     };
   }
-  // TODO:
-  // enable changeHandle on checkboxes buttons
-  // enable get request on button click
-    // do props.clickHandle("waiting") in get request function
-  resetChecks() {
-    this.props.clickHandle("waiting");
-  }
 
   render() {
+    // this doesn't hold its context inside the map function
+    var that = this;
+
     return (
       <div>
       <Paper style={style.paper} zDepth={3}>
@@ -57,16 +40,22 @@ class Types extends React.Component {
         <h2>What are you in the mood for?</h2>
         <div style={style.container}>
           {this.state.types.map(function(type) {
-            return <Checkbox name="wantToEat" style={style.checks} label={type} />
+            return <Check name={"wantToEat"}
+                          type={type}
+                          choose={that.props.wantToEat} />
           })}
         </div>
         <h2>Any dealbreakers?</h2>
         <div style={style.container}>
           {this.state.types.map(function(type) {
-            return <Checkbox name="willNotEat" style={style.checks} label={type} />
+            return <Check name={"willNotEat"}
+                          type={type}
+                          choose={that.props.willNotEat} />
           })}
         </div>
-        <RaisedButton label="Next" primary={true} onClick={() => { this.props.clickHandle("waiting") }} />
+        <RaisedButton label="Next"
+                      primary={true}
+                      onClick={ () => this.props.clickHandle("waiting") } />
       </Paper>
       </div>
     )

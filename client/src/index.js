@@ -9,6 +9,7 @@ import Input from './components/input.jsx';
 import Results from './components/results.jsx';
 import Types from './components/types.jsx';
 import Waiting from './components/wating.jsx';
+import Dummy from './components/dummy.jsx';
 
 // TODO:
 // when a response is received from server
@@ -25,13 +26,28 @@ class Index extends React.Component {
       peopleNum: '',
       distance: '',
       budget: '',
-      types: [],
+      wantToEat: [],
+      willNotEat: [],
       errorText: '',
       counter: 1,
     };
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
     this.changeView = this.changeView.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+  }
+
+  submitForm() {
+    // make an axios post request to the server
+    let data = {
+      location: this.state.location,
+      budget: this.state.budget,
+      radius: this.state.distance,
+      wantToEat: this.state.wantToEat,
+      willNotEat: this.state.willNotEat
+    };
+
+    console.log('submitting', data);
   }
 
   // handles empty value errors in input.jsx
@@ -55,16 +71,18 @@ class Index extends React.Component {
     this.setState( stateObj );
   }
 
-  // handles button clicks at the bottom of the app
-  // as forms are completed
+  // handles button clicks at the bottom of the app as forms are completed and
+  // changes the current view
   clickHandle(view) {
-    // this if statement handles how many types forms are loaded based on peopleNum
-    if (view === 'waiting') {
-      console.log(this.state.peopleNum);
-      if (this.state.counter < this.state.peopleNum) {
+    // this if statement handles how many types.jsx forms are loaded based on peopleNum
+    if (view === 'waiting') { // if view equals 'waiting', that means a typs.jsx for was just submitted
+      if (this.state.counter < this.state.peopleNum) { // check to see if everyone has submitted a form
         let increment = this.state.counter + 1;
-        this.setState({ counter: increment });
+        // we have to set the appView to a dummy page briefly, which in turn loads
+        // another types page, otherwise the checkboxes won't reset
+        this.setState({ counter: increment, appView: 'dummy' });
       } else {
+        // when everyone has filled out a types.jsx form, comtinue to the waiting page
         this.setState({ appView: view });
       }
     } else {
@@ -118,9 +136,10 @@ class Index extends React.Component {
         <div>
           <h1>uChews</h1>
           <MuiThemeProvider>
-            <Types appView={this.state.appView}
-                   clickHandle={this.clickHandle}
-                   counter={this.state.counter}/>
+            <Types clickHandle={this.clickHandle}
+                   counter={this.state.counter}
+                   willNotEat={this.state.willNotEat}
+                   wantToEat={this.state.wantToEat}/>
           </MuiThemeProvider>
         </div>
       )
@@ -129,7 +148,7 @@ class Index extends React.Component {
         <div>
           <h1>uChews</h1>
           <MuiThemeProvider>
-            <Waiting appView={this.state.appView} clickHandle={this.clickHandle}/>
+            <Waiting submitForm={this.submitForm} />
           </MuiThemeProvider>
         </div>
       )
@@ -148,6 +167,10 @@ class Index extends React.Component {
           <Signup appView={this.state.appView} clickHandle={this.clickHandle}
                   changeView={this.changeView}/>
         </MuiThemeProvider>
+      )
+    } else if (this.state.appView === 'dummy') {
+      return (
+        <Dummy changeView={this.changeView} />
       )
     }
   }
