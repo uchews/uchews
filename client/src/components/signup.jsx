@@ -25,6 +25,9 @@ const style = {
   button: {
     margin: 10,
   },
+  signBar: {
+
+  }
 };
 
 
@@ -39,6 +42,7 @@ const Signup = ({clickHandle}) => {
           <AppBar
             title="Sign Up"
             showMenuIconButton={false}
+            style={style.signBar}
             />
             <div>
               <Paper style={style.text} zDepth={1}>
