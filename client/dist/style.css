@@ -3,3 +3,9 @@ body {
    margin: 0 auto;
    text-align: center;
  }
+
+ h1 {
+  color: orange;
+  font-family: "Chewy";
+  font-size: 54px;
+ }

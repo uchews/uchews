@@ -9,6 +9,7 @@ import Input from './components/input.jsx';
 import Results from './components/results.jsx';
 import Types from './components/types.jsx';
 import Waiting from './components/wating.jsx';
+import Dummy from './components/dummy.jsx';
 
 // TODO:
 // when a response is received from server
@@ -63,7 +64,9 @@ class Index extends React.Component {
     if (view === 'waiting') {
       if (this.state.counter < this.state.peopleNum) {
         let increment = this.state.counter + 1;
-        this.setState({ counter: increment });
+        // we have to set the appView to a dummy page briefly, which in turn loads
+        // another types page, otherwise the checkboxes won't reset
+        this.setState({ counter: increment, appView: 'dummy' });
       } else {
         this.setState({ appView: view });
       }
@@ -150,6 +153,10 @@ class Index extends React.Component {
           <Signup appView={this.state.appView} clickHandle={this.clickHandle}
                   changeView={this.changeView}/>
         </MuiThemeProvider>
+      )
+    } else if (this.state.appView === 'dummy') {
+      return (
+        <Dummy changeView={this.changeView} />
       )
     }
   }
