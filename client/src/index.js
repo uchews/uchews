@@ -12,11 +12,17 @@ import Waiting from './components/wating.jsx';
 import Dummy from './components/dummy.jsx';
 import axios from 'axios';
 
+// TODO:
+// when a response is received from server
+// load results page (this is done either here or in Index)
+// HTTP:
+// body = { location, budget, radius, wantToEat, willNotEat }
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      appView: 'signup',
+      appView: 'home',
       location: '',
       peopleNum: '',
       distance: '',
@@ -45,6 +51,7 @@ class Index extends React.Component {
 
     axios.post('/input/findRestaurants', data)
     .then( () => changeView('results') );
+    this.googleClick = this.googleClick.bind(this);
   }
 
   // handles empty value errors in input.jsx
@@ -162,7 +169,8 @@ class Index extends React.Component {
       return (
         <MuiThemeProvider>
           <Signup appView={this.state.appView} clickHandle={this.clickHandle}
-                  changeView={this.changeView}/>
+                  changeView={this.changeView}
+                  googleClick={this.googleClick}/>
         </MuiThemeProvider>
       )
     } else if (this.state.appView === 'dummy') {
