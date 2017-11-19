@@ -81,12 +81,3 @@ app.get('/findRestaurants', (req, res) => {
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
 });
-
-
-// req.body: {
-//   budget: 2,
-//   radius: 500,
-//   wantToEat: ['chinese', 'sushi', 'italian'],
-//   willNotEat: ['italian', 'bar']
-// }
-
