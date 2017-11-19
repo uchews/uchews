@@ -11,14 +11,26 @@ const style = {
 class Check extends React.Component {
   constructor(props) {
     super(props);
+    this.checkHandle = this.checkHandle.bind(this);
     this.state = {
       checked: false,
     };
-    this.checkHandle = this.checkHandle.bind(this);
   }
 
   checkHandle(e) {
-    this.setState({ checked: !this.state.checked });
+    let val = e.target.value;
+
+    this.setState({ checked: !this.state.checked }, () => {
+      if (this.state.checked) { // if check checked is true
+        // push checkbox value to choose array
+        this.props.choose.push(val);
+      } else { // else if check is false
+        // remove checkbox value from choose array
+        let i = this.props.choose.indexOf(val);
+        this.props.choose.splice(i, 1);
+      }
+    });
+
   }
 
   render() {

@@ -14,7 +14,8 @@ const style = {
   }
 };
 
-const Waiting = () => {
+const Waiting = ({ submitForm }) => {
+  submitForm();
 
   return (
     <div>

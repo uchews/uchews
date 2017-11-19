@@ -34,6 +34,20 @@ class Index extends React.Component {
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
     this.changeView = this.changeView.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+  }
+
+  submitForm() {
+    // make an axios post request to the server
+    let data = {
+      location: this.state.location,
+      budget: this.state.budget,
+      radius: this.state.distance,
+      wantToEat: this.state.wantToEat,
+      willNotEat: this.state.willNotEat
+    };
+
+    console.log('submitting', data);
   }
 
   // handles empty value errors in input.jsx
@@ -57,17 +71,18 @@ class Index extends React.Component {
     this.setState( stateObj );
   }
 
-  // handles button clicks at the bottom of the app
-  // as forms are completed
+  // handles button clicks at the bottom of the app as forms are completed and
+  // changes the current view
   clickHandle(view) {
-    // this if statement handles how many types forms are loaded based on peopleNum
-    if (view === 'waiting') {
-      if (this.state.counter < this.state.peopleNum) {
+    // this if statement handles how many types.jsx forms are loaded based on peopleNum
+    if (view === 'waiting') { // if view equals 'waiting', that means a typs.jsx for was just submitted
+      if (this.state.counter < this.state.peopleNum) { // check to see if everyone has submitted a form
         let increment = this.state.counter + 1;
         // we have to set the appView to a dummy page briefly, which in turn loads
         // another types page, otherwise the checkboxes won't reset
         this.setState({ counter: increment, appView: 'dummy' });
       } else {
+        // when everyone has filled out a types.jsx form, comtinue to the waiting page
         this.setState({ appView: view });
       }
     } else {
@@ -121,8 +136,7 @@ class Index extends React.Component {
         <div>
           <h1>uChews</h1>
           <MuiThemeProvider>
-            <Types appView={this.state.appView}
-                   clickHandle={this.clickHandle}
+            <Types clickHandle={this.clickHandle}
                    counter={this.state.counter}
                    willNotEat={this.state.willNotEat}
                    wantToEat={this.state.wantToEat}/>
@@ -134,7 +148,7 @@ class Index extends React.Component {
         <div>
           <h1>uChews</h1>
           <MuiThemeProvider>
-            <Waiting appView={this.state.appView} clickHandle={this.clickHandle}/>
+            <Waiting submitForm={this.submitForm} />
           </MuiThemeProvider>
         </div>
       )

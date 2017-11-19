@@ -29,12 +29,8 @@ class Types extends React.Component {
     };
   }
 
-  // TODO:
-  // store checked types in corresponding arrays
-  // enable get request on button click
-    // do props.clickHandle("waiting") in get request function
-
   render() {
+    // this doesn't hold its context inside the map function
     var that = this;
 
     return (
@@ -45,14 +41,16 @@ class Types extends React.Component {
         <div style={style.container}>
           {this.state.types.map(function(type) {
             return <Check name={"wantToEat"}
-                          type={type} />
+                          type={type}
+                          choose={that.props.wantToEat} />
           })}
         </div>
         <h2>Any dealbreakers?</h2>
         <div style={style.container}>
           {this.state.types.map(function(type) {
             return <Check name={"willNotEat"}
-                          type={type} />
+                          type={type}
+                          choose={that.props.willNotEat} />
           })}
         </div>
         <RaisedButton label="Next"
