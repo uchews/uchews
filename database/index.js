@@ -24,20 +24,30 @@ const UserSchema = new Schema({
 const User = mongoose.model('User', UserSchema);
 
 const saveNewUser = (user, cb) => {
-  return new User({
-    username: user.username,
+  let newUser = new User({
+    username: user.username || user.googleId,
     password: user.password,
     googleId: user.googleId,
     ateAt: []
-  }).save(cb);
+  });
+  newUser.save(cb);
 }
 
 const findOrCreateUser = (query, cb) => {
   User.findOne(query, (err, user) => {
     if (!user) {
-      saveNewUser(query, cb)
+      saveNewUser(query, (err2) => {
+        if (err2) {
+          console.log('error saving user: ', err2);
+        } else {
+          User.findOne(query, (err, user) => {
+            cb(err, user);
+          });
+        }
+      });
+    } else {
+      cb(err, user);
     }
-    cb(err, user);
   });
 }
 

@@ -26,8 +26,8 @@ passport.use(new GoogleStrategy({
 passport.serializeUser(function(user, done) {
   done(null, user._id);
 });
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser(function(_id, done) {
+  db.User.findById(_id, function(err, user) {
     done(err, user);
   });
 });
@@ -66,6 +66,13 @@ app.post('/signup', (req, res) => {
   });
 });
 
+app.post('/login', (req, res) => {
+  const user = req.body;
+  //try to retrieve the user from db
+  //if user exists, check password against hash using bcrypt.compare
+  //return true if user exists and bcrypt returns true
+});
+
 //needs to be rewritten to reflect actual login page
 app.get('/login', function(req, res) {
   //req.logout();
@@ -78,22 +85,13 @@ const port = app.get('port');
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-//This must be changed to app.post to interact with the front-end
-app.get('/input/findRestaurants', (req, res) => {
+app.post('/input/findRestaurants', (req, res) => {
   google.handleQueries(req.body, (results) => {
+    console.log('results in server/index.js: ', results);
     res.send(results);
   });
 });
 
-app.get('/findRestaurants', (req, res) => {
-  google.handleQueries(req.body, (results) => {
-
-  });
-  google.requestRestaurants('Indian', 40.712775, -74.005973, 500, (data) => {
-    console.log('results===================', data.data.results);
-    res.send();
-  });
-})
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
