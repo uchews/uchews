@@ -56,17 +56,22 @@ class Signup extends React.Component {
       password: this.state.password,
     })
       .then((response) => {
-        console.log('successful sign up')
-        // if the response is false
+        this.setState({
+          username: '',
+          password: ''
+        })
+        console.log(response.data)
+        if (response.data === false) {
           this.setState({
             floatUser: 'username exist try again'
           })
+        } else  {
+          console.log('successful sign up')
+          this.props.changeView('home')
+        }
       })
       .catch((err) => {
         console.log('could not reach server')
-        this.setState({
-            floatUser: 'username exist'
-          })
       })
   }
 
@@ -91,6 +96,7 @@ class Signup extends React.Component {
                         floatingLabelText={this.state.floatUser}
                         underlineShow={false}
                         name="username" onChange={this.onUserChange}
+                        value={this.state.username}
                       />
                       <Divider />
                     </div>
@@ -101,6 +107,7 @@ class Signup extends React.Component {
                         type="password"
                         underlineShow={false}
                         name="password" onChange={this.onUserChange}
+                        value={this.state.password}
                       />
                       <Divider />
                     </div>
