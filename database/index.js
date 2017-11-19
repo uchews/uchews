@@ -43,3 +43,4 @@ const findOrCreateUser = (query, cb) => {
 
 module.exports.findOrCreateUser = findOrCreateUser;
 module.exports.User = User;
+module.exports.saveNewUser = saveNewUser;
