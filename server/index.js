@@ -26,8 +26,8 @@ passport.use(new GoogleStrategy({
 passport.serializeUser(function(user, done) {
   done(null, user._id);
 });
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser(function(_id, done) {
+  db.User.findById(_id, function(err, user) {
     done(err, user);
   });
 });
@@ -64,6 +64,13 @@ app.post('/signup', (req, res) => {
       res.send(false);
     }
   });
+});
+
+app.post('/login', (req, res) => {
+  const user = req.body;
+  //try to retrieve the user from db
+  //if user exists, check password against hash using bcrypt.compare
+  //return true if user exists and bcrypt returns true
 });
 
 //needs to be rewritten to reflect actual login page
