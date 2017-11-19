@@ -85,22 +85,13 @@ const port = app.get('port');
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-//This must be changed to app.post to interact with the front-end
-app.get('/input/findRestaurants', (req, res) => {
+app.post('/input/findRestaurants', (req, res) => {
   google.handleQueries(req.body, (results) => {
+    console.log('results in server/index.js: ', results);
     res.send(results);
   });
 });
 
-app.get('/findRestaurants', (req, res) => {
-  google.handleQueries(req.body, (results) => {
-
-  });
-  google.requestRestaurants('Indian', 40.712775, -74.005973, 500, (data) => {
-    console.log('results===================', data.data.results);
-    res.send();
-  });
-})
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`);

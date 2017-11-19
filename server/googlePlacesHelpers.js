@@ -1,5 +1,6 @@
 const axios = require('axios');
 const Nodegeocoder = require('node-geocoder');
+const handleRestaurants = require('./handleRestaurants.js');
 
 
 
@@ -15,15 +16,15 @@ const requestRestaurants = function(cuisine, latitude, longitude, radius) {
 
 
 const handleQueries = function(body, cb) {
-  //rankedCuisines = handleRestaurants.rankCuisine(body);
+  let rankedCuisines = handleRestaurants.rankCusine(body);
 
   //dummy data
-  rankedCuisines = ['Chinese', 'Italian', 'Greek']
-  body = {
-    location: '2333 Keara Way, Charlotte, NC 28270',
-    budget: 2,
-    radius: 500,
-  }
+  // rankedCuisines = ['Chinese', 'Italian', 'Greek']
+  // body = {
+  //   location: '2333 Keara Way, Charlotte, NC 28270',
+  //   budget: 2,
+  //   radius: 500,
+  // }
 
   //use Google's geocoder API to transform an address into latitude & longitude
   let geocoder = Nodegeocoder({
@@ -40,15 +41,17 @@ const handleQueries = function(body, cb) {
     }))
     .then((responses) => {
       const restaurants = [];
+      console.log('responses from GooglePlaces: ', responses);
       //aggregate the resulting restaurants into a restaurant matrix and add a cuisine property to each restaurant
       for (let i = 0; i < responses.length; i++) {
-        //let rankedRest = handleRestaurants.rankRestaurants(responses[i].data.results)
+        let rankedRest = handleRestaurants.rankRestaurant(responses[i].data, body.budget)
         //should push rankedRest rather than responses[i] below
-        restaurants.push(responses[i].data.results);
+        restaurants.push(rankedRest);
         restaurants[i].map((restaurant) => {
           restaurant.cuisine = rankedCuisines[i];
         });
       }
+      console.log('restaurants having been ranked: ', restaurants);
       cb(restaurants);
     });
   });
