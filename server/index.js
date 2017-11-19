@@ -5,6 +5,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const db = require('../database/index.js');
 const google = require('./googlePlacesHelpers.js');
+const authenticate = require('./authenticate.js');
 
 require('dotenv').config();
 
@@ -47,6 +48,22 @@ app.get('/auth/google/callback',
   passport.authenticate('google', {failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
+});
+
+app.post('/signup', (req, res) => {
+  //make sure the user doesn't exist in database by doing find({username: username})
+  console.log('user: ', req.body);
+  authenticate.checkUserExist(req.body, (doesUserNotExist) => {
+    if (doesUserNotExist) {
+    //if the user doesn't exist, hash the password and store user and hash in db and send true to client
+      authenticate.storeNewUser(req.body, () => {
+        console.log('new user created');
+        res.send(true);
+      });
+    } else {
+      res.send(false);
+    }
+  });
 });
 
 //needs to be rewritten to reflect actual login page
