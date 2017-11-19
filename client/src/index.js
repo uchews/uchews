@@ -20,7 +20,7 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      appView: 'home',
+      appView: 'signup',
       location: '',
       peopleNum: '',
       distance: '',
