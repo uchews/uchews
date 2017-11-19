@@ -22,7 +22,7 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      appView: 'signup',
+      appView: 'home',
       location: '',
       peopleNum: '',
       distance: '',
@@ -105,17 +105,6 @@ class Index extends React.Component {
     this.setState({
       appView: view
     })
-  }
-
-  googleClick() {
-    console.log(`I've been clicked!`)
-    axios.get('/auth/google')
-      .then((response) => {
-        console.log('successfuly sent to server');
-      })
-      .catch((error) => {
-        console.log('error unable to reach server')
-      })
   }
 
   render() {

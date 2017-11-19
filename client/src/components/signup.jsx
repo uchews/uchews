@@ -123,9 +123,9 @@ class Signup extends React.Component {
                         label="LOGIN"
                         onClick={() => this.props.clickHandle('login')}
                       />
-                      <a href="/auth/google"><img  src="../../assets/light.png"
-                            onClick={this.props.googleClick}
-                      /></a>
+                      <a href="/auth/google">
+                        <img  src="../../assets/light.png"/>
+                      </a>
 
                     </div>
               </div>

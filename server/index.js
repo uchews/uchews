@@ -85,9 +85,12 @@ const port = app.get('port');
 
 app.use(express.static(__dirname + '/../client/dist'));
 
+app.get('/checkSession', (req, res) => {
+  res.send('hello there')
+})
+
 app.post('/input/findRestaurants', (req, res) => {
   google.handleQueries(req.body, (results) => {
-    console.log('results in server/index.js: ', results);
     res.send(results);
   });
 });

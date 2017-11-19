@@ -41,7 +41,6 @@ const handleQueries = function(body, cb) {
     }))
     .then((responses) => {
       const restaurants = [];
-      console.log('responses from GooglePlaces: ', responses);
       //aggregate the resulting restaurants into a restaurant matrix and add a cuisine property to each restaurant
       for (let i = 0; i < responses.length; i++) {
         let rankedRest = handleRestaurants.rankRestaurant(responses[i].data, body.budget)
@@ -51,7 +50,6 @@ const handleQueries = function(body, cb) {
           restaurant.cuisine = rankedCuisines[i];
         });
       }
-      console.log('restaurants having been ranked: ', restaurants);
       cb(restaurants);
     });
   });
