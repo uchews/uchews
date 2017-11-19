@@ -10,12 +10,7 @@ import Results from './components/results.jsx';
 import Types from './components/types.jsx';
 import Waiting from './components/wating.jsx';
 import Dummy from './components/dummy.jsx';
-
-// TODO:
-// when a response is received from server
-// load results page (this is done either here or in Index)
-// HTTP:
-// body = { location, budget, radius, wantToEat, willNotEat }
+import axios from 'axios';
 
 class Index extends React.Component {
   constructor(props) {
@@ -38,7 +33,6 @@ class Index extends React.Component {
   }
 
   submitForm() {
-    // make an axios post request to the server
     let data = {
       location: this.state.location,
       budget: this.state.budget,
@@ -48,6 +42,9 @@ class Index extends React.Component {
     };
 
     console.log('submitting', data);
+
+    axios.post('/input/findRestaurants', data)
+    .then( () => changeView('results') );
   }
 
   // handles empty value errors in input.jsx
