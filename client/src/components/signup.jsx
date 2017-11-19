@@ -36,7 +36,8 @@ class Signup extends React.Component {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      floatUser: 'username'
     }
     this.onUserChange = this.onUserChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -56,9 +57,16 @@ class Signup extends React.Component {
     })
       .then((response) => {
         console.log('successful sign up')
+        // if the response is false
+          this.setState({
+            floatUser: 'username exist try again'
+          })
       })
       .catch((err) => {
         console.log('could not reach server')
+        this.setState({
+            floatUser: 'username exist'
+          })
       })
   }
 
@@ -79,8 +87,8 @@ class Signup extends React.Component {
                 <Paper style={style.text} zDepth={1}>
                     <div>
                       <TextField
-                        hintText="Username Field"
-                        floatingLabelText="Username"
+                        hintText="username field"
+                        floatingLabelText={this.state.floatUser}
                         underlineShow={false}
                         name="username" onChange={this.onUserChange}
                       />
@@ -88,8 +96,8 @@ class Signup extends React.Component {
                     </div>
                     <div>
                       <TextField
-                        hintText="Password Field"
-                        floatingLabelText="Password"
+                        hintText="password field"
+                        floatingLabelText="password"
                         type="password"
                         underlineShow={false}
                         name="password" onChange={this.onUserChange}
