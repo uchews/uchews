@@ -36,7 +36,8 @@ class Signup extends React.Component {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      floatUser: 'username'
     }
     this.onUserChange = this.onUserChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -55,7 +56,19 @@ class Signup extends React.Component {
       password: this.state.password,
     })
       .then((response) => {
-        console.log('successful sign up')
+        this.setState({
+          username: '',
+          password: ''
+        })
+        console.log(response.data)
+        if (response.data === false) {
+          this.setState({
+            floatUser: 'username exist try again'
+          })
+        } else  {
+          console.log('successful sign up')
+          this.props.changeView('home')
+        }
       })
       .catch((err) => {
         console.log('could not reach server')
@@ -79,20 +92,22 @@ class Signup extends React.Component {
                 <Paper style={style.text} zDepth={1}>
                     <div>
                       <TextField
-                        hintText="Username Field"
-                        floatingLabelText="Username"
+                        hintText="username field"
+                        floatingLabelText={this.state.floatUser}
                         underlineShow={false}
                         name="username" onChange={this.onUserChange}
+                        value={this.state.username}
                       />
                       <Divider />
                     </div>
                     <div>
                       <TextField
-                        hintText="Password Field"
-                        floatingLabelText="Password"
+                        hintText="password field"
+                        floatingLabelText="password"
                         type="password"
                         underlineShow={false}
                         name="password" onChange={this.onUserChange}
+                        value={this.state.password}
                       />
                       <Divider />
                     </div>

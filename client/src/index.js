@@ -31,6 +31,7 @@ class Index extends React.Component {
     };
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
+    this.changeView = this.changeView.bind(this);
   }
 
   // handles empty value errors in input.jsx
@@ -76,6 +77,12 @@ class Index extends React.Component {
   changeHandle(e, i, val) {
     this.errorHandle(val);
     this.updateState(e, val);
+  }
+
+  changeView(view) {
+    this.setState({
+      appView: view
+    })
   }
 
   render() {
@@ -138,7 +145,8 @@ class Index extends React.Component {
     } else if (this.state.appView === 'signup') {
       return (
         <MuiThemeProvider>
-          <Signup appView={this.state.appView} clickHandle={this.clickHandle}/>
+          <Signup appView={this.state.appView} clickHandle={this.clickHandle}
+                  changeView={this.changeView}/>
         </MuiThemeProvider>
       )
     }

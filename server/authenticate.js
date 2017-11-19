@@ -6,8 +6,9 @@ const checkUserExist = (user, cb) => {
   db.User.findOne({ username: user.username }, (err, user) => {
     if (user) {
       cb(false);
+    } else {
+      cb(true);
     }
-    cb(true);
   });
 }
 
