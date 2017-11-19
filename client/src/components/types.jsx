@@ -2,14 +2,6 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
 import RaisedButton from 'material-ui/RaisedButton';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
 
 const style = {
   paper: {
@@ -45,8 +37,28 @@ class Types extends React.Component {
   // enable changeHandle on checkboxes buttons
   // enable get request on button click
     // do props.clickHandle("waiting") in get request function
-  resetChecks() {
-    this.props.clickHandle("waiting");
+
+  checkHandle() {
+    // set checked to opposite of current state
+
+    // if checkbox name is wantToEat
+      // if current state is true
+        // if key is present in types object
+          // increase value by 1
+        // else
+          // add key to types obj with value of 1
+    // else if checkbox name is willNotEat
+      // if the current state is true
+        // if key is present in types object
+          // decrease value by 2
+        // else
+          // add key to types obj with value of -2
+
+    // sync call this.props.clickHandle("waiting")
+  }
+
+  componentDidMount() {
+    // uncheck all checkboxes
   }
 
   render() {

@@ -25,7 +25,7 @@ class Index extends React.Component {
       peopleNum: '',
       distance: '',
       budget: '',
-      types: [],
+      types: {},
       errorText: '',
       counter: 1,
     };
