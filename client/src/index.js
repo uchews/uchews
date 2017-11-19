@@ -25,7 +25,8 @@ class Index extends React.Component {
       peopleNum: '',
       distance: '',
       budget: '',
-      types: {},
+      wantToEat: [],
+      willNotEat: [],
       errorText: '',
       counter: 1,
     };
@@ -60,7 +61,6 @@ class Index extends React.Component {
   clickHandle(view) {
     // this if statement handles how many types forms are loaded based on peopleNum
     if (view === 'waiting') {
-      console.log(this.state.peopleNum);
       if (this.state.counter < this.state.peopleNum) {
         let increment = this.state.counter + 1;
         this.setState({ counter: increment });
@@ -120,7 +120,9 @@ class Index extends React.Component {
           <MuiThemeProvider>
             <Types appView={this.state.appView}
                    clickHandle={this.clickHandle}
-                   counter={this.state.counter}/>
+                   counter={this.state.counter}
+                   willNotEat={this.state.willNotEat}
+                   wantToEat={this.state.wantToEat}/>
           </MuiThemeProvider>
         </div>
       )
