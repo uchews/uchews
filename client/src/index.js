@@ -17,7 +17,6 @@ import axios from 'axios';
 // load results page (this is done either here or in Index)
 // HTTP:
 // body = { location, budget, radius, wantToEat, willNotEat }
->>>>>>> added google sign up button
 
 class Index extends React.Component {
   constructor(props) {
@@ -36,7 +35,6 @@ class Index extends React.Component {
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
     this.changeView = this.changeView.bind(this);
-<<<<<<< HEAD
     this.submitForm = this.submitForm.bind(this);
   }
 
@@ -53,9 +51,7 @@ class Index extends React.Component {
 
     axios.post('/input/findRestaurants', data)
     .then( () => changeView('results') );
-=======
     this.googleClick = this.googleClick.bind(this);
->>>>>>> added google sign up button
   }
 
   // handles empty value errors in input.jsx
