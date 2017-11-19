@@ -32,7 +32,7 @@ class Types extends React.Component {
     this.forceUpdate = this.forceUpdate.bind(this);
   }
   // TODO:
-  // enable changeHandle on checkboxes buttons
+  // store checked types in corresponding arrays
   // enable get request on button click
     // do props.clickHandle("waiting") in get request function
 
