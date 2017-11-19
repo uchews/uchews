@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
+import axios from 'axios';
 
 
 const style = {
@@ -30,56 +31,92 @@ const style = {
   }
 };
 
+class Signup extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      password: ''
+    }
+    this.onUserChange = this.onUserChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
 
-const Signup = ({clickHandle}) => {
-  return (
-    <div>
-      <AppBar
-        title="uChews"
-      />
-        <form action="/signup" method="post">
-          <Paper style={style.box}>
-          <AppBar
-            title="Sign Up"
-            showMenuIconButton={false}
-            style={style.signBar}
-            />
-            <div>
-              <Paper style={style.text} zDepth={1}>
-                  <div>
-                    <TextField
-                      hintText="Username Field"
-                      floatingLabelText="Username"
-                      underlineShow={false}
-                    />
-                    <Divider />
-                  </div>
-                  <div>
-                    <TextField
-                      hintText="Password Field"
-                      floatingLabelText="Password"
-                      type="password"
-                      underlineShow={false}
-                    />
-                    <Divider />
-                  </div>
-              </Paper>
-                  <div>
-                    <RaisedButton
-                      style={style.button}
-                      label="SIGNUP"
-                    />
-                    <RaisedButton
-                      style={style.button}
-                      label="LOGIN"
-                      onClick={() => clickHandle('login')}
-                    />
-                  </div>
-            </div>
-          </Paper>
-        </form>
-    </div>
-  )
+
+  onUserChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  handleSubmit() {
+    axios.post('/signup', {
+      username: this.state.username,
+      password: this.state.password,
+    })
+      .then((response) => {
+        console.log('successful sign up')
+      })
+      .catch((err) => {
+        console.log('could not reach server')
+      })
+  }
+
+  render() {
+    return (
+      <div>
+        <AppBar
+          title="uChews"
+        />
+          <form>
+            <Paper style={style.box}>
+            <AppBar
+              title="Sign Up"
+              showMenuIconButton={false}
+              style={style.signBar}
+              />
+              <div>
+                <Paper style={style.text} zDepth={1}>
+                    <div>
+                      <TextField
+                        hintText="Username Field"
+                        floatingLabelText="Username"
+                        underlineShow={false}
+                        name="username" onChange={this.onUserChange}
+                      />
+                      <Divider />
+                    </div>
+                    <div>
+                      <TextField
+                        hintText="Password Field"
+                        floatingLabelText="Password"
+                        type="password"
+                        underlineShow={false}
+                        name="password" onChange={this.onUserChange}
+                      />
+                      <Divider />
+                    </div>
+                </Paper>
+                    <div>
+                      <RaisedButton
+                        style={style.button}
+                        label="SIGNUP"
+                        onClick={this.handleSubmit}
+                      />
+                      <RaisedButton
+                        style={style.button}
+                        label="LOGIN"
+                        onClick={() => this.props.clickHandle('login')}
+                      />
+                      <a href="/auth/google">Log In with OAuth Provider</a>
+                    </div>
+              </div>
+            </Paper>
+          </form>
+      </div>
+
+    )
+  }
 }
 
 export default Signup;
