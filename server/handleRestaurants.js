@@ -33,7 +33,12 @@ const rankRestaurant = function(data, budget)
   //filter non-restaurant data
   let restaurantsByCusine = [];
   data.results.forEach((result) => {
-    restaurantsByCusine.push({ name:result.name, rating:result.rating, price_level:result.price_level });
+    if(result.types.includes('restaurant')) {
+      restaurantsByCusine.push(
+        {
+          name:result.name, rating:result.rating, price_level:result.price_level
+        });
+    }
   });
   //if a budget_level is given
    const restaurantsByCusineAndBudget = restaurantsByCusine.filter((restaurant) => {
