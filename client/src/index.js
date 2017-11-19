@@ -12,6 +12,13 @@ import Waiting from './components/wating.jsx';
 import Dummy from './components/dummy.jsx';
 import axios from 'axios';
 
+// TODO:
+// when a response is received from server
+// load results page (this is done either here or in Index)
+// HTTP:
+// body = { location, budget, radius, wantToEat, willNotEat }
+>>>>>>> added google sign up button
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -29,6 +36,7 @@ class Index extends React.Component {
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
     this.changeView = this.changeView.bind(this);
+<<<<<<< HEAD
     this.submitForm = this.submitForm.bind(this);
   }
 
@@ -45,6 +53,9 @@ class Index extends React.Component {
 
     axios.post('/input/findRestaurants', data)
     .then( () => changeView('results') );
+=======
+    this.googleClick = this.googleClick.bind(this);
+>>>>>>> added google sign up button
   }
 
   // handles empty value errors in input.jsx
@@ -98,6 +109,17 @@ class Index extends React.Component {
     this.setState({
       appView: view
     })
+  }
+
+  googleClick() {
+    console.log(`I've been clicked!`)
+    axios.get('/auth/google')
+      .then((response) => {
+        console.log('successfuly sent to server');
+      })
+      .catch((error) => {
+        console.log('error unable to reach server')
+      })
   }
 
   render() {
@@ -162,7 +184,8 @@ class Index extends React.Component {
       return (
         <MuiThemeProvider>
           <Signup appView={this.state.appView} clickHandle={this.clickHandle}
-                  changeView={this.changeView}/>
+                  changeView={this.changeView}
+                  googleClick={this.googleClick}/>
         </MuiThemeProvider>
       )
     } else if (this.state.appView === 'dummy') {

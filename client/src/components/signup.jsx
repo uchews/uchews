@@ -123,7 +123,10 @@ class Signup extends React.Component {
                         label="LOGIN"
                         onClick={() => this.props.clickHandle('login')}
                       />
-                      <a href="/auth/google">Log In with OAuth Provider</a>
+                      <a href="/auth/google"><img  src="../../assets/light.png"
+                            onClick={this.props.googleClick}
+                      /></a>
+
                     </div>
               </div>
             </Paper>
