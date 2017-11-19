@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const session = require('express-session');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const db = require('../database/index.js');
 const google = require('./googlePlacesHelpers.js');
@@ -38,6 +39,11 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(passport.initialize());
 //set up the route to Google for authentication
 app.get('/auth/google',
@@ -86,6 +92,7 @@ const port = app.get('port');
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/checkSession', (req, res) => {
+  console.log('session object: ', req.sessionID);
   res.send('hello there')
 })
 
