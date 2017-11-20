@@ -41,13 +41,17 @@ const rankCusine = function(body){
   });
   const willNotEat = body.willNotEat;
   willNotEat.forEach(willNotEatType => {
-    cusineTypeCounter[willNotEat] =  cusineTypeCounter[willNotEat] ?  cusineTypeCounter[willNotEat] - 1 : -1;
+    cusineTypeCounter[willNotEatType] =  cusineTypeCounter[willNotEatType] ?  cusineTypeCounter[willNotEatType] - 1 : -1;
   });
    cusineTypeSorted = Object.keys(cusineTypeCounter).sort((a,b) => {
     return cusineTypeCounter[b]-cusineTypeCounter[a];
    }
   );
- return cusineTypeSorted.slice(0, 3);
+  const results = cusineTypeSorted.slice();
+  if(results.length < 3){
+    return results;
+  }
+ return results.slice(0, 3);
 };
 
 
