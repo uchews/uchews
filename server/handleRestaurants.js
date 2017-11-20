@@ -33,10 +33,9 @@ const recommendSearchDataByHistory = function(historyData){
 };
 
 
-const rankCusine = function(reqByType){
+const rankCusine = function(body){
   let cusineTypeCounter = {};
-
-  const wantToEat = reqByType.wantToEat;
+  const wantToEat = body.wantToEat;
   wantToEat.forEach(wantToEatType => {
     cusineTypeCounter[wantToEatType] =  cusineTypeCounter[wantToEatType] ?  cusineTypeCounter[wantToEatType] + 1 : 1;
   });
@@ -67,15 +66,7 @@ const rankRestaurant = function(data, budget)
   const budget_level = budget || 2;
   //const restaurantsByCusine = data.results;
   //filter non-restaurant data
-  let restaurantsByCusine = [];
-  data.results.forEach((result) => {
-    if(result.types.includes('restaurant')) {
-      restaurantsByCusine.push(
-        {
-          name:result.name, rating:result.rating, price_level:result.price_level
-        });
-    }
-  });
+  let restaurantsByCusine = data.results;
   //if a budget_level is given
    const restaurantsByCusineAndBudget = restaurantsByCusine.filter((restaurant) => {
     return typeof(restaurant.price_level)==='number'&&restaurant.price_level === budget_level;
