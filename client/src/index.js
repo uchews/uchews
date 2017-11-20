@@ -43,10 +43,9 @@ class Index extends React.Component {
       willNotEat: this.state.willNotEat
     };
 
-    console.log('submitting', data);
-
     axios.post('/input/findRestaurants', data)
     .then( (response) => {
+      console.log('submitting', data);
       this.setState({ results: response.data }, () => this.changeView('results'));
     });
   }

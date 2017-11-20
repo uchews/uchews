@@ -24,7 +24,7 @@ const style = {
     textAlign: 'center',
     width: '50%'
   },
-}
+};
 
 const tilesData = [
   {
@@ -37,32 +37,27 @@ const tilesData = [
     title: 'Tasty burger',
     author: 'pashminu',
   }
-]
+];
 
 const Results = ({ results }) => {
+  console.log(results);
   return (
     <div>
       <Paper style={style.paper} zDepth={3}>
         <h1>#1</h1>
-        <img src="/" />
+        <img src={results[0][0].icon} />
         <h2>{results[0][0].name}</h2>
-        (HOURS)
-        (ADDRESS)
-        (PHONE #)
+        {results[0][0].formatted_address}
 
         <h1>#2</h1>
-        <img src="/" />
+        <img src={results[1][0].icon} />
         <h2>{results[1][0].name}</h2>
-        (HOURS)
-        (ADDRESS)
-        (PHONE #)
+        {results[1][0].formatted_address}
 
         <h1>#3</h1>
-        <img src="/" />
+        <img src={results[2][0].icon} />
         <h2>{results[2][0].name}</h2>
-        (HOURS)
-        (ADDRESS)
-        (PHONE #)
+        {results[2][0].formatted_address}
       </Paper>
     </div>
   )
