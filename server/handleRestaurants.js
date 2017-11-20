@@ -1,3 +1,38 @@
+const rankCusineByHistory = function(historyDataByType) {
+  let historyDataByTypeObj = {wantToEat: [], willNotEat:[]};
+
+  historyDataByType.forEach(eachHistoryType => {
+    historyDataByTypeObj.wantToEat.concat(eachHistoryType.wantToEat);
+    historyDataByTypeObj.willNotEat.concat(eachHistoryType.willNotEat);
+  });
+  return rankCusine(historyDataByTypeObj);
+};
+
+
+const countFreq = function(arrData) {
+  const counter = {};
+  arrData.forEach((value) => {
+    counter[value] = counter[value] ? counter[value] + 1: 1;
+  });
+  //return the most frequent one in history
+  counterSorted = Object.keys(counter).sort((a,b) => {
+    return counter[b]-counter[a];
+   });
+  return counterSorted.slice(0, 1);
+};
+
+const recommendSearchDataByHistory = function(historyData){
+  const recommendSearchInput = {};
+  for(var key in historyData) {
+    if(key === 'foodType') {
+      recommendSearchInput[key] = rankCusineByHistory(historyData[key]);
+    }
+    recommendSearchInput[key] = countFreq(historyData[key]);
+  }
+  return recommendSearchInput;
+};
+
+
 const rankCusine = function(body){
   let cusineTypeCounter = {};
   const wantToEat = body.wantToEat;
@@ -31,10 +66,7 @@ const rankRestaurant = function(data, budget)
   const budget_level = budget || 2;
   //const restaurantsByCusine = data.results;
   //filter non-restaurant data
-  let restaurantsByCusine = [];
-  data.results.forEach((result) => {
-    restaurantsByCusine.push({ name:result.name, rating:result.rating, price_level:result.price_level });
-  });
+  let restaurantsByCusine = data.results;
   //if a budget_level is given
    const restaurantsByCusineAndBudget = restaurantsByCusine.filter((restaurant) => {
     return typeof(restaurant.price_level)==='number'&&restaurant.price_level === budget_level;
@@ -56,4 +88,7 @@ const rankRestaurant = function(data, budget)
 };
 
 module.exports.rankCusine = rankCusine;
+module.exports.recommendSearchDataByHistory = recommendSearchDataByHistory;
 module.exports.rankRestaurant =rankRestaurant;
+
+

@@ -37,7 +37,7 @@ const handleQueries = function(body, cb) {
 
     //map the rankedCuisine array into an array of promises for querying Google Places
     axios.all(rankedCuisines.map((cuisine) => {
-      return requestRestaurants(cuisine, lat, long, body.distance * 1100);
+      return requestRestaurants(cuisine, lat, long, body.radius * 1100);
     }))
     .then((responses) => {
       const restaurants = [];
