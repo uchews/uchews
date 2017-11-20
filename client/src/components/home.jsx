@@ -28,8 +28,12 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    const context = this;
     axios.get('/checkSession')
       .then((response) => {
+        if (!response.data) {
+          context.props.clickHandle('signup');
+        }
         console.log(response.data)
       })
       .catch((error) => {

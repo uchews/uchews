@@ -59,9 +59,8 @@ class Login extends React.Component {
           this.setState({
             floatUser: 'incorrect username, try again'
           })
-        } else  {
-          console.log('successful login')
-
+        } else {
+          this.props.clickHandle('home');
         }
       })
       .catch((err) => {

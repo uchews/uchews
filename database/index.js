@@ -18,7 +18,7 @@ const UserSchema = new Schema({
   username: { type: String },
   password: { type: String },
   googleId: { type: String },
-  sessionId: { type: String },
+  sessionID: { type: String },
   location: [String],
   distance: [String],
   budget:[Number],
@@ -29,15 +29,16 @@ const UserSchema = new Schema({
 const User = mongoose.model('User', UserSchema);
 
 const saveNewUser = (user, cb) => {
+  console.log('new user in saveNewUser function: ', user);
   let newUser = new User({
     username: user.username || user.googleId,
     password: user.password,
     googleId: user.googleId,
     sessionID: user.sessionID,
-    location: [String],
-    distance: [String],
-    budget:[Number],
-    foodType:[String],
+    location: [],
+    distance: [],
+    budget:[],
+    foodType:[],
     ateAt: []
   });
   newUser.save(cb);
