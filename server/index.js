@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const MongoStore = require('connect-mongo')(session);
 const db = require('../database/index.js');
 const google = require('./googlePlacesHelpers.js');
 const authenticate = require('./authenticate.js');
@@ -43,7 +44,8 @@ app.use(bodyParser.urlencoded({
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds163745.mlab.com:63745/uchews`})
 }));
 app.use(passport.initialize());
 //set up the route to Google for authentication
@@ -59,11 +61,10 @@ app.get('/auth/google/callback',
 
 app.post('/signup', (req, res) => {
   //make sure the user doesn't exist in database by doing find({username: username})
-  console.log('user: ', req.body);
   authenticate.checkUserExist(req.body, (doesUserNotExist) => {
     if (doesUserNotExist) {
     //if the user doesn't exist, hash the password and store user and hash in db and send true to client
-      authenticate.storeNewUser(req.body, () => {
+      authenticate.storeNewUser(req.body, req.sessionID, () => {
         console.log('new user created');
         res.send(true);
       });
@@ -96,8 +97,15 @@ const port = app.get('port');
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/checkSession', (req, res) => {
-  console.log('session object: ', req.sessionID);
-  res.send('hello there')
+  console.log('sessionID: ', req.sessionID);
+  db.User.findOne({ sessionID: req.sessionID }, (err, user) => {
+    console.log('users: ', user);
+    if (user) {
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  });
 })
 
 app.post('/input/findRestaurants', (req, res) => {

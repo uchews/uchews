@@ -12,12 +12,14 @@ const checkUserExist = (user, cb) => {
   });
 }
 
-const storeNewUser = (user, cb) => {
+const storeNewUser = (user, sessionID, cb) => {
+  console.log('sessionID in save: ', sessionID);
   bcrypt.genSalt(5, (err, salt) => {
     bcrypt.hash(user.password, salt, (err, hash) => {
       const newUser = {
         username: user.username,
-        password: hash
+        password: hash,
+        sessionID: sessionID
       };
       db.saveNewUser(newUser, cb);
     });
