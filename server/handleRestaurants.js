@@ -1,6 +1,42 @@
-const rankCusine = function(body){
+const rankCusineByHistory = function(historyDataByType) {
+  let historyDataByTypeObj = {wantToEat: [], willNotEat:[]};
+
+  historyDataByType.forEach(eachHistoryType => {
+    historyDataByTypeObj.wantToEat.concat(eachHistoryType.wantToEat);
+    historyDataByTypeObj.willNotEat.concat(eachHistoryType.willNotEat);
+  });
+  return rankCusine(historyDataByTypeObj);
+};
+
+
+const countFreq = function(arrData) {
+  const counter = {};
+  arrData.forEach((value) => {
+    counter[value] = counter[value] ? counter[value] + 1: 1;
+  });
+  //return the most frequent one in history
+  counterSorted = Object.keys(counter).sort((a,b) => {
+    return counter[b]-counter[a];
+   });
+  return counterSorted.slice(0, 1);
+};
+
+const recommendSearchDataByHistory = function(historyData){
+  const recommendSearchInput = {};
+  for(var key in historyData) {
+    if(key === 'foodType') {
+      recommendSearchInput[key] = rankCusineByHistory(historyData[key]);
+    }
+    recommendSearchInput[key] = countFreq(historyData[key]);
+  }
+  return recommendSearchInput;
+};
+
+
+const rankCusine = function(reqByType){
   let cusineTypeCounter = {};
-  const wantToEat = body.wantToEat;
+
+  const wantToEat = reqByType.wantToEat;
   wantToEat.forEach(wantToEatType => {
     cusineTypeCounter[wantToEatType] =  cusineTypeCounter[wantToEatType] ?  cusineTypeCounter[wantToEatType] + 1 : 1;
   });
@@ -61,4 +97,7 @@ const rankRestaurant = function(data, budget)
 };
 
 module.exports.rankCusine = rankCusine;
+module.exports.recommendSearchDataByHistory = recommendSearchDataByHistory;
 module.exports.rankRestaurant =rankRestaurant;
+
+

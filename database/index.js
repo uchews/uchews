@@ -18,6 +18,10 @@ const UserSchema = new Schema({
   username: { type: String },
   password: { type: String },
   googleId: { type: String },
+  location: [String],
+  distance: [String],
+  budget:[Number],
+  foodType:[String],
   ateAt: [String]
 });
 
@@ -28,6 +32,10 @@ const saveNewUser = (user, cb) => {
     username: user.username || user.googleId,
     password: user.password,
     googleId: user.googleId,
+    location: [String],
+    distance: [String],
+    budget:[Number],
+    foodType:[String],
     ateAt: []
   });
   newUser.save(cb);

@@ -7,6 +7,7 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const db = require('../database/index.js');
 const google = require('./googlePlacesHelpers.js');
 const authenticate = require('./authenticate.js');
+const handleRestaurants = require('./handleRestaurants.js');
 
 require('dotenv').config();
 
@@ -72,6 +73,7 @@ app.post('/signup', (req, res) => {
   });
 });
 
+
 app.post('/login', (req, res) => {
   const user = req.body;
   //try to retrieve the user from db
@@ -79,10 +81,12 @@ app.post('/login', (req, res) => {
   //return true if user exists and bcrypt returns true
 });
 
+
 //needs to be rewritten to reflect actual login page
 app.get('/login', function(req, res) {
   //req.logout();
   res.send('google authentication failed');
+
 });
 
 app.set('port', (process.env.PORT || 1337));
