@@ -26,6 +26,7 @@ class Index extends React.Component {
       errorText: '',
       counter: 1,
       results: [],
+
     };
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
@@ -103,13 +104,14 @@ class Index extends React.Component {
     })
   }
 
+
   render() {
     if (this.state.appView === 'home') {
       return (
         <div>
-          <h1>uChews</h1>
           <MuiThemeProvider>
-            <Home appView={this.state.appView} clickHandle={this.clickHandle}/>
+            <Home appView={this.state.appView}
+                  clickHandle={this.clickHandle}/>
           </MuiThemeProvider>
         </div>
       )
