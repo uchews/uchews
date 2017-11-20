@@ -5,6 +5,7 @@ const passport = require('passport');
 const session = require('express-session');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const MongoStore = require('connect-mongo')(session);
+const bcrypt = require('bcrypt');
 const db = require('../database/index.js');
 const google = require('./googlePlacesHelpers.js');
 const authenticate = require('./authenticate.js');
@@ -64,7 +65,8 @@ app.post('/signup', (req, res) => {
   authenticate.checkUserExist(req.body, (doesUserNotExist) => {
     if (doesUserNotExist) {
     //if the user doesn't exist, hash the password and store user and hash in db and send true to client
-      authenticate.storeNewUser(req.body, req.sessionID, () => {
+      authenticate.storeNewUser(req.body, req.sessionID, (err) => {
+        console.log('error in storeNewUser, server index line 68: ', err);
         console.log('new user created');
         res.send(true);
       });
@@ -77,7 +79,21 @@ app.post('/signup', (req, res) => {
 
 app.post('/login', (req, res) => {
   const user = req.body;
-  //try to retrieve the user from db
+  db.User.findOne({ username: req.body.username }, (err, user) => {
+    if (!user) {
+      res.send(false);
+    } else {
+      bcrypt.compare(req.body.password, user.password, (err2, result) => {
+        if (result) {
+          db.User.findOneAndUpdate({ username: req.body.username }, { sessionID: req.sessionID }, { new: true }, (err, updatedUser) => {
+            res.send(result);
+          });
+        } else {
+          res.send(result);
+        }
+      });
+    }
+  });
   //if user exists, check password against hash using bcrypt.compare
   //return true if user exists and bcrypt returns true
 });
@@ -85,6 +101,7 @@ app.post('/login', (req, res) => {
 
 //needs to be rewritten to reflect actual login page
 app.get('/login', function(req, res) {
+
   //req.logout();
   res.send('google authentication failed');
 
@@ -97,16 +114,15 @@ const port = app.get('port');
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/checkSession', (req, res) => {
-  console.log('sessionID: ', req.sessionID);
+  console.log('sessionID in /checkSession: ', req.sessionID);
   db.User.findOne({ sessionID: req.sessionID }, (err, user) => {
-    console.log('users: ', user);
     if (user) {
       res.send(true);
     } else {
       res.send(false);
     }
   });
-})
+});
 
 app.post('/input/findRestaurants', (req, res) => {
   google.handleQueries(req.body, (results) => {
