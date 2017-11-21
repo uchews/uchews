@@ -10,6 +10,7 @@ import Results from './components/results.jsx';
 import Types from './components/types.jsx';
 import Waiting from './components/wating.jsx';
 import Dummy from './components/dummy.jsx';
+import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
 
 class Index extends React.Component {
@@ -126,6 +127,7 @@ class Index extends React.Component {
         <div>
           <h1>uChews</h1>
           <MuiThemeProvider>
+            <AppBar title="uChews"/>
             <Input data={this.state.data}
                    clickHandle={this.clickHandle}
                    changeHandle={this.changeHandle}
