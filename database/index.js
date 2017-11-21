@@ -45,7 +45,7 @@ const saveNewUser = (user, cb) => {
 }
 
 const findOrCreateUser = (query, cb) => {
-  User.findOne(query, (err, user) => {
+  User.findOne({ googleId: query.googleId }, (err, user) => {
     if (!user) {
       saveNewUser(query, (err2) => {
         if (err2) {
@@ -57,7 +57,13 @@ const findOrCreateUser = (query, cb) => {
         }
       });
     } else {
-      cb(err, user);
+      User.findOneAndUpdate({ username: user.username }, { sessionID: query.sessionID }, { new: true }, (err, updatedUser) => {
+        if (err) {
+          console.log('error saving in findOrCreate: ', err);
+        }
+        console.log('updated User: ', updatedUser);
+        cb(err, user);
+      });
     }
   });
 }
