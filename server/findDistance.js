@@ -4,6 +4,7 @@ const toRad = (num) => {
   return num * Math.PI / 180;
 }
 
+//This function uses the haversine formula to find the shortest distance between two points on a globe
 const haversine = (homeLat, homeLong, restLat, restLong) => {
   const R = 6371000;
   const phi1 = toRad(homeLat);

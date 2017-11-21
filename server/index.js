@@ -23,8 +23,6 @@ passport.use(new GoogleStrategy({
   //lookup or create a new user using the googleId (no associated username or password)
   function(req, accessToken, refreshToken, profile, done) {
     db.findOrCreateUser({ googleId: profile.id, sessionID: req.sessionID }, function (err, user) {
-      console.log('user in google strategy ', user);
-
       return done(err, user);
     });
   }
@@ -57,9 +55,8 @@ app.get('/auth/google',
 }));
 //set up the return handler after Google has authenticated
 app.get('/auth/google/callback',
-  passport.authenticate('google', {failureRedirect: '/login' }),
+  passport.authenticate('google', {failureRedirect: '/' }),
   function(req, res) {
-    console.log('Google sessionID: ', req.sessionID);
     res.redirect('/');
 });
 
@@ -67,10 +64,8 @@ app.post('/signup', (req, res) => {
   //make sure the user doesn't exist in database by doing find({username: username})
   authenticate.checkUserExist(req.body, (doesUserNotExist) => {
     if (doesUserNotExist) {
-    //if the user doesn't exist, hash the password and store user and hash in db and send true to client
+    //if the user doesn't exist, hash the password and store user and hash in db
       authenticate.storeNewUser(req.body, req.sessionID, (err) => {
-        console.log('error in storeNewUser, server index line 68: ', err);
-        console.log('new user created');
         res.send(true);
       });
     } else {
@@ -99,21 +94,11 @@ app.post('/login', (req, res) => {
   });
 });
 
-
-//needs to be rewritten to reflect actual login page
-app.get('/login', function(req, res) {
-
-  //req.logout();
-  res.send('google authentication failed');
-
-});
-
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.log('error on logout: ', err);
     }
-    console.log('sending logout to client');
     res.send();
   });
 });
@@ -124,9 +109,8 @@ const port = app.get('port');
 
 app.use(express.static(__dirname + '/../client/dist'));
 
+//The client sends a get request to /checkSession to determine whether the login or home view should be selected
 app.get('/checkSession', (req, res) => {
-  console.log('sessionID in /checkSession: ', req.sessionID);
-  console.log('session object in /checkSession: ', req.session);
   db.User.findOne({ sessionID: req.sessionID }, (err, user) => {
     if (user) {
       res.send(true);
@@ -136,7 +120,7 @@ app.get('/checkSession', (req, res) => {
   });
 });
 
-
+//Client sends survey results to /input/findRestaurants for API querying and ranking
 app.post('/input/findRestaurants', (req, res) => {
   google.handleQueries(req.body, (results) => {
     res.send(results);
