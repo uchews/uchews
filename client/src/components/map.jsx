@@ -26,6 +26,7 @@ class MapContainer extends React.Component {
       activeMarker: marker,
       showingInfoWindow: true
     });
+    console.log(this.state.activeMarker);
   }
 
   onMapClicked(props) {
@@ -49,22 +50,29 @@ class MapContainer extends React.Component {
           }}>
         <Marker
           title={`Choice 1`}
+          onClick={this.onMarkerClick}
           name={this.props.results[0][0].name}
+          address={this.props.results[0][0].formatted_address}
           position={{lat: this.props.results[0][0].geometry.location.lat, lng: this.props.results[0][0].geometry.location.lng}} />
         <Marker
           title={`Choice 2`}
+          onClick={this.onMarkerClick}
           name={this.props.results[1][0].name}
+          address={this.props.results[1][0].formatted_address}
           position={{lat: this.props.results[1][0].geometry.location.lat, lng: this.props.results[1][0].geometry.location.lng}} />
         <Marker
           title={`Choice 3`}
+          onClick={this.onMarkerClick}
           name={this.props.results[2][0].name}
+          address={this.props.results[2][0].formatted_address}
           position={{lat: this.props.results[2][0].geometry.location.lat, lng: this.props.results[2][0].geometry.location.lng}} />
 
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
             <div>
-              <h1>{this.state.selectedPlace.name}</h1>
+              <h4>{this.state.selectedPlace.name}</h4>
+              <p>{this.state.selectedPlace.address}</p>
             </div>
         </InfoWindow>
       </Map>
