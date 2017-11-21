@@ -50,3 +50,20 @@ REACT
 https://reactjs.org/docs/components-and-props.html
 WEBPACK
 https://webpack.js.org/
+
+
+# Next Steps #
+Implement recommended restaurants based on user history
+  server/handleRestaurants has a recommendSearchDataByHistory function that returns suggested search parameters based on historical user input
+  this could be used to display recommended searches on the homepage
+
+Implement continued user interaction after results are displayed
+  clicking a restaurant on the results page could show a restaurant's menu, direct to the restaurant's webpage, etc.
+
+Create user profiles
+  users could view past search parameters and restaurants
+
+Flesh out user creation
+  signup could require an email address
+  dual password input on user signup to prevent typos
+  there is currently nothing preventing a blank password
