@@ -5,7 +5,7 @@ const handleRestaurants = require('./handleRestaurants.js');
 
 
 const requestRestaurants = function(cuisine, latitude, longitude, radius) {
-  const searchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${cuisine}+Restaurant&sensor=true&location=${latitude},${longitude}&radius=${radius}&key=${process.env.GOOGLE_API_KEY}`;
+  const searchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${cuisine}+Restaurant&sensor=true&location=${latitude},${longitude}&key=${process.env.GOOGLE_API_KEY}`;
 
   return axios({
     method: 'get',
@@ -38,10 +38,11 @@ const handleQueries = function(body, cb) {
     }
     const lat = locationObject[0].latitude;
     const long = locationObject[0].longitude;
+    const radius = body.radius * 1600;
 
     //map the rankedCuisine array into an array of promises for querying Google Places
     axios.all(rankedCuisines.map((cuisine) => {
-      return requestRestaurants(cuisine, lat, long, body.radius);
+      return requestRestaurants(cuisine, lat, long);
     }))
     .then((responses) => {
       const restaurants = [];
