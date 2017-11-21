@@ -32,12 +32,16 @@ const handleQueries = function(body, cb) {
     apiKey: process.env.GOOGLE_API_KEY
   });
   geocoder.geocode(body.location, (err, locationObject) => {
+    console.log(locationObject);
+    if (err) {
+      console.log('ERROR:', err);
+    }
     const lat = locationObject[0].latitude;
     const long = locationObject[0].longitude;
 
     //map the rankedCuisine array into an array of promises for querying Google Places
     axios.all(rankedCuisines.map((cuisine) => {
-      return requestRestaurants(cuisine, lat, long, body.radius * 1100);
+      return requestRestaurants(cuisine, lat, long, body.radius);
     }))
     .then((responses) => {
       const restaurants = [];
