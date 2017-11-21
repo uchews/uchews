@@ -24,6 +24,15 @@
     GOOGLE_API_KEY=[api key]
 9. inside of map.jsx insert your API key as a string on line 86
 
+# OAuth 2.0 client ID#
+This is necessary to enable Google sign-in
+1. create a client ID from console.developers.google.com for OAuth 2.0 client IDs
+  https://developers.google.com/identity/sign-in/web/devconsole-project is a helpful tutorial
+2. set the GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and LOCAL_GOOGLE_REDIRECT variables in your .env file
+  these three variables are all accessed in server/index.js when the GoogleStrategy is defined for passport
+3. pay attention to step 5 in the tutorial above: you must authorize separate redirect urls for testing on your local machine and the deployed website
+
+
 # HELPFUL RESOURCES #
 AXIOS
 https://github.com/axios/axios
