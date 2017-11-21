@@ -1,11 +1,12 @@
 const axios = require('axios');
 const Nodegeocoder = require('node-geocoder');
 const handleRestaurants = require('./handleRestaurants.js');
+const findDistance = require('./findDistance.js');
 
 
 
 const requestRestaurants = function(cuisine, latitude, longitude, radius) {
-  const searchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${cuisine}+Restaurant&sensor=true&location=${latitude},${longitude}&key=${process.env.GOOGLE_API_KEY}`;
+  const searchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${cuisine}+food&sensor=true&location=${latitude},${longitude}&key=${process.env.GOOGLE_API_KEY}`;
 
   return axios({
     method: 'get',
@@ -32,23 +33,23 @@ const handleQueries = function(body, cb) {
     apiKey: process.env.GOOGLE_API_KEY
   });
   geocoder.geocode(body.location, (err, locationObject) => {
-    console.log(locationObject);
     if (err) {
       console.log('ERROR:', err);
     }
     const lat = locationObject[0].latitude;
-    const long = locationObject[0].longitude;
+    const lng = locationObject[0].longitude;
     const radius = body.radius * 1600;
 
     //map the rankedCuisine array into an array of promises for querying Google Places
     axios.all(rankedCuisines.map((cuisine) => {
-      return requestRestaurants(cuisine, lat, long);
+      return requestRestaurants(cuisine, lat, lng);
     }))
     .then((responses) => {
       const restaurants = [];
       //aggregate the resulting restaurants into a restaurant matrix and add a cuisine property to each restaurant
       for (let i = 0; i < responses.length; i++) {
-        let rankedRest = handleRestaurants.rankRestaurant(responses[i].data, body.budget)
+        let rankedRest = handleRestaurants.rankRestaurant(responses[i].data, body.budget);
+        rankedRest = findDistance.filterByDist(rankedRest, lat, lng, radius);
         //should push rankedRest rather than responses[i] below
         restaurants.push(rankedRest);
         restaurants[i].map((restaurant) => {
