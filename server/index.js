@@ -13,7 +13,6 @@ const handleRestaurants = require('./handleRestaurants.js');
 
 require('dotenv').config();
 
-
 //Set up google login protocol
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
