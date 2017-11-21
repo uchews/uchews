@@ -41,7 +41,6 @@ class Index extends React.Component {
     };
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
-    this.changeView = this.changeView.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -60,7 +59,7 @@ class Index extends React.Component {
 
     axios.post('/input/findRestaurants', data)
     .then( (response) => {
-      this.setState({ results: response.data }, () => this.changeView('results'));
+      this.setState({ results: response.data }, () => this.clickHandle('results'));
     });
   }
 
@@ -99,8 +98,21 @@ class Index extends React.Component {
         // when everyone has filled out a types.jsx form, comtinue to the waiting page
         this.setState({ appView: view }, () => this.submitForm() );
       }
+    } else if (view === 'home'){
+      this.setState({
+        appView: 'home',
+        location: '',
+        peopleNum: '',
+        distance: '',
+        budget: '',
+        wantToEat: [],
+        willNotEat: [],
+        errorText: '',
+        counter: 1,
+        results: []
+      })
     } else {
-      this.setState({ appView: view });
+      this.setState({ appView: view, open: false });
     }
   }
 
@@ -109,13 +121,6 @@ class Index extends React.Component {
   changeHandle(e, i, val) {
     this.errorHandle(val);
     this.updateState(e, val);
-  }
-
-  changeView(view) {
-    this.setState({
-      appView: view,
-      open: false
-    })
   }
 
   handleToggle() {
@@ -147,7 +152,7 @@ class Index extends React.Component {
                     width={200}
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.changeView('home')}>
+                    <MenuItem onClick={() => this.clickHandle('home')}>
                         Home
                     </MenuItem>
                     <Divider />
@@ -181,7 +186,7 @@ class Index extends React.Component {
                     width={200}
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.changeView('home')}>
+                    <MenuItem onClick={() => this.clickHandle('home')}>
                         Home
                     </MenuItem>
                     <Divider />
@@ -206,7 +211,7 @@ class Index extends React.Component {
                     width={200}
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.changeView('home')}>
+                    <MenuItem onClick={() => this.clickHandle('home')}>
                         Home
                     </MenuItem>
                     <Divider />
@@ -231,7 +236,7 @@ class Index extends React.Component {
                     width={200}
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.changeView('home')}>
+                    <MenuItem onClick={() => this.clickHandle('home')}>
                         Home
                     </MenuItem>
                     <Divider />
@@ -253,7 +258,7 @@ class Index extends React.Component {
                     width={200}
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.changeView('home')}>
+                    <MenuItem onClick={() => this.clickHandle('home')}>
                         Home
                     </MenuItem>
                     <Divider />
@@ -274,13 +279,13 @@ class Index extends React.Component {
               showMenuIconButton={false}
               />
           <Signup appView={this.state.appView} clickHandle={this.clickHandle}
-                  changeView={this.changeView}
+                  clickHandle={this.clickHandle}
                   googleClick={this.googleClick}/>
         </MuiThemeProvider>
       )
     } else if (this.state.appView === 'dummy') {
       return (
-        <Dummy changeView={this.changeView} />
+        <Dummy clickHandle={this.clickHandle} />
       )
     }
   }

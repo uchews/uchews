@@ -63,7 +63,7 @@ class Signup extends React.Component {
           })
         } else  {
           console.log('successful sign up')
-          this.props.changeView('home')
+          this.props.clickHandle('home')
         }
       })
       .catch((err) => {
