@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {redA200} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Home from './components/home.jsx';
@@ -16,8 +17,16 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import axios from 'axios';
 
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: redA200,
+    primary2Color: redA200
+  }
+});
+
 const style = {
   nav:  {
+    backgroundColor: '#FF5252',
     marginBottom: '10%'
   }
 }
@@ -149,7 +158,7 @@ class Index extends React.Component {
     if (this.state.appView === 'home') {
       return (
         <div>
-          <MuiThemeProvider>
+          <MuiThemeProvider muiTheme={muiTheme}>
             <AppBar title="uChews"
                     style={style.nav}
                     onLeftIconButtonTouchTap={this.handleToggle}/>
@@ -171,7 +180,7 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'login') {
       return (
-        <MuiThemeProvider>
+        <MuiThemeProvider muiTheme={muiTheme}>
           <AppBar
             title="uChews"
             style={style.nav}
@@ -183,7 +192,7 @@ class Index extends React.Component {
     } else if (this.state.appView === 'input') {
       return (
         <div>
-          <MuiThemeProvider>
+          <MuiThemeProvider muiTheme={muiTheme}>
             <AppBar title="uChews"
                     style={style.nav}
                     onLeftIconButtonTouchTap={this.handleToggle}/>
@@ -208,7 +217,7 @@ class Index extends React.Component {
     } else if (this.state.appView === 'types') {
       return (
         <div>
-          <MuiThemeProvider>
+          <MuiThemeProvider muiTheme={muiTheme}>
             <AppBar title="uChews"
                     style={style.nav}
                     onLeftIconButtonTouchTap={this.handleToggle}/>
@@ -233,7 +242,7 @@ class Index extends React.Component {
     } else if (this.state.appView === 'waiting') {
       return (
         <div>
-          <MuiThemeProvider>
+          <MuiThemeProvider muiTheme={muiTheme}>
             <AppBar title="uChews"
                     style={style.nav}
                     onLeftIconButtonTouchTap={this.handleToggle}/>
@@ -255,7 +264,7 @@ class Index extends React.Component {
     } else if (this.state.appView === 'results') {
       return (
         <div>
-          <MuiThemeProvider>
+          <MuiThemeProvider muiTheme={muiTheme}>
             <AppBar title="uChews"
                     style={style.nav}
                     onLeftIconButtonTouchTap={this.handleToggle}/>
@@ -277,7 +286,7 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'signup') {
       return (
-        <MuiThemeProvider>
+        <MuiThemeProvider muiTheme={muiTheme}>
             <AppBar
               title="uChews"
               style={style.nav}
