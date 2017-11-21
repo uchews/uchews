@@ -18,11 +18,14 @@ require('dotenv').config();
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: process.env.LOCAL_GOOGLE_REDIRECT || 'https://frozen-beach-49440.herokuapp.com/auth/google/callback'
+  callbackURL: process.env.LOCAL_GOOGLE_REDIRECT || 'https://frozen-beach-49440.herokuapp.com/auth/google/callback',
+  passReqToCallback: true
   },
   //lookup or create a new user using the googleId (no associated username or password)
-  function(accessToken, refreshToken, profile, done) {
-    db.findOrCreateUser({ googleId: profile.id }, function (err, user) {
+  function(req, accessToken, refreshToken, profile, done) {
+    db.findOrCreateUser({ googleId: profile.id, sessionID: req.sessionID }, function (err, user) {
+      console.log('user in google strategy ', user);
+
       return done(err, user);
     });
   }
@@ -57,6 +60,7 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', {failureRedirect: '/login' }),
   function(req, res) {
+    console.log('Google sessionID: ', req.sessionID);
     res.redirect('/');
 });
 
@@ -94,8 +98,6 @@ app.post('/login', (req, res) => {
       });
     }
   });
-  //if user exists, check password against hash using bcrypt.compare
-  //return true if user exists and bcrypt returns true
 });
 
 
@@ -107,6 +109,16 @@ app.get('/login', function(req, res) {
 
 });
 
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log('error on logout: ', err);
+    }
+    console.log('sending logout to client');
+    res.send();
+  });
+});
+
 app.set('port', (process.env.PORT || 1337));
 const port = app.get('port');
 
@@ -115,6 +127,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/checkSession', (req, res) => {
   console.log('sessionID in /checkSession: ', req.sessionID);
+  console.log('session object in /checkSession: ', req.session);
   db.User.findOne({ sessionID: req.sessionID }, (err, user) => {
     if (user) {
       res.send(true);
@@ -123,6 +136,7 @@ app.get('/checkSession', (req, res) => {
     }
   });
 });
+
 
 app.post('/input/findRestaurants', (req, res) => {
   google.handleQueries(req.body, (results) => {

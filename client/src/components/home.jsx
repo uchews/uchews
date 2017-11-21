@@ -32,6 +32,7 @@ class Home extends React.Component {
     }
     this.handleToggle = this.handleToggle.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
 
   }
 
@@ -58,12 +59,14 @@ class Home extends React.Component {
   }
 
   handleLogout() {
+    const context = this;
     axios.get('/logout')
       .then((response) => {
         console.log('Successfully loggedout')
+        context.props.clickHandle('login');
       })
       .catch((error) => {
-        console.log('error logging out')
+        console.log('error logging out', error)
       })
   }
 
