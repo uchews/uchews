@@ -1,11 +1,12 @@
 body {
    font-family: "Roboto";
+   padding-bottom: 100px;
    margin: 0 auto;
    text-align: center;
  }
 
  h1 {
-  color: orange;
+  color: #FF5252;
   font-family: "Chewy";
   font-size: 54px;
  }
