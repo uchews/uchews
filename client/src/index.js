@@ -72,9 +72,12 @@ class Index extends React.Component {
     }
   }
 
+  // catches which input field in input.jsx the user in entering information into,
+  // takes the value, updates the corresponding state with that value
   updateState(e, val) {
-    val === undefined ? val = e.target.value : val;  // to catch location value
+    val === undefined ? val = e.target.value : val;  // catch location input field value since it behaves differently
     let key = e.target.name;
+    // you must use a function to set state if the key is a variable
     let stateObj = function() {
       var obj = {};
       obj[key] = val;
@@ -99,6 +102,7 @@ class Index extends React.Component {
         this.setState({ appView: view }, () => this.submitForm() );
       }
     } else if (view === 'home'){
+      // resets all user inputted states
       this.setState({
         appView: 'home',
         location: '',
@@ -109,7 +113,8 @@ class Index extends React.Component {
         willNotEat: [],
         errorText: '',
         counter: 1,
-        results: []
+        results: [],
+        open: false
       })
     } else {
       this.setState({ appView: view, open: false });
@@ -117,12 +122,13 @@ class Index extends React.Component {
   }
 
   // handles changes in input fields from input.jsx
-  // and routes to handle errors and to update this state
+  // and routes to handle errors and to constantly update this state
   changeHandle(e, i, val) {
     this.errorHandle(val);
     this.updateState(e, val);
   }
 
+  // handles icon menu drawer visibility
   handleToggle() {
     this.setState({open: !this.state.open});
   }
@@ -138,7 +144,6 @@ class Index extends React.Component {
         console.log('error logging out', error)
       })
   }
-
 
   render() {
     if (this.state.appView === 'home') {
