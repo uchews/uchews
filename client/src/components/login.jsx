@@ -56,7 +56,7 @@ class Login extends React.Component {
         console.log(response.data)
         if (response.data === false) {
           this.setState({
-            floatUser: 'incorrect username, try again'
+            floatUser: 'incorrect username or password'
           })
         } else {
           this.props.clickHandle('home');

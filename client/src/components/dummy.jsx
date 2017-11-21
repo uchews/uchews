@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Dummy = ({ changeView }) => {
+const Dummy = ({ clickHandle }) => {
   return (
     <div>
-      {changeView('types')}
+      {clickHandle('types')}
     </div>
   )
 }
