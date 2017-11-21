@@ -21,7 +21,6 @@ const storeNewUser = (user, sessionID, cb) => {
         password: hash,
         sessionID: sessionID
       };
-      console.log('newUser in authenticate.js: ', newUser);
       db.saveNewUser(newUser, cb);
     });
   });
