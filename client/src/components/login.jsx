@@ -11,7 +11,7 @@ const style = {
     height: '80%',
     width: '80%',
     margin: 40,
-    textAlign: 'center',
+    textAlign: 'left',
     display: 'inline-block',
   },
   box: {
