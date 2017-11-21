@@ -147,7 +147,7 @@ class Index extends React.Component {
           <MuiThemeProvider>
             <AppBar title="uChews"
                     style={style.nav}
-                    onClick={this.handleToggle}/>
+                    onLeftIconButtonTouchTap={this.handleToggle}/>
             <Drawer docked={false}
                     width={200}
                     open={this.state.open}
@@ -181,7 +181,7 @@ class Index extends React.Component {
           <MuiThemeProvider>
             <AppBar title="uChews"
                     style={style.nav}
-                    onClick={this.handleToggle}/>
+                    onLeftIconButtonTouchTap={this.handleToggle}/>
             <Drawer docked={false}
                     width={200}
                     open={this.state.open}
@@ -206,7 +206,7 @@ class Index extends React.Component {
           <MuiThemeProvider>
             <AppBar title="uChews"
                     style={style.nav}
-                    onClick={this.handleToggle}/>
+                    onLeftIconButtonTouchTap={this.handleToggle}/>
             <Drawer docked={false}
                     width={200}
                     open={this.state.open}
@@ -231,7 +231,7 @@ class Index extends React.Component {
           <MuiThemeProvider>
             <AppBar title="uChews"
                     style={style.nav}
-                    onClick={this.handleToggle}/>
+                    onLeftIconButtonTouchTap={this.handleToggle}/>
             <Drawer docked={false}
                     width={200}
                     open={this.state.open}
@@ -253,7 +253,7 @@ class Index extends React.Component {
           <MuiThemeProvider>
             <AppBar title="uChews"
                     style={style.nav}
-                    onClick={this.handleToggle}/>
+                    onLeftIconButtonTouchTap={this.handleToggle}/>
             <Drawer docked={false}
                     width={200}
                     open={this.state.open}
