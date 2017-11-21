@@ -35,7 +35,8 @@ class Input extends React.Component {
 
   /*
     Material UI SelectField behaves differently than the other input fields,
-    so it needs it own setState function to pass the correct data between components
+    so it needs it own setState function to pass the correct data between components.
+    setState is an async function, so a callback is necessary for changeHandle.
   */
   setPeople(e, i, val) {
     this.setState({
