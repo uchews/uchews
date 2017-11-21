@@ -106,13 +106,15 @@ class Signup extends React.Component {
               </Paper>
                   <div>
                     <RaisedButton
+                      primary={true}
                       style={style.button}
                       label="SIGNUP"
                       onClick={this.handleSubmit}
                     />
+                    <h3>Have an account?</h3>
                     <RaisedButton
                       style={style.button}
-                      label="LOGIN"
+                      label="login"
                       onClick={() => this.props.clickHandle('login')}
                     />
                     <RaisedButton

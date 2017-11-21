@@ -8,8 +8,8 @@ import axios from 'axios';
 
 const style = {
   text: {
-    height: '50%',
-    width: '50%',
+    height: '80%',
+    width: '80%',
     margin: 40,
     textAlign: 'center',
     display: 'inline-block',
@@ -107,14 +107,21 @@ class Login extends React.Component {
             </Paper>
                 <div>
                   <RaisedButton
-                    style={style.button}
-                    label="SIGNUP"
-                    onClick={() => this.props.clickHandle('signup')}
-                  />
-                  <RaisedButton
+                    primary={true}
                     style={style.button}
                     label="LOGIN"
                     onClick={this.handleSubmit}
+                  />
+                  <RaisedButton
+                    primary={true}
+                    style={style.button}
+                    label="SIGN IN WITH GOOGLE"
+                    href="/auth/google"
+                  />
+                  <RaisedButton
+                    style={style.button}
+                    label="SIGNUP"
+                    onClick={() => this.props.clickHandle('signup')}
                   />
                 </div>
           </div>

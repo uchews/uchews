@@ -13,6 +13,7 @@ import Dummy from './components/dummy.jsx';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import Divider from 'material-ui/Divider';
 import axios from 'axios';
 
 const style = {
@@ -149,7 +150,9 @@ class Index extends React.Component {
                     <MenuItem onClick={() => this.changeView('home')}>
                         Home
                     </MenuItem>
+                    <Divider />
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    <Divider />
             </Drawer>
             <Home appView={this.state.appView}
                   clickHandle={this.clickHandle}/>
@@ -181,7 +184,9 @@ class Index extends React.Component {
                     <MenuItem onClick={() => this.changeView('home')}>
                         Home
                     </MenuItem>
+                    <Divider />
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    <Divider />
             </Drawer>
             <Input data={this.state.data}
                    clickHandle={this.clickHandle}
@@ -204,7 +209,9 @@ class Index extends React.Component {
                     <MenuItem onClick={() => this.changeView('home')}>
                         Home
                     </MenuItem>
+                    <Divider />
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    <Divider />
             </Drawer>
             <Types clickHandle={this.clickHandle}
                    counter={this.state.counter}
@@ -227,7 +234,9 @@ class Index extends React.Component {
                     <MenuItem onClick={() => this.changeView('home')}>
                         Home
                     </MenuItem>
+                    <Divider />
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    <Divider />
             </Drawer>
             <Waiting submitForm={this.submitForm} />
           </MuiThemeProvider>
@@ -247,7 +256,9 @@ class Index extends React.Component {
                     <MenuItem onClick={() => this.changeView('home')}>
                         Home
                     </MenuItem>
+                    <Divider />
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    <Divider />
             </Drawer>
             <Results clickHandle={this.clickHandle}
                      results={this.state.results} />
