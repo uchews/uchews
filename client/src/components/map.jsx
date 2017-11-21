@@ -49,18 +49,21 @@ class MapContainer extends React.Component {
             lng: this.props.results[0][0].geometry.location.lng
           }}>
         <Marker
+          label={`#1`}
           title={`Choice 1`}
           onClick={this.onMarkerClick}
           name={this.props.results[0][0].name}
           address={this.props.results[0][0].formatted_address}
           position={{lat: this.props.results[0][0].geometry.location.lat, lng: this.props.results[0][0].geometry.location.lng}} />
         <Marker
+          label={`#2`}
           title={`Choice 2`}
           onClick={this.onMarkerClick}
           name={this.props.results[1][0].name}
           address={this.props.results[1][0].formatted_address}
           position={{lat: this.props.results[1][0].geometry.location.lat, lng: this.props.results[1][0].geometry.location.lng}} />
         <Marker
+          label={`#3`}
           title={`Choice 3`}
           onClick={this.onMarkerClick}
           name={this.props.results[2][0].name}

@@ -41,8 +41,3 @@ const Results = ({ results }) => {
 }
 
 export default Results;
-
-
-// div on click
-// trigger a function that was passed to the child
-// the function will show the info window
