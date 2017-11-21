@@ -4,7 +4,7 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import Paper from 'material-ui/Paper';
-import MapsContainer from './maps.jsx'
+import MapsContainer from './map.jsx'
 
 const style = {
   paper: {

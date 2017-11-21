@@ -15,6 +15,12 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import axios from 'axios';
 
+const style = {
+  nav:  {
+    marginBottom: '10%'
+  }
+}
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -106,7 +112,8 @@ class Index extends React.Component {
 
   changeView(view) {
     this.setState({
-      appView: view
+      appView: view,
+      open: false
     })
   }
 
@@ -133,11 +140,15 @@ class Index extends React.Component {
         <div>
           <MuiThemeProvider>
             <AppBar title="uChews"
+                    style={style.nav}
                     onClick={this.handleToggle}/>
             <Drawer docked={false}
                     width={200}
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
+                    <MenuItem onClick={() => this.changeView('home')}>
+                        Home
+                    </MenuItem>
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
             </Drawer>
             <Home appView={this.state.appView}
@@ -148,6 +159,11 @@ class Index extends React.Component {
     } else if (this.state.appView === 'login') {
       return (
         <MuiThemeProvider>
+          <AppBar
+            title="uChews"
+            style={style.nav}
+            showMenuIconButton={false}
+            />
           <Login appView={this.state.appView} clickHandle={this.clickHandle}/>
         </MuiThemeProvider>
       )
@@ -156,11 +172,15 @@ class Index extends React.Component {
         <div>
           <MuiThemeProvider>
             <AppBar title="uChews"
+                    style={style.nav}
                     onClick={this.handleToggle}/>
             <Drawer docked={false}
                     width={200}
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
+                    <MenuItem onClick={() => this.changeView('home')}>
+                        Home
+                    </MenuItem>
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
             </Drawer>
             <Input data={this.state.data}
@@ -175,11 +195,15 @@ class Index extends React.Component {
         <div>
           <MuiThemeProvider>
             <AppBar title="uChews"
+                    style={style.nav}
                     onClick={this.handleToggle}/>
             <Drawer docked={false}
                     width={200}
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
+                    <MenuItem onClick={() => this.changeView('home')}>
+                        Home
+                    </MenuItem>
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
             </Drawer>
             <Types clickHandle={this.clickHandle}
@@ -194,11 +218,15 @@ class Index extends React.Component {
         <div>
           <MuiThemeProvider>
             <AppBar title="uChews"
+                    style={style.nav}
                     onClick={this.handleToggle}/>
             <Drawer docked={false}
                     width={200}
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
+                    <MenuItem onClick={() => this.changeView('home')}>
+                        Home
+                    </MenuItem>
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
             </Drawer>
             <Waiting submitForm={this.submitForm} />
@@ -210,11 +238,15 @@ class Index extends React.Component {
         <div>
           <MuiThemeProvider>
             <AppBar title="uChews"
+                    style={style.nav}
                     onClick={this.handleToggle}/>
             <Drawer docked={false}
                     width={200}
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
+                    <MenuItem onClick={() => this.changeView('home')}>
+                        Home
+                    </MenuItem>
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
             </Drawer>
             <Results clickHandle={this.clickHandle}
@@ -225,6 +257,11 @@ class Index extends React.Component {
     } else if (this.state.appView === 'signup') {
       return (
         <MuiThemeProvider>
+            <AppBar
+              title="uChews"
+              style={style.nav}
+              showMenuIconButton={false}
+              />
           <Signup appView={this.state.appView} clickHandle={this.clickHandle}
                   changeView={this.changeView}
                   googleClick={this.googleClick}/>

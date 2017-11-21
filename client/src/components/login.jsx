@@ -17,7 +17,6 @@ const style = {
   box: {
     height: '50%',
     width: '50%',
-    margin: 100,
     textAlign: 'center',
     display: 'inline-block',
   },
@@ -78,7 +77,7 @@ class Login extends React.Component {
         <Paper style={style.box}>
         <AppBar
           title="Log In"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
+          showMenuIconButton={false}
           />
           <div>
             <Paper style={style.text} zDepth={1}>

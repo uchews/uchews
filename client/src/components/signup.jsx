@@ -20,14 +20,10 @@ const style = {
     width: '50%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 250,
     textAlign: 'center',
   },
   button: {
     margin: 10,
-  },
-  signBar: {
-
   }
 };
 
@@ -78,59 +74,56 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        <AppBar
-          title="uChews"
-        />
-          <form>
-            <Paper style={style.box}>
-            <AppBar
-              title="Sign Up"
-              showMenuIconButton={false}
-              style={style.signBar}
-              />
-              <div>
-                <Paper style={style.text} zDepth={1}>
-                    <div>
-                      <TextField
-                        hintText="username field"
-                        floatingLabelText={this.state.floatUser}
-                        underlineShow={false}
-                        name="username" onChange={this.onUserChange}
-                        value={this.state.username}
-                      />
-                      <Divider />
-                    </div>
-                    <div>
-                      <TextField
-                        hintText="password field"
-                        floatingLabelText="password"
-                        type="password"
-                        underlineShow={false}
-                        name="password" onChange={this.onUserChange}
-                        value={this.state.password}
-                      />
-                      <Divider />
-                    </div>
-                </Paper>
-                    <div>
-                      <RaisedButton
-                        style={style.button}
-                        label="SIGNUP"
-                        onClick={this.handleSubmit}
-                      />
-                      <RaisedButton
-                        style={style.button}
-                        label="LOGIN"
-                        onClick={() => this.props.clickHandle('login')}
-                      />
-                      <a href="/auth/google">
-                        <img  src="../../assets/light.png"/>
-                      </a>
-
-                    </div>
-              </div>
-            </Paper>
-          </form>
+        <form>
+          <Paper style={style.box}>
+          <AppBar
+            title="Sign Up"
+            showMenuIconButton={false}
+            />
+            <div>
+              <Paper style={style.text} zDepth={1}>
+                  <div>
+                    <TextField
+                      hintText="username field"
+                      floatingLabelText={this.state.floatUser}
+                      underlineShow={false}
+                      name="username" onChange={this.onUserChange}
+                      value={this.state.username}
+                    />
+                    <Divider />
+                  </div>
+                  <div>
+                    <TextField
+                      hintText="password field"
+                      floatingLabelText="password"
+                      type="password"
+                      underlineShow={false}
+                      name="password" onChange={this.onUserChange}
+                      value={this.state.password}
+                    />
+                    <Divider />
+                  </div>
+              </Paper>
+                  <div>
+                    <RaisedButton
+                      style={style.button}
+                      label="SIGNUP"
+                      onClick={this.handleSubmit}
+                    />
+                    <RaisedButton
+                      style={style.button}
+                      label="LOGIN"
+                      onClick={() => this.props.clickHandle('login')}
+                    />
+                    <RaisedButton
+                      style={style.button}
+                      label="SIGN IN WITH GOOGLE"
+                      href="/auth/google"
+                    />
+                  </div>
+            </div>
+          </Paper>
+        </form>
       </div>
 
     )
