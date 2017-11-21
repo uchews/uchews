@@ -43,9 +43,10 @@ class Index extends React.Component {
       willNotEat: this.state.willNotEat
     };
 
+    console.log('submitting', data);
+
     axios.post('/input/findRestaurants', data)
     .then( (response) => {
-      console.log('submitting', data);
       this.setState({ results: response.data }, () => this.changeView('results'));
     });
   }
@@ -83,7 +84,7 @@ class Index extends React.Component {
         this.setState({ counter: increment, appView: 'dummy' });
       } else {
         // when everyone has filled out a types.jsx form, comtinue to the waiting page
-        this.setState({ appView: view });
+        this.setState({ appView: view }, () => this.submitForm() );
       }
     } else {
       this.setState({ appView: view });
