@@ -22,8 +22,8 @@ const UserSchema = new Schema({
   location: [String],
   distance: [String],
   budget:[Number],
-  foodType:[String],
-  ateAt: [String]
+  foodType:{type: Array,  "default" : []},
+  ateAt: {type: Array,  "default" : []}
 });
 
 const User = mongoose.model('User', UserSchema);
