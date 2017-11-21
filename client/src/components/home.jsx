@@ -27,13 +27,6 @@ const style = {
 class Home extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      open: false
-    }
-    this.handleToggle = this.handleToggle.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleLogout = this.handleLogout.bind(this)
-
   }
 
   componentDidMount() {
@@ -50,38 +43,14 @@ class Home extends React.Component {
       })
   }
 
-  handleToggle() {
-    this.setState({open: !this.state.open});
-  }
-
   handleClose() {
     this.setState({open: false});
-  }
-
-  handleLogout() {
-    const context = this;
-    axios.get('/logout')
-      .then((response) => {
-        console.log('Successfully loggedout')
-        context.props.clickHandle('login');
-      })
-      .catch((error) => {
-        console.log('error logging out', error)
-      })
   }
 
 
   render() {
     return (
       <div>
-        <AppBar title="uChews"
-                onClick={this.handleToggle}/>
-        <Drawer docked={false}
-                width={200}
-                open={this.state.open}
-                onRequestChange={(open) => this.setState({open})}>
-                <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
-        </Drawer>
         <Paper style={style.paper} zDepth={3}>
           <h2 style={style.hungry}>Hungry?</h2>
           <RaisedButton style={style.button} primary={true} onClick={ () => this.props.clickHandle('input')} label="Get Started!" />
