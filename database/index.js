@@ -19,7 +19,7 @@ const UserSchema = new Schema({
   password: { type: String },
   googleId: { type: String },
   sessionID: { type: String },
-  distance: String,
+  distance: [String],
   budget:[Number],
   foodType:{type: Array,  "default" : []},
   ateAt: {type: Array,  "default" : []},

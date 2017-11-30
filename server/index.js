@@ -77,12 +77,12 @@ app.post('/signup', (req, res) => {
 app.post('/update', (req, res) => {
   db.User.findOneAndUpdate({ username: req.body.username },
     {
-      user.distance = req.body.distance;
-      user.location = req.body.location;
-      user.budget = req.body.budget;
-      user.foodType = req.body.foodType;
-      user.willNotEat = req.body.willNotEat;
-    }, { upsert: true }, (err, user) {
+      distance: req.body.distance,
+      location: req.body.location,
+      budget: req.body.budget,
+      foodType: req.body.foodType,
+      willNotEat: req.body.willNotEat
+    }, { upsert: true }, (err, user) => {
       res.send('success');
       res.end();
     }
