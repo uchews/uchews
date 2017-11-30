@@ -89,6 +89,22 @@ app.post('/update', (req, res) => {
   )
 })
 
+app.get('/group', (req, res) => {
+  db.Group.find({}, function(err, groups) {
+    res.send(groups);
+    res.end();
+  })
+})
+
+app.post('/group', (req, res) => {
+  db.Group.findOneAndUpdate({ title: req.body.title },
+    { members: req.body.members, location: req.body.location }, { upsert: true, new: true }, (err, group) {
+      res.send(group);
+      res.end();
+    }
+  )
+})
+
 app.post('/login', (req, res) => {
   const user = req.body;
   db.User.findOne({ username: req.body.username }, (err, user) => {
