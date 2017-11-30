@@ -4,8 +4,6 @@ require('dotenv').config();
 
 mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds123956.mlab.com:23956/uchewstwo`, { mongoUseClient: true});
 
-
-
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -30,6 +28,8 @@ const GroupSchema = new Schema({
   location: { type: String },
   members: {type: Array, "default" : []}
 })
+
+const Group = mongoose.mode('Group', GroupSchema);
 
 const User = mongoose.model('User', UserSchema);
 
@@ -76,3 +76,4 @@ const findOrCreateUser = (query, cb) => {
 module.exports.findOrCreateUser = findOrCreateUser;
 module.exports.User = User;
 module.exports.saveNewUser = saveNewUser;
+module.exports.Group = Group;
