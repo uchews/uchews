@@ -29,7 +29,7 @@ const GroupSchema = new Schema({
   members: {type: Array, "default" : []}
 })
 
-const Group = mongoose.mode('Group', GroupSchema);
+const Group = mongoose.model('Group', GroupSchema);
 
 const User = mongoose.model('User', UserSchema);
 
@@ -41,7 +41,7 @@ const saveNewUser = (user, cb) => {
     googleId: user.googleId,
     sessionID: user.sessionID,
     distance: '',
-    budget:null,
+    budget: null,
     foodType:[],
     ateAt: [],
     willNotEat: []
