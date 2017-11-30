@@ -16,7 +16,7 @@ handleChange(event) {
 //send post request to server to create table
 /***** need to handle duplicate table name****/
 handleClick(event) {
-  axios.post('/newTable', {tablename: this.state.tablename})
+  axios.post('/group', {tablename: this.state.tablename})
   .then((res) => console.log('new table post succeed', res))
   .catch((err) => console.log('new table post error', err));
 }
