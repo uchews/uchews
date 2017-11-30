@@ -27,14 +27,17 @@ const Results = ({ results }) => {
         <h1>#1</h1>                          {/* otherwise the map will overlap the results */}
         <h2>{results[0][0].name}</h2>
         {results[0][0].formatted_address}
+        <h3>Stars: {results[0][0].rating}</h3>
 
         <h1>#2</h1>
         <h2>{results[1][0].name}</h2>
         {results[1][0].formatted_address}
+        <h3>Stars: {results[1][0].rating}</h3>
 
         <h1>#3</h1>
         <h2>{results[2][0].name}</h2>
         {results[2][0].formatted_address}
+        <h3>Stars: {results[2][0].rating}</h3>
       </Paper>
     </div>
   )
