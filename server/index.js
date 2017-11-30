@@ -75,6 +75,12 @@ app.post('/signup', (req, res) => {
 });
 
 
+app.post('/update', (req, res) => {
+  db.User.findOne({ username: req.body.username }, function(err, doc) {
+
+  })
+})
+
 app.post('/login', (req, res) => {
   const user = req.body;
   db.User.findOne({ username: req.body.username }, (err, user) => {

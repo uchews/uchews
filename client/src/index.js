@@ -110,7 +110,7 @@ class Index extends React.Component {
         // when everyone has filled out a types.jsx form, comtinue to the waiting page
         this.setState({ appView: view }, () => this.submitForm() );
       }
-    } else if (view === 'home'){
+    } else if (view === 'home') {
       // resets all user inputted states
       this.setState({
         appView: 'home',

@@ -14,6 +14,12 @@ db.once('open', function() {
 
 const Schema = mongoose.Schema;
 
+const TableSchema = new Schema({
+  // users: {type: Array, "default" : []},
+  // limit: [Number],
+
+})
+
 const UserSchema = new Schema({
   username: { type: String },
   password: { type: String },
@@ -23,7 +29,8 @@ const UserSchema = new Schema({
   distance: [String],
   budget:[Number],
   foodType:{type: Array,  "default" : []},
-  ateAt: {type: Array,  "default" : []}
+  ateAt: {type: Array,  "default" : []},
+  dealbreaker: {type: Array, "default" : []}
 });
 
 const User = mongoose.model('User', UserSchema);
@@ -39,7 +46,8 @@ const saveNewUser = (user, cb) => {
     distance: [],
     budget:[],
     foodType:[],
-    ateAt: []
+    ateAt: [],
+    dealbreaker: []
   });
   newUser.save(cb);
 }
