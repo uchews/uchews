@@ -64,7 +64,19 @@ class Index extends React.Component {
       willNotEat: this.state.willNotEat
     };
 
+    let userData = {
+      budget: this.state.budget,
+      wantToEat: this.state.wantToEat,
+      willNotEat: this.state.willNotEat
+    }
+
     console.log('submitting', data);
+
+    //need to update user's preference
+    axios.post('/update', data)
+    .then( (response) => {
+
+    });
 
     axios.post('/input/findRestaurants', data)
     .then( (response) => {
