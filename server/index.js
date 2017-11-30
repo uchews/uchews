@@ -98,7 +98,7 @@ app.get('/group', (req, res) => {
 
 app.post('/group', (req, res) => {
   db.Group.findOneAndUpdate({ title: req.body.title },
-    { members: req.body.members, location: req.body.location }, { upsert: true, new: true }, (err, group) {
+    { members: req.body.members, location: req.body.location }, { upsert: true, new: true }, (err, group) => {
       res.send(group);
       res.end();
     }
