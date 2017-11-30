@@ -19,11 +19,11 @@ const UserSchema = new Schema({
   password: { type: String },
   googleId: { type: String },
   sessionID: { type: String },
-  location: [String],
   distance: [String],
   budget:[Number],
   foodType:{type: Array,  "default" : []},
-  ateAt: {type: Array,  "default" : []}
+  ateAt: {type: Array,  "default" : []},
+  willNotEat: {type: Array, "default" : []}
 });
 
 const User = mongoose.model('User', UserSchema);
@@ -35,11 +35,11 @@ const saveNewUser = (user, cb) => {
     password: user.password,
     googleId: user.googleId,
     sessionID: user.sessionID,
-    location: [],
     distance: [],
     budget:[],
     foodType:[],
-    ateAt: []
+    ateAt: [],
+    willNotEat: []
   });
   newUser.save(cb);
 }

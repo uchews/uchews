@@ -66,6 +66,12 @@ class Index extends React.Component {
 
     console.log('submitting', data);
 
+    //need to update user's preference
+    axios.post('/update', data)
+    .then( (response) => {
+
+    });
+
     axios.post('/input/findRestaurants', data)
     .then( (response) => {
       this.setState({ results: response.data }, () => this.clickHandle('results'));
@@ -110,7 +116,7 @@ class Index extends React.Component {
         // when everyone has filled out a types.jsx form, comtinue to the waiting page
         this.setState({ appView: view }, () => this.submitForm() );
       }
-    } else if (view === 'home'){
+    } else if (view === 'home') {
       // resets all user inputted states
       this.setState({
         appView: 'home',

@@ -74,6 +74,20 @@ app.post('/signup', (req, res) => {
   });
 });
 
+app.post('/update', (req, res) => {
+  db.User.findOneAndUpdate({ username: req.body.username },
+    {
+      distance: req.body.distance,
+      location: req.body.location,
+      budget: req.body.budget,
+      foodType: req.body.foodType,
+      willNotEat: req.body.willNotEat
+    }, { upsert: true }, (err, user) => {
+      res.send('success');
+      res.end();
+    }
+  )
+})
 
 app.post('/login', (req, res) => {
   const user = req.body;
