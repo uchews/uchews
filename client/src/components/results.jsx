@@ -17,7 +17,7 @@ const style = {
 };
 
 const Results = ({ results }) => {
-  console.log(results);
+  //console.log(results);
   return (
     <div>
       <Paper style={style.paper} zDepth={3}>
