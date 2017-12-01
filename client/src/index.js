@@ -36,7 +36,7 @@ class Index extends React.Component {
     super(props);
     this.state= {
       currentUser: null,
-      appView: 'home',
+      appView: 'login',
       location: '',
       peopleNum: '',
       distance: '',
@@ -54,7 +54,7 @@ class Index extends React.Component {
     this.submitForm = this.submitForm.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    this.updateUser = this.currentUser.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
 
   updateUser(username) {
@@ -159,7 +159,7 @@ class Index extends React.Component {
       .then((response) => {
         console.log('Successfully loggedout')
         this.clickHandle('login');
-        this.setState({ open: false});
+        this.setState({ open: false, username: null});
       })
       .catch((error) => {
         console.log('error logging out', error)
@@ -185,7 +185,7 @@ class Index extends React.Component {
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
                     <Divider />
             </Drawer>
-            <Home appView={this.state.appView}
+            <Home currentUser={this.state.currentUser} appView={this.state.appView}
                   clickHandle={this.clickHandle}/>
           </MuiThemeProvider>
         </div>

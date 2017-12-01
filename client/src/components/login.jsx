@@ -49,6 +49,7 @@ class Login extends React.Component {
       password: this.state.password,
     })
       .then((response) => {
+        this.props.updateUser(this.state.username);
         this.setState({
           username: '',
           password: ''
@@ -59,7 +60,8 @@ class Login extends React.Component {
             floatUser: 'incorrect username or password'
           })
         } else {
-          this.props.updateUser(this.state.username);
+          console.log('THIS PORTION IS HIT WHEN LOGGING IN')
+
           this.props.clickHandle('home');
         }
       })

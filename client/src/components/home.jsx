@@ -52,6 +52,7 @@ class Home extends React.Component {
     return (
       <div>
         <Paper style={style.paper} zDepth={3}>
+          <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
           <h2 style={style.hungry}>Hungry?</h2>
           <RaisedButton style={style.button} primary={true} onClick={ () => this.props.clickHandle('input')} label="Get Started!" />
         </Paper>
