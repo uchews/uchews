@@ -77,27 +77,29 @@ app.post('/signup', (req, res) => {
 
 //*New* get user's Prefs from db for preference.jsx
 app.get('/prefs', (function(req, res) {
-  console.log('Hellow from server/index.js line 79');
-  db.User.find({username}, function(error,something) {
+  console.log('Hellow from server/index.js line 79 USERNAME-------->', username1);
+  db.User.find({}, function(error, something) {
     if (error) {
       console.log('Error userinfo Get server/index.js line 82', error);
     }
-    console.log('BENJI -----------> line 84 sever/index.js', something)
+    console.log('BENJI --------> line 84 sever/index.js', something)
     res.status(200).send(something)
   });
 }));
 
-var username; //gets it's value from app.post('/login'...
+var username1; //gets it's value from app.post('/login'...
 
 
 app.post('/update', (req, res) => {
-  db.User.findOneAndUpdate({ username: req.body.username },
+  console.log('line 94 SERVER/INDEX.JS REQ = ', req.body)
+  db.User.findOneAndUpdate({ username: username1 },
     {
       distance: req.body.distance,
       location: req.body.location,
       budget: req.body.budget,
-      foodType: req.body.foodType,
-      willNotEat: req.body.willNotEat
+      foodType: req.body.wantToEat,
+      willNotEat: req.body.willNotEat,
+      // username: 'dug' //TEMPORARY was  req.body.username but index.js of app was sending empty string.
     }, { upsert: true }, (err, user) => {
       res.send('success');
       res.end();
@@ -124,7 +126,7 @@ app.post('/group', (req, res) => {
 
 app.post('/login', (req, res) => {
   const user = req.body;
-  username = user;
+  username1 = user.username;
   db.User.findOne({ username: req.body.username }, (err, user) => {
     if (!user) {
       res.send(false);
