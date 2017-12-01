@@ -1,5 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  button: {
+    margin: '0 0 100px 0'
+  },
+  hungry: {
+    margin: '100px 0 20px 0'
+  }
+};
 
 class NewGroup extends React.Component {
   constructor(props) {
@@ -24,21 +35,22 @@ handleClick() {
   axios.post('/group', {title: scope.state.title, location:scope.state.location})
   .then((res) => console.log('new group post succeed', res))
   .catch((err) => console.log('new group post error', err));
+  this.props.clickHandle('input');
 }
 
   render() {
     return (<div>
       <form>
         <label>
-          Group Name
-          <input name="title" value={this.state.title} onChange={this.handleInputChange} />
+          <h2>Group Name:</h2>
+          <TextField name="title" value={this.state.title} onChange={this.handleInputChange} />
         </label><br/>
         <label>
-          Location
-          <input name="location" placeholder="Address or zip code" onChange={this.handleChange} />
+          <h2>Location:</h2>
+          <TextField name="location" hintText="Address or zip code" onChange={this.handleChange} />
         </label>
       </form>
-      <button onClick={this.handleClick}>Submit</button>
+      <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Get Started!"/>
     </div>)
   }
 }
