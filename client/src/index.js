@@ -96,8 +96,6 @@ class Index extends React.Component {
   }
 
 
-
-
   // handles empty value errors in input.jsx
   errorHandle(val) {
     if (val === '') {

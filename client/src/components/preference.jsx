@@ -32,7 +32,6 @@ class Preference extends React.Component {
 //             )
 //           })}
 
-
 //TEMP deleted from deal breakers {this.state.prefs}
   render() {
     if (this.state.prefsClicked) {

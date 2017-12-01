@@ -123,7 +123,6 @@ app.post('/group', (req, res) => {
   )
 })
 
-
 app.post('/login', (req, res) => {
   const user = req.body;
   username1 = user.username;
