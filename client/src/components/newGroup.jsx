@@ -1,0 +1,45 @@
+import React from 'react';
+import axios from 'axios';
+import TextField from 'material-ui/TextField';
+
+class NewGroup extends React.Component {
+  constructor(props) {
+    this.state = {
+      title: '',
+      location: ''
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+//handle input change of group name
+handleInputChange(event) {
+  this.setState({[event.target.name]: event.target.value})
+}
+
+//send post request to server to create or update group (title and location)
+handleClick() {
+  axios.post('/group', {this.state})
+  .then((res) => console.log('new group post succeed', res))
+  .catch((err) => console.log('new group post error', err));
+}
+
+  render() {
+    return (
+      <div>
+        <form>
+          <label>
+            Group Name
+            <input name="title" value={this.state.title} onChange={this.handleInputChange} />
+          </label><br/>
+          <label>
+            Location
+            <input name="location" placeholder="Address or zip code" onChange={this.handleChange} />
+          </label>
+        </form>
+        <button onClick={this.handleClick}>Submit</button>
+      </div>
+    )
+  }
+}
+
+export default NewGroup;
