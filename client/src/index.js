@@ -46,7 +46,8 @@ class Index extends React.Component {
       errorText: '',
       counter: 1,
       results: [],
-      open: false
+      open: false,
+      prefs: {}
 
     };
     this.clickHandle = this.clickHandle.bind(this);
@@ -72,17 +73,30 @@ class Index extends React.Component {
 
     console.log('submitting', data);
 
-    //need to update user's preference
-    axios.post('/update', data)
-    .then( (response) => {
-
-    });
-
     axios.post('/input/findRestaurants', data)
     .then( (response) => {
       this.setState({ results: response.data }, () => this.clickHandle('results'));
     });
+
+    let dataAndUser = {
+      location: this.state.location,
+      budget: this.state.budget,
+      radius: this.state.distance,
+      wantToEat: this.state.wantToEat,
+      willNotEat: this.state.willNotEat,
+      username: this.state.currentUser
+    }
+    console.log('-------DATAandUser---- l82 index.js', dataAndUser)
+    //New Benji
+    axios.post('/update', data)
+    .then( (response) => {
+      console.log('line 91 index.js POST of prefs complete');
+      this.setState({ prefs: data }); //made a state to pass to prefs.jsx
+    });
   }
+
+
+
 
   // handles empty value errors in input.jsx
   errorHandle(val) {
@@ -186,7 +200,7 @@ class Index extends React.Component {
                     <Divider />
             </Drawer>
             <Home currentUser={this.state.currentUser} appView={this.state.appView}
-                  clickHandle={this.clickHandle}/>
+                  clickHandle={this.clickHandle} prefs={this.state.prefs} />
           </MuiThemeProvider>
         </div>
       )
