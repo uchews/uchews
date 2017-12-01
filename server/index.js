@@ -75,6 +75,21 @@ app.post('/signup', (req, res) => {
   });
 });
 
+//*New* get user's Prefs from db for preference.jsx
+app.get('/prefs', (function(req, res) {
+  console.log('Hellow from server/index.js line 79');
+  db.User.find({username}, function(error,something) {
+    if (error) {
+      console.log('Error userinfo Get server/index.js line 82', error);
+    }
+    console.log('BENJI -----------> line 84 sever/index.js', something)
+    res.status(200).send(something)
+  });
+}));
+
+var username; //gets it's value from app.post('/login'...
+
+
 app.post('/update', (req, res) => {
   db.User.findOneAndUpdate({ username: req.body.username },
     {
@@ -106,8 +121,10 @@ app.post('/group', (req, res) => {
   )
 })
 
+
 app.post('/login', (req, res) => {
   const user = req.body;
+  username = user;
   db.User.findOne({ username: req.body.username }, (err, user) => {
     if (!user) {
       res.send(false);
