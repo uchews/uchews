@@ -35,7 +35,8 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      appView: 'home',
+      currentUser: null,
+      appView: 'login',
       location: '',
       peopleNum: '',
       distance: '',
@@ -53,6 +54,11 @@ class Index extends React.Component {
     this.submitForm = this.submitForm.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+  }
+
+  updateUser(username) {
+    this.setState({currentUser: username});
   }
 
   submitForm() {
@@ -153,7 +159,7 @@ class Index extends React.Component {
       .then((response) => {
         console.log('Successfully loggedout')
         this.clickHandle('login');
-        this.setState({ open: false});
+        this.setState({ open: false, username: null});
       })
       .catch((error) => {
         console.log('error logging out', error)
@@ -179,7 +185,7 @@ class Index extends React.Component {
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
                     <Divider />
             </Drawer>
-            <Home appView={this.state.appView}
+            <Home currentUser={this.state.currentUser} appView={this.state.appView}
                   clickHandle={this.clickHandle}/>
           </MuiThemeProvider>
         </div>
@@ -192,7 +198,7 @@ class Index extends React.Component {
             style={style.nav}
             showMenuIconButton={false}
             />
-          <Login appView={this.state.appView} clickHandle={this.clickHandle}/>
+          <Login updateUser={this.updateUser} appView={this.state.appView} clickHandle={this.clickHandle}/>
         </MuiThemeProvider>
       )
     } else if (this.state.appView === 'input') {
