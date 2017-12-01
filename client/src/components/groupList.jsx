@@ -13,10 +13,11 @@ class GroupList extends React.Component {
   //send get request
   /*** need to filter out groups involve current user either in frontend or backend***/
   getList() {
+    var scope = this;
     axios.get('/group')
     .then((res) => {
       console.log('group list get request succeed');
-      this.setState({grouplist: res})})
+      scope.setState({grouplist: res})})
     .catch((err) => console.log('group list get request error', err))
   }
 
