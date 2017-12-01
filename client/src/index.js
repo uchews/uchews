@@ -47,7 +47,6 @@ class Index extends React.Component {
       counter: 1,
       results: [],
       open: false
-
     };
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
@@ -312,6 +311,16 @@ class Index extends React.Component {
     } else if (this.state.appView === 'dummy') {
       return (
         <Dummy clickHandle={this.clickHandle} />
+      )
+    } else if (this.state.appView === 'image') {
+      return (
+        <div>
+          <MuiThemeProvider muiTheme={muiTheme}>
+            <AppBar title="uChews"
+                    style={style.nav}
+                    onLeftIconButtonTouchTap={this.handleToggle}/>
+          </MuiThemeProvider>
+        </div>
       )
     }
   }

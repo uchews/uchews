@@ -61,12 +61,11 @@ class Home extends React.Component {
     return (
       <div>
         <Paper style={style.paper} zDepth={3}>
-          <Avatar id="avatar" src="https://avatars1.githubusercontent.com/u/29010046?s=460&v=4"/>
+          <Avatar size={70} id="avatar" src="https://avatars1.githubusercontent.com/u/29010046?s=460&v=4"/>
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
           <h2 style={style.hungry}>Hungry?</h2>
           <RaisedButton style={style.button} primary={true} onClick={ () => this.props.clickHandle('input')} label="Get Started!" />
-          <NewGroup />
-
+          <NewGroup clickHandle={this.props.clickHandle}/>
           <FlatButton label="Choose file" labelPosition="before">
             <input type="file" />
           </FlatButton>
