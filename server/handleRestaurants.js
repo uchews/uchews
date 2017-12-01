@@ -33,7 +33,7 @@ const sortRestaurantByRating = function(a, b)
 //rankRestaurant: for a given type of cusine and budget, sort the restaurants based on rating in a decreasing order.
 const rankRestaurant = function(data, budget)
 {
-  console.log('data prior to ranking restaurants: ', data);
+  console.log('data prior to ranking restaurants: benji deleted data here');//BENJI deleted  data  from this
   const budget_level = budget || 2;
   //const restaurantsByCusine = data.results;
   let restaurantsByCusine = data.results;
