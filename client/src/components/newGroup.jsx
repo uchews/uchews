@@ -3,6 +3,7 @@ import axios from 'axios';
 
 class NewGroup extends React.Component {
   constructor(props) {
+    super(props);
     this.state = {
       title: '',
       location: ''
@@ -19,7 +20,8 @@ handleInputChange(event) {
 //send post request to server to create or update group (title and location)
 /*** need to send user name to server ***/
 handleClick() {
-  axios.post('/group', {this.state})
+  var scope = this;
+  axios.post('/group', {title: scope.state.title, location:scope.state.location})
   .then((res) => console.log('new group post succeed', res))
   .catch((err) => console.log('new group post error', err));
 }

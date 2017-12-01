@@ -61,7 +61,6 @@ class Login extends React.Component {
           })
         } else {
           console.log('THIS PORTION IS HIT WHEN LOGGING IN')
-
           this.props.clickHandle('home');
         }
       })
