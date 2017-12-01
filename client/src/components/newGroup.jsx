@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import Input from './input.jsx';
 
 const style = {
   button: {
@@ -35,7 +36,7 @@ handleClick() {
   axios.post('/group', {title: scope.state.title, location:scope.state.location})
   .then((res) => console.log('new group post succeed', res))
   .catch((err) => console.log('new group post error', err));
-  this.props.clickHandle('input');
+  // this.props.clickHandle('input');
 }
 
   render() {
@@ -45,12 +46,8 @@ handleClick() {
           <h2>Group Name:</h2>
           <TextField name="title" value={this.state.title} onChange={this.handleInputChange} />
         </label><br/>
-        <label>
-          <h2>Location:</h2>
-          <TextField name="location" hintText="Address or zip code" onChange={this.handleChange} />
-        </label>
       </form>
-      <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Get Started!"/>
+      <Input />
     </div>)
   }
 }
