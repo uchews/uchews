@@ -5,6 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import axios from 'axios';
+import GroupList from './grouplist.jsx';
+import NewGroup from './newGroup.jsx';
 
 
 // sets styles for material ui components
@@ -55,6 +57,7 @@ class Home extends React.Component {
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
           <h2 style={style.hungry}>Hungry?</h2>
           <RaisedButton style={style.button} primary={true} onClick={ () => this.props.clickHandle('input')} label="Get Started!" />
+          <NewGroup />
         </Paper>
       </div>
     )

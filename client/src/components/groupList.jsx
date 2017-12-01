@@ -3,8 +3,9 @@ import axios from 'axios';
 
 class GroupList extends React.Component {
   constructor(props) {
+    super(props);
     this.state = {
-      grouplist: [];
+      grouplist: []
     }
     this.getList = this.getList.bind(this);
   }
