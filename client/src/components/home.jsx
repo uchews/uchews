@@ -7,6 +7,8 @@ import MenuItem from 'material-ui/MenuItem';
 import axios from 'axios';
 import GroupList from './grouplist.jsx';
 import NewGroup from './newGroup.jsx';
+import Preference from './preference.jsx';
+
 
 
 // sets styles for material ui components
@@ -58,11 +60,11 @@ class Home extends React.Component {
           <h2 style={style.hungry}>Hungry?</h2>
           <RaisedButton style={style.button} primary={true} onClick={ () => this.props.clickHandle('input')} label="Get Started!" />
           <NewGroup />
+          <Preference prefs={this.props.prefs} />
         </Paper>
       </div>
     )
   }
 }
-
 
 export default Home;
