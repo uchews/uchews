@@ -35,6 +35,7 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
+      currentUser: null,
       appView: 'home',
       location: '',
       peopleNum: '',
@@ -53,6 +54,11 @@ class Index extends React.Component {
     this.submitForm = this.submitForm.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.updateUser = this.currentUser.bind(this);
+  }
+
+  updateUser(username) {
+    this.setState({currentUser: username});
   }
 
   submitForm() {
@@ -192,7 +198,7 @@ class Index extends React.Component {
             style={style.nav}
             showMenuIconButton={false}
             />
-          <Login appView={this.state.appView} clickHandle={this.clickHandle}/>
+          <Login updateUser={this.updateUser} appView={this.state.appView} clickHandle={this.clickHandle}/>
         </MuiThemeProvider>
       )
     } else if (this.state.appView === 'input') {

@@ -59,6 +59,7 @@ class Login extends React.Component {
             floatUser: 'incorrect username or password'
           })
         } else {
+          this.props.updateUser(this.state.username);
           this.props.clickHandle('home');
         }
       })

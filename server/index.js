@@ -48,6 +48,7 @@ app.use(session({
   saveUninitialized: true,
   store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds123956.mlab.com:23956/uchewstwo`})
 }));
+
 app.use(passport.initialize());
 //set up the route to Google for authentication
 app.get('/auth/google',
@@ -125,6 +126,7 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
+  console.log('request session', req.session);
   req.session.destroy((err) => {
     if (err) {
       console.log('error on logout: ', err);
