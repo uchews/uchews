@@ -11,6 +11,9 @@ const google = require('./googlePlacesHelpers.js');
 const authenticate = require('./authenticate.js');
 const handleRestaurants = require('./handleRestaurants.js');
 
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
+
 require('dotenv').config();
 
 //Set up google login protocol
@@ -74,6 +77,22 @@ app.post('/signup', (req, res) => {
     }
   });
 });
+
+app.post('/invitation', function(req, res) {
+  // console.log('EMAIL---line 82 SERVER/INDEX.JS REQ = ', req.body)
+  const msg = {
+      to: req.body.guest,
+      from: 'JediSchoolOfMasterDan@dan.com',
+      subject: 'Jedi Mast Dan Kwon has summond you',
+      text: 'Simply enter the group name: ' + 'HACKREACTOR',
+    };
+    sgMail.send(msg).then(function() {
+      res.send('sent success');
+      res.end();
+    }
+  )
+})
+
 
 //*New* get user's Prefs from db for preference.jsx
 app.get('/prefs', (function(req, res) {
