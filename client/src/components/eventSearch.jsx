@@ -72,7 +72,9 @@ class EventSearch extends React.Component {
           <h2>Nearby Events:</h2>
           <h3>{this.state.titles.map(function(item) {
             return (
-              <ul>{item}</ul>
+              <li>
+                <a href={'https://www.google.com/search?q='+item} target="_blank">{item}</a>
+              </li>
             )
           })}</h3>
           <br/>
