@@ -17,7 +17,6 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
       people: 0,
       distance: 0,
     };
@@ -32,7 +31,8 @@ class Input extends React.Component {
   */
   setPeople(e, i, val) {
     this.setState({
-      people: val
+      people: val,
+      location: ''
     }, function() {
       e.target.value = val;
       e.target.name = 'peopleNum';
@@ -52,14 +52,26 @@ class Input extends React.Component {
     });
   }
 
+  handleInputChange(event) {
+    this.setState({location: event.target.value});
+    console.log(this.props.currentgroup);
+  }
+
+  handleClick() {
+    var scope = this;
+    axios.post('/group', {title: scope.state.title})
+    .then((res) => console.log('new group post succeed', res))
+    .catch((err) => console.log('new group post error', err));
+    this.props.clickHandle('input');
+  }
+
   render() {
     return (
       <div>
-
         <form>
-
           <h2>Location:</h2><TextField name="location"
                                        hintText="Address or zip code..."
+                                       value={this.state.title}
                                        errorText={this.props.errorText}
                                        onChange={this.props.changeHandle}/><br />
 
@@ -102,7 +114,7 @@ class Input extends React.Component {
             <RadioButton value={4} label="$$$$" />
           </RadioButtonGroup><br />
 
-          <RaisedButton label="Get Started!" primary={true} onClick={() => this.props.clickHandle("types")} />
+          <RaisedButton label="Get Started!" primary={true} onClick={() => {this.props.clickHandle("types"); this.handleClick}} />
 
         </form>
 
