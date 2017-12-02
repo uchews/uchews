@@ -51,11 +51,13 @@ class Signup extends React.Component {
     axios.post('/signup', {
       username: this.state.username,
       password: this.state.password,
+      imageUrl: this.state.imageUrl
     })
       .then((response) => {
         this.setState({
           username: '',
-          password: ''
+          password: '',
+          imageUrl: ''
         })
         console.log(response.data)
         if (response.data === false) {
@@ -107,7 +109,7 @@ class Signup extends React.Component {
                   <div>
                     <TextField
                       hintText="imageURL field"
-                      floatingLabelText="image URL"
+                      floatingLabelText="profile image URL"
                       underlineShow={false}
                       name="imageUrl" onChange={this.onUserChange}
                       value={this.state.imageUrl}
