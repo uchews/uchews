@@ -18,6 +18,8 @@ class EventSearch extends React.Component {
       clicked: false,
       query: '',
       zip: '',
+      titles: [],
+      descriptions: {}
 
     };
     this.postEvents = this.postEvents.bind(this);
@@ -37,11 +39,21 @@ class EventSearch extends React.Component {
 
     })
     .then(function(response) {
-      console.log('RESPONSE GET line 38 prefs.jsx', response.data)
+      console.log('RESPONSE.data GET line 38 eventSearch.jsx', response.data)
 
+      var titles = response.data.map(function(item) {
+        return item.title;
+      })
+      titles = titles.slice(0,3);
+      var descriptions = response.data.map(function(item) {
+        return item.description;
+      })
+// console.log('title----------title', titles)
       thisContext.setState({
         clicked: !thisContext.state.clicked,
-        events: response.data
+        events: response.data,
+        titles: titles,
+        descriptions: descriptions
       })
     })
   }
@@ -58,7 +70,11 @@ class EventSearch extends React.Component {
       return (
         <div>
           <h2>Nearby Events:</h2>
-
+          <h3>{this.state.titles.map(function(item) {
+            return (
+              <ul>{item}</ul>
+            )
+          })}</h3>
           <br/>
         </div>
       )
