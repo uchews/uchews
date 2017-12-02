@@ -1,3 +1,23 @@
+const style = {
+  text: {
+    height: '80%',
+    width: '80%',
+    margin: 40,
+    textAlign: 'left',
+    display: 'inline-block',
+  },
+  box: {
+    height: '50%',
+    width: '50%',
+    textAlign: 'center',
+    display: 'inline-block',
+  },
+  button: {
+    margin: 10,
+  }
+};
+
+
 class Image extends React.Component {
   constructor(props) {
     super(props);
