@@ -8,13 +8,11 @@ import axios from 'axios';
 import GroupList from './grouplist.jsx';
 import NewGroup from './newGroup.jsx';
 import Preference from './preference.jsx';
-<<<<<<< HEAD
 import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
-=======
 import Invitation from './invitation.jsx';
 
->>>>>>> added invitation component to home.jsx
+
 
 
 // sets styles for material ui components
@@ -71,8 +69,7 @@ class Home extends React.Component {
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
           <h2 style={style.hungry}>Hungry?</h2>
           <RaisedButton style={style.button} primary={true} onClick={ () => this.props.clickHandle('input')} label="Get Started!" />
-          <NewGroup />
-
+          <NewGroup clickHandle={this.props.clickHandle}/>
           <FlatButton label="Choose file" labelPosition="before">
             <input type="file" />
           </FlatButton>

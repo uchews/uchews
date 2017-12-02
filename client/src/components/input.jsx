@@ -1,5 +1,4 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
@@ -8,14 +7,6 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 // sets styles for material ui components
 const style = {
-  paper: {
-    display: 'inline-block',
-    height: '50%',
-    margin: '0 auto',
-    padding: 50,
-    textAlign: 'center',
-    width: '50%'
-  },
   radio: {
     textAlign: 'left',
     marginLeft: '40%'
@@ -26,6 +17,7 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: '',
       people: 0,
       distance: 0,
     };
@@ -63,8 +55,10 @@ class Input extends React.Component {
   render() {
     return (
       <div>
-      <Paper style={style.paper} zDepth={3}>
+
         <form>
+        <h2>Group Name:</h2>
+          <TextField name="title" value={this.state.title} onChange={this.handleInputChange} /><br/>
           <h2>Location:</h2><TextField name="location"
                                        hintText="Address or zip code..."
                                        errorText={this.props.errorText}
@@ -109,10 +103,10 @@ class Input extends React.Component {
             <RadioButton value={4} label="$$$$" />
           </RadioButtonGroup><br />
 
-          <RaisedButton label="Next" primary={true} onClick={() => this.props.clickHandle("types")} />
+          <RaisedButton label="Get Started!" primary={true} onClick={() => this.props.clickHandle("types")} />
 
         </form>
-      </Paper>
+
       </div>
     )
   }
