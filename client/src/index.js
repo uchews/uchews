@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {redA200} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import Home from './components/home.jsx';
 import Signup from './components/signup.jsx';
 import Login from './components/login.jsx';
