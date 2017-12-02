@@ -50,6 +50,14 @@ class Home extends React.Component {
       .catch((error) => {
         console.log('error inside home')
       })
+
+    axios.get('/image')
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log('Error');
+      })
   }
 
   handleClose() {

@@ -33,7 +33,8 @@ class Signup extends React.Component {
     this.state = {
       username: '',
       password: '',
-      floatUser: 'username'
+      floatUser: 'username',
+      imageUrl: ''
     }
     this.onUserChange = this.onUserChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -100,6 +101,16 @@ class Signup extends React.Component {
                       underlineShow={false}
                       name="password" onChange={this.onUserChange}
                       value={this.state.password}
+                    />
+                    <Divider />
+                  </div>
+                  <div>
+                    <TextField
+                      hintText="imageURL field"
+                      floatingLabelText="image URL"
+                      underlineShow={false}
+                      name="imageUrl" onChange={this.onUserChange}
+                      value={this.state.imageUrl}
                     />
                     <Divider />
                   </div>
