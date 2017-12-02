@@ -17,30 +17,52 @@ class NewGroup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: ''
+      title: '',
+      location:'',
+      errorText: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.changeHandle = this.changeHandle.bind(this);
+    // this.clickHandle = this.clickHandle.bind(this);
+    this.errorHandle = this.errorHandle.bind(this);
   }
 
-//handle input change of group name
-handleInputChange(event) {
-  this.setState({[event.target.name]: event.target.value})
-}
+  //handle input change of group name
+  handleInputChange(event) {
+    this.setState({[event.target.name]: event.target.value})
+  }
 
-//send post request to server to create or update group (title and location)
-/*** need to send user name to server ***/
-handleClick() {
-  var scope = this;
-  axios.post('/group', {title: scope.state.title, location:scope.state.location})
-  .then((res) => console.log('new group post succeed', res))
-  .catch((err) => console.log('new group post error', err));
-  // this.props.clickHandle('input');
-}
+  //send post request to server to create or update group (title and location)
+  /*** need to send user name to server ***/
+  handleClick() {
+    var scope = this;
+    axios.post('/group', {title: scope.state.title, location:scope.state.location})
+    .then((res) => console.log('new group post succeed', res))
+    .catch((err) => console.log('new group post error', err));
+    // this.props.clickHandle('input');
+  }
+
+  //from src index.js
+  changeHandle(e, i, val) {
+      this.errorHandle(val);
+      this.updateState(e, val);
+    }
+
+  // handles empty value errors in input.jsx
+  errorHandle(val) {
+    if (val === '') {
+      this.setState({
+        errorText: 'Required'
+      });
+    }
+  }
 
   render() {
     return (<div>
-      <Input />
+      <Input clickHandle={this.clickHandle}
+             changeHandle={this.changeHandle}
+             errorText={this.state.errorText}/>
     </div>)
   }
 }
