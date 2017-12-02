@@ -39,6 +39,7 @@ const saveNewUser = (user, cb) => {
   let newUser = new User({
     username: user.username || user.googleId,
     password: user.password,
+    imageUrl: user.imageUrl,
     googleId: user.googleId,
     sessionID: user.sessionID,
     distance: '',

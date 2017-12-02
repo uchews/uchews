@@ -38,7 +38,8 @@ class Index extends React.Component {
     super(props);
     this.state= {
       currentUser: null,
-      imageUrl: 'https://avatars1.githubusercontent.com/u/29010046?s=460&v=4',
+      //default image
+      imageUrl: 'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z_400x400.jpg',
       appView: 'login',
       location: '',
       peopleNum: '',
@@ -66,15 +67,15 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    var context = this;
-    axios.get('/image')
-    .then((response) => {
-      context.updateImage(response.data);
-      console.log('THIS IS THE RESPONSE DATA', response.data);
-    })
-    .catch((error) => {
-      console.log('Error');
-    })
+    // var context = this;
+    // axios.get('/image')
+    // .then((response) => {
+    //   context.updateImage(response.data);
+    //   console.log('THIS IS THE RESPONSE DATA', response.data);
+    // })
+    // .catch((error) => {
+    //   console.log('Error');
+    // })
   }
 
   updateUser(username) {
@@ -410,7 +411,7 @@ class Index extends React.Component {
               style={style.nav}
               showMenuIconButton={false}
               />
-          <Signup appView={this.state.appView} clickHandle={this.clickHandle}
+          <Signup updateUser={this.updateUser} updateImage={this.updateImage} appView={this.state.appView} clickHandle={this.clickHandle}
                   clickHandle={this.clickHandle}
                   googleClick={this.googleClick}/>
         </MuiThemeProvider>
