@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
+import Avatar from 'material-ui/Avatar';
 
 
 
@@ -35,6 +36,7 @@ class Image extends React.Component {
       image:''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onURLChange = this.onURLChange.bind(this);
   }
 
   onURLChange(e) {
@@ -56,7 +58,7 @@ class Image extends React.Component {
           title="Change your Image URL"
           showMenuIconButton={false}
           />
-          <Avatar id="avatar" src={this.props.imageUrl}/>
+          <Avatar id="avatarimage" size={70} src={this.props.imageUrl}/>
           <div>
             <Paper style={style.text} zDepth={1}>
                 <div>
