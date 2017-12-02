@@ -62,6 +62,7 @@ class Index extends React.Component {
     this.updateImage = this.updateImage.bind(this);
     this.betterUpdateState = this.betterUpdateState.bind(this);
     this.updateGroup = this.updateGroup.bind(this);
+    this.foodsYum = this.foodsYum.bind(this);
   }
 
   updateUser(username) {
@@ -77,46 +78,29 @@ class Index extends React.Component {
     console.log('currentgroup in index', this.state.currentgroup)
   }
 
-  foodsYUM() {
+  foodsYum() {
     return (
-      <section>
-        <ul>
-          <li>
-            <figure className="meal-photo">
-            </figure>
-          </li>
-          <li>
-            <figure className-"meal-photo">
-            </figure>
-          </li>
-          <li>
-            <figure className="meal-photo">
-            </figure>
-          </li>
-          <li>
-            <figure className="meal-photo">
-            </figure>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <figure className="meal-photo">
+      <section className="section-meals">
 
-            </figure>
-          </li>
-          <li>
-            <figure className="meal-photo">
-            </figure>
-          </li>
-          <li>
-            <figure className="meal-photo">
-            </figure>
-          </li>
-          <li>
-            <figure className="meal-photo">
-            </figure>
-          </li>
-        </ul>
+              <img alt="Korean Bibimbop" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+
+
+              <img alt="Pizza" src="https://images.unsplash.com/photo-1499778003268-cbafc6d08bab?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+
+              <img alt="Sushi" src="https://images.unsplash.com/photo-1501735972267-d5c1bc03655c?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+
+              <img alt="Pad Thai" src="https://images.unsplash.com/photo-1441850605338-1b0b5a22e7b9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+
+              <img alt="Hamburger" src="https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+
+              <img alt="Burrito" src="https://images.unsplash.com/photo-1464219222984-216ebffaaf85?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+
+              <img alt="Subs" src="https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+
+              <img alt="Chicken" src="https://images.unsplash.com/photo-1456404823214-a69ef7a1fae5?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+
+              <img alt="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3Da"/>
+
       </section>
     )
   }
@@ -262,6 +246,7 @@ class Index extends React.Component {
                     <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
                     <Divider />
             </Drawer>
+            {this.foodsYum()}
             <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
                   clickHandle={this.clickHandle} prefs={this.state.prefs}
                   updateGroup={this.updateGroup} />
