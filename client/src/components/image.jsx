@@ -48,6 +48,18 @@ class Image extends React.Component {
   handleSubmit() {
     this.props.updateImage(this.state.image);
     this.props.clickHandle('home');
+    axios.post('/image', {
+      currentUser: this.props.currentUser,
+      imageUrl: this.state.image
+    })
+    .then((response) => {
+      if (response === 'success') {
+        console.log('Successfully saved imageUrl to currentUser');
+      }
+    })
+    .catch((err) => {
+      if (err) throw err;
+    })
   }
 
   render() {
