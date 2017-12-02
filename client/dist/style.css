@@ -7,21 +7,85 @@ body {
 
  h1 {
   color: #FF5252;
-  font-family: "Chewy";
+  font-family: "Chewy","Libre Barcode 39 Text", "Zilla Slab Highlight", "Londrina Outline";
   font-size: 54px;
+  font-weight: bold;
  }
 
  #avatar {
   margin-top: 27%;
-
  }
-
 
  #avatarimage {
   margin-top: 17%;
  }
 
  body {
-  background-image: url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=2131&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
-  background-position: cover;
+/*   background-image: url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=2131&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
+/*  */  background-size: cover;
+ */ }
+
+ .header {
+  width: 100%;
  }
+
+ .section-meals {
+    padding: 0;
+    left: 0;
+    width: 70%;
+    margin-left: 17.7%;
+    margin-right: 13.3%;
+}
+
+.container {
+  position: relative;
+}
+
+
+.section-meals img {
+    float: left;
+    display: inline-block;
+    background-color: black;
+    width: 25%;
+    height: auto;
+    opacity: 0.77;
+    margin: 3%;
+    padding-left: 0;
+    height: auto;
+    -webkit-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    transform: scale(1.15);
+    -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
+    backface-visibility: hidden
+}
+
+
+
+.container:hover img {
+  opacity: 1;
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+}
+
+/* .container:hover .middle {
+  opacity: 1;
+} */
+
+.text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}

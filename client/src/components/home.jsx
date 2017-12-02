@@ -23,7 +23,7 @@ const style = {
     height: '50%',
     margin: '0 auto',
     textAlign: 'center',
-    width: '50%'
+    width: '70%'
   },
   button: {
     margin: '0 0 100px 0'
@@ -87,9 +87,6 @@ class Home extends React.Component {
           <NewGroup clickHandle={this.props.clickHandle}
             updateGroup={this.props.updateGroup}/>
           <GroupList grouplist={this.state.grouplist}/>
-          <FlatButton label="Choose file" labelPosition="before">
-            <input type="file" />
-          </FlatButton>
           <Preference prefs={this.props.prefs} />
           <EventSearch />
           <Invitation />

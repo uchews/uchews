@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {redA200} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import Home from './components/home.jsx';
 import Signup from './components/signup.jsx';
 import Login from './components/login.jsx';
@@ -61,6 +62,7 @@ class Index extends React.Component {
     this.updateImage = this.updateImage.bind(this);
     this.betterUpdateState = this.betterUpdateState.bind(this);
     this.updateGroup = this.updateGroup.bind(this);
+    this.foodsYum = this.foodsYum.bind(this);
   }
 
   updateUser(username) {
@@ -74,6 +76,67 @@ class Index extends React.Component {
   updateGroup(title) {
     this.setState({currentgroup: title});
     console.log('currentgroup in index', this.state.currentgroup)
+  }
+
+  foodsYum() {
+    return (
+      <section className="section-meals">
+        <div className="container">
+          <img alt="Korean Bibimbop" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="middle">
+            <div className="text">Korean</div>
+          </div>
+        </div>
+        <div className="container">
+          <img alt="Pizza" src="https://images.unsplash.com/photo-1507927822105-9a760e57a419?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="middle">
+            <div className="text">Pizza</div>
+          </div>
+        </div>
+        <div className="container">
+          <img alt="Sushi" src="https://images.unsplash.com/photo-1501735972267-d5c1bc03655c?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="middle">
+            <div className="text">Sushi</div>
+          </div>
+        </div>
+        <div className="container">
+          <img alt="Thai" src="https://images.unsplash.com/photo-1441850605338-1b0b5a22e7b9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="middle">
+            <div className="text">Thai</div>
+          </div>
+        </div>
+        <div className="container">
+          <img alt="Hamburger" src="https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="middle">
+            <div className="text">Burger</div>
+          </div>
+        </div>
+        <div className="container">
+          <img alt="Burrito" src="https://images.unsplash.com/photo-1464219222984-216ebffaaf85?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="middle">
+            <div className="text">Mexican</div>
+          </div>
+        </div>
+        <div className="container">
+          <img alt="Subs" src="https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="middle">
+            <div className="text">Sub</div>
+          </div>
+        </div>
+        <div className="container">
+          <img alt="Chicken" src="https://images.unsplash.com/photo-1456404823214-a69ef7a1fae5?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="middle">
+            <div className="text">Chicken</div>
+          </div>
+        </div>
+        <div className="container">
+          <img alt="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3Da"/>
+          <div className="middle">
+            <div className="text">Chinese</div>
+          </div>
+        </div>
+      </section>
+    )
   }
 
   submitForm() {
@@ -217,6 +280,7 @@ class Index extends React.Component {
                     <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
                     <Divider />
             </Drawer>
+            {this.foodsYum()}
             <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
                   clickHandle={this.clickHandle} prefs={this.state.prefs}
                   updateGroup={this.updateGroup} />
