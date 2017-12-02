@@ -85,7 +85,6 @@ class Index extends React.Component {
 
               <img alt="Pizza" src="https://images.unsplash.com/photo-1507927822105-9a760e57a419?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
 
-
               <img alt="Sushi" src="https://images.unsplash.com/photo-1501735972267-d5c1bc03655c?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
 
               <img alt="Pad Thai" src="https://images.unsplash.com/photo-1441850605338-1b0b5a22e7b9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
