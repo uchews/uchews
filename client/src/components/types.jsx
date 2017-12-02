@@ -37,7 +37,7 @@ class Types extends React.Component {
       <div>
       <Paper style={style.paper} zDepth={3}>
         <h1>Chewser #{this.props.counter}</h1>
-        <h2>What are you in the mood for?</h2>
+        <h2>Which cuisine types would you like to eat?</h2>
         <div style={style.container}>
           {this.state.types.map(function(type) {
             return <Check name={"wantToEat"}
@@ -45,7 +45,7 @@ class Types extends React.Component {
                           choose={that.props.wantToEat} />
           })}
         </div>
-        <h2>Any dealbreakers?</h2>
+        <h2>Which types do you refuse to eat?</h2>
         <div style={style.container}>
           {this.state.types.map(function(type) {
             return <Check name={"willNotEat"}
