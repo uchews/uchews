@@ -39,7 +39,7 @@ class Invitation extends React.Component {
   }
 
   guestEmail(input) {
-    console.log('should be guests email =', input.target.value)
+    // console.log('should be guests email =', input.target.value)
     this.setState({guest: input.target.value});
   }
 
