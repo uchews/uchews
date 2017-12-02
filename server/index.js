@@ -10,9 +10,18 @@ const db = require('../database/index.js');
 const google = require('./googlePlacesHelpers.js');
 const authenticate = require('./authenticate.js');
 const handleRestaurants = require('./handleRestaurants.js');
+var axios = require('axios');
 
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey('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');
+
+
+//EVENTS API ATTEMPT
+global.fetch = require('node-fetch')
+var phq = require('predicthq')
+var client = new phq.Client({access_token: "vcbZQQcuQvsXd2lwYDZyAfDxUbG6Sd"})
+// var phq = new Client({access_token: "vcbZQQcuQvsXd2lwYDZyAfDxUbG6Sd"})
+
 
 require('dotenv').config();
 
@@ -92,6 +101,41 @@ app.post('/invitation', function(req, res) {
     }
   )
 })
+
+
+
+
+
+app.post('/events', (function(req, res) {
+  console.log('line 109 events get req.body =', req.body);
+
+  var geoLat;
+  var geoLong;
+  //get coordinates from zip:
+  axios.get('https://www.zipcodeapi.com/rest/yhQtTsIlD8YDqFFt3SLGO9SUFD7nPHjicMoj5LTedYejbvG5av6AXiCNwDcvuKuh/info.json/' + req.body.zip + '/degrees')
+    .then(function(response){
+      console.log('response.data', response.data);
+      console.log('response.status', response.status);
+      geoLat = response.data.lat;
+      geoLong =response.data.lng;
+      callEventsApi();
+    });
+
+  var callEventsApi = function() {
+    client.events.search({q: 'Jazz', within: '30km@' + geoLat + ',' + geoLong})
+      .then(function(results){
+        var events = results.toArray()
+        // for(var i=0; i < events.length; i++) {
+        //     console.info(events[i].rank, events[i].category, events[i].title, events[i].start, events[i].location )
+        //   }
+          // console.log('EVENTS WAS SUCCESSFUL =', events)
+      res.status(200).send(events)
+      })
+        // console.log('BENJI --------> line 11 sever/index.js', results)
+  }
+}));
+
+
 
 
 //*New* get user's Prefs from db for preference.jsx

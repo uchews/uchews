@@ -55,7 +55,7 @@ class Types extends React.Component {
         </div>
         <RaisedButton label="Next"
                       primary={true}
-                      onClick={ () => this.props.clickHandle(this.state.wantToEat.length !== 0 ? "waiting" : ) } />
+                      onClick={ () => this.props.clickHandle("waiting") } />
       </Paper>
       </div>
     )

@@ -1,4 +1,4 @@
-4444rrrimport React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import {redA200} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
