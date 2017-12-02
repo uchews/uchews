@@ -57,7 +57,7 @@ class Home extends React.Component {
 
     axios.get('/image')
       .then((response) => {
-        console.log(response.data);
+        context.props.updateImage(response.data);
       })
       .catch((error) => {
         console.log('Error');

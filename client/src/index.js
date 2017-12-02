@@ -65,6 +65,7 @@ class Index extends React.Component {
     this.foodsYum = this.foodsYum.bind(this);
   }
 
+
   updateUser(username) {
     this.setState({currentUser: username});
   }
