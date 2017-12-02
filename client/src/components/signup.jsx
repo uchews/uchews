@@ -33,7 +33,8 @@ class Signup extends React.Component {
     this.state = {
       username: '',
       password: '',
-      floatUser: 'username'
+      floatUser: 'username',
+      imageUrl: ''
     }
     this.onUserChange = this.onUserChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -50,11 +51,13 @@ class Signup extends React.Component {
     axios.post('/signup', {
       username: this.state.username,
       password: this.state.password,
+      imageUrl: this.state.imageUrl
     })
       .then((response) => {
         this.setState({
           username: '',
-          password: ''
+          password: '',
+          imageUrl: ''
         })
         console.log(response.data)
         if (response.data === false) {
@@ -100,6 +103,16 @@ class Signup extends React.Component {
                       underlineShow={false}
                       name="password" onChange={this.onUserChange}
                       value={this.state.password}
+                    />
+                    <Divider />
+                  </div>
+                  <div>
+                    <TextField
+                      hintText="imageURL field"
+                      floatingLabelText="profile image URL"
+                      underlineShow={false}
+                      name="imageUrl" onChange={this.onUserChange}
+                      value={this.state.imageUrl}
                     />
                     <Divider />
                   </div>
