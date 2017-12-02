@@ -49,8 +49,8 @@ class Index extends React.Component {
       counter: 1,
       results: [],
       open: false,
-      prefs: {}
-
+      prefs: {},
+      currentgroup: ''
     };
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
@@ -60,6 +60,7 @@ class Index extends React.Component {
     this.updateUser = this.updateUser.bind(this);
     this.updateImage = this.updateImage.bind(this);
     this.betterUpdateState = this.betterUpdateState.bind(this);
+    this.updateGroup = this.updateGroup.bind(this);
   }
 
   updateUser(username) {
@@ -68,6 +69,11 @@ class Index extends React.Component {
 
   updateImage(imageUrl) {
     this.setState({imageUrl: imageUrl});
+  }
+
+  updateGroup(title) {
+    this.setState({currentgroup: title});
+    console.log('currentgroup in index', this.state.currentgroup)
   }
 
   submitForm() {
@@ -100,6 +106,10 @@ class Index extends React.Component {
       console.log('line 91 index.js POST of prefs complete');
       this.setState({ prefs: data }); //made a state to pass to prefs.jsx
     });
+
+    axios.post('/group', {title: this.state.currentgroup, location: this.state.location, people: this.state.currentUser})
+    .then((res) => console.log('new group post succeed in index', res))
+    .catch((err) => console.log('new group post error in index', err));
   }
 
 
@@ -128,6 +138,7 @@ class Index extends React.Component {
       return obj;
     }.bind(e)();
     this.setState( stateObj );
+
   }
 
   // handles button clicks at the bottom of the app as forms are completed and
@@ -208,7 +219,8 @@ class Index extends React.Component {
                     <Divider />
             </Drawer>
             <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
-                  clickHandle={this.clickHandle} prefs={this.state.prefs} />
+                  clickHandle={this.clickHandle} prefs={this.state.prefs}
+                  updateGroup={this.updateGroup} />
           </MuiThemeProvider>
         </div>
       )
@@ -244,7 +256,8 @@ class Index extends React.Component {
             <Input data={this.state.data}
                    clickHandle={this.clickHandle}
                    changeHandle={this.changeHandle}
-                   errorText={this.state.errorText}/>
+                   errorText={this.state.errorText}
+                   currentgroup={this.state.currentgroup} />
           </MuiThemeProvider>
         </div>
       )
