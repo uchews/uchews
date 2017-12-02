@@ -17,67 +17,31 @@ class NewGroup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      location:'',
-      errorText: ''
+      title: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.changeHandle = this.changeHandle.bind(this);
-    // this.clickHandle = this.clickHandle.bind(this);
-    this.errorHandle = this.errorHandle.bind(this);
-    this.updateState = this.updateState.bind(this);
   }
 
   //handle input change of group name
   handleInputChange(event) {
-    this.setState({[event.target.name]: event.target.value})
+    this.setState({title: event.target.value})
   }
 
   //send post request to server to create or update group (title and location)
-  /*** need to send user name to server ***/
-  handleClick() {
+handleClick() {
     var scope = this;
-    axios.post('/group', {title: scope.state.title, location:scope.state.location})
+    axios.post('/group', {title: scope.state.title})
     .then((res) => console.log('new group post succeed', res))
     .catch((err) => console.log('new group post error', err));
-    // this.props.clickHandle('input');
-  }
-
-  //from src index.js
-  changeHandle(e, i, val) {
-      this.errorHandle(val);
-      this.updateState(e, val);
-    }
-
-  // handles empty value errors in input.jsx
-  errorHandle(val) {
-    if (val === '') {
-      this.setState({
-        errorText: 'Required'
-      });
-    }
-  }
-
-  updateState(e, val) {
-    val === undefined ? val = e.target.value : val;  // catch location input field value since it behaves differently
-    let key = e.target.name;
-    // you must use a function to set state if the key is a variable
-    let stateObj = function() {
-      var obj = {};
-      obj[key] = val;
-      return obj;
-    }.bind(e)();
-    this.setState( stateObj );
+    this.props.clickHandle('input');
   }
 
   render() {
     return (<div>
-      <h2>Group Name:</h2>
-          <TextField name="title" value={this.state.title} onChange={this.handleInputChange} /><br/>
-      <Input clickHandle={this.clickHandle}
-             changeHandle={this.changeHandle}
-             errorText={this.state.errorText}/>
+      <h2>New Group:</h2>
+      <TextField name="title" value={this.state.title} onChange={this.handleInputChange} /><br/>
+      <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Get Started!"/>
     </div>)
   }
 }
