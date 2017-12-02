@@ -1,36 +1,19 @@
-import React from 'react';
-import axios from 'axios';
+import {List, ListItem, ListItemText} from 'material-ui/List';
 
-class GroupList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      grouplist: []
-    }
-    this.getList = this.getList.bind(this);
-  }
-
-  //send get request
-  /*** need to filter out groups involve current user either in frontend or backend***/
-  getList() {
-    var scope = this;
-    axios.get('/group')
-    .then((res) => {
-      console.log('group list get request succeed');
-      scope.setState({grouplist: res})})
-    .catch((err) => console.log('group list get request error', err))
-  }
-
-  render() {
-    return (<div>
-      {this.state.grouplist.map((group) => {
-        <li>
-          Group: {group.title} Location: {group.location}<br/>
-          Members: {group.members}
-        </li>
-      })}
-    </div>)
-  }
+const GroupList =(props) => {
+  return (<div>
+    <h2>Your Groups:</h2>
+    <List>
+      {props.grouplist.map((group) => {
+        let locandmem = `location: ${group.location}
+                         membrs: ${group.member}`
+        return (
+          <ListItem primaryText={group.title}
+          secondaryText={locandmem} />
+          )
+        })}
+    </List>
+  </div>)
 }
 
 export default GroupList;

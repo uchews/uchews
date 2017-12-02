@@ -36,6 +36,9 @@ const style = {
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      grouplist: []
+    }
     this.onFileLoad = this.onFileLoad.bind(this);
   }
 
@@ -59,7 +62,11 @@ class Home extends React.Component {
       .catch((error) => {
         console.log('Error');
       })
-  }
+
+    axios.get('/group')
+      .then((res) => context.setState({grouplist: res.data}))
+      .catch((err) => console.log('group list get request', err))
+}
 
   handleClose() {
     this.setState({open: false});
@@ -79,6 +86,7 @@ class Home extends React.Component {
           <h2 style={style.hungry}>Hungry?</h2><br/>
           <NewGroup clickHandle={this.props.clickHandle}
             updateGroup={this.props.updateGroup}/>
+          <GroupList grouplist={this.state.grouplist}/>
           <FlatButton label="Choose file" labelPosition="before">
             <input type="file" />
           </FlatButton>
