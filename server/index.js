@@ -164,8 +164,14 @@ app.post('/update', (req, res) => {
 })
 
 app.get('/group', (req, res) => {
+  var userGroups = [];
   db.Group.find({}, function(err, groups) {
-    res.send(groups);
+    if (err) {
+      console.log("current user not found as member of any group")
+    } if (groups.members.contains(username) === true) {
+      userGroups.push(groups);
+    }
+    res.send(userGroups);
     res.end();
   })
 })
