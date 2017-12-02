@@ -1,13 +1,18 @@
+import {List, ListItem, ListItemText} from 'material-ui/List';
+
 const GroupList =(props) => {
   return (<div>
     <h2>Your Groups:</h2>
-    {props.grouplist.map((group) => (
-      <li>
-        Group: {group.title}
-        Location: {group.location}
-        Members: {group.members}
-      </li>)
-    )}
+    <List>
+      {props.grouplist.map((group) => {
+        let locandmem = `location: ${group.location}
+                         membrs: ${group.member}`
+        return (
+          <ListItem primaryText={group.title}
+          secondaryText={locandmem} />
+          )
+        })}
+    </List>
   </div>)
 }
 
