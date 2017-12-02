@@ -343,7 +343,7 @@ class Index extends React.Component {
               style={style.nav}
               showMenuIconButton={false}
               />
-            <Image clickHandle={this.clickHandle} updateImage={this.updateImage}/>
+            <Image imageUrl={this.state.imageUrl} clickHandle={this.clickHandle} updateImage={this.updateImage}/>
         </MuiThemeProvider>
       )
     }

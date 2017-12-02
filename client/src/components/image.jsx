@@ -1,22 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {redA200} from 'material-ui/styles/colors';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Home from './components/home.jsx';
-import Signup from './components/signup.jsx';
-import Login from './components/login.jsx';
-import Input from './components/input.jsx';
-import Results from './components/results.jsx';
-import Types from './components/types.jsx';
-import Waiting from './components/wating.jsx';
-import Dummy from './components/dummy.jsx';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
-import Image from './components/image.jsx'
+import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
+
+
 
 const style = {
   text: {
@@ -66,6 +56,7 @@ class Image extends React.Component {
           title="Change your Image URL"
           showMenuIconButton={false}
           />
+          <Avatar id="avatar" src={this.props.imageUrl}/>
           <div>
             <Paper style={style.text} zDepth={1}>
                 <div>
