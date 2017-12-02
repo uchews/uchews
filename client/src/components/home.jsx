@@ -55,18 +55,18 @@ class Home extends React.Component {
         console.log('error inside home')
       })
 
-    axios.get('/image')
-      .then((response) => {
-        context.props.updateImage(response.data);
-      })
-      .catch((error) => {
-        console.log('Error');
-      })
+    // axios.get('/image')
+    //   .then((response) => {
+    //     context.props.updateImage(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log('Error');
+    //   })
 
     axios.get('/group')
       .then((res) => context.setState({grouplist: res.data}))
       .catch((err) => console.log('group list get request', err))
-}
+  }
 
   handleClose() {
     this.setState({open: false});

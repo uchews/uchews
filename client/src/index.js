@@ -65,6 +65,17 @@ class Index extends React.Component {
     this.foodsYum = this.foodsYum.bind(this);
   }
 
+  componentDidMount() {
+    var context = this;
+    axios.get('/image')
+    .then((response) => {
+      context.updateImage(response.data);
+      console.log('THIS IS THE RESPONSE DATA', response.data);
+    })
+    .catch((error) => {
+      console.log('Error');
+    })
+  }
 
   updateUser(username) {
     this.setState({currentUser: username});
@@ -219,19 +230,15 @@ class Index extends React.Component {
         this.setState({ appView: view }, () => this.submitForm() );
       }
     } else if (view === 'home') {
+      var scope = this;
       // resets all user inputted states
-      this.setState({
-        appView: 'home',
-        location: '',
-        peopleNum: '',
-        distance: '',
-        budget: '',
-        wantToEat: [],
-        willNotEat: [],
-        errorText: '',
-        counter: 1,
-        results: [],
-        open: false
+      axios.get('/image')
+      .then((response) => {
+        scope.setState({appView: 'home', open: false, imageUrl:response.data});
+        console.log('THIS IS THE RESPONSE DATA', response.data);
+      })
+      .catch((error) => {
+        console.log('Error');
       })
     } else {
       this.setState({ appView: view, open: false });
