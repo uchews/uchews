@@ -1,3 +1,23 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {redA200} from 'material-ui/styles/colors';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Home from './components/home.jsx';
+import Signup from './components/signup.jsx';
+import Login from './components/login.jsx';
+import Input from './components/input.jsx';
+import Results from './components/results.jsx';
+import Types from './components/types.jsx';
+import Waiting from './components/wating.jsx';
+import Dummy from './components/dummy.jsx';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import Divider from 'material-ui/Divider';
+import Image from './components/image.jsx'
+import axios from 'axios';
+
 const style = {
   text: {
     height: '80%',
@@ -24,13 +44,13 @@ class Image extends React.Component {
     this.state = {
       image:''
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onURLChange(e) {
     this.setState({
       image: e.target.value,
     })
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit() {
@@ -74,3 +94,5 @@ class Image extends React.Component {
     )
   }
 }
+
+export default Image;
