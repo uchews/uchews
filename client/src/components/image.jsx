@@ -65,7 +65,7 @@ class Image extends React.Component {
   render() {
     return (
       <form action="/image" method="post">
-        <Paper style={style.box}>
+        <Paper id="paper" style={style.box}>
         <AppBar
           title="Change your Image URL"
           showMenuIconButton={false}
