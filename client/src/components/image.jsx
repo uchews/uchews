@@ -8,8 +8,14 @@ class Image extends React.Component {
 
   onURLChange(e) {
     this.setState({
-      [e.target.name]: e.target.value,
+      image: e.target.value,
     })
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit() {
+    this.props.updateImage(this.state.image);
+    this.props.clickHandle('home');
   }
 
   render() {
@@ -28,7 +34,7 @@ class Image extends React.Component {
                     floatingLabelText={this.state.floatUser}
                     underlineShow={false}
                     onChange={this.onURLChange}
-                    value={this.state.username}
+                    value={this.state.image}
                     name="image"
                   />
                   <Divider />

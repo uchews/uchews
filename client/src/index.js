@@ -94,8 +94,7 @@ class Index extends React.Component {
       willNotEat: this.state.willNotEat,
       username: this.state.currentUser
     }
-    console.log('-------DATAandUser---- l82 index.js', dataAndUser)
-    //New Benji
+
     axios.post('/update', data)
     .then( (response) => {
       console.log('line 91 index.js POST of prefs complete');
@@ -344,7 +343,7 @@ class Index extends React.Component {
               style={style.nav}
               showMenuIconButton={false}
               />
-            <Image updateImage={this.updateImage}/>
+            <Image clickHandle={this.clickHandle} updateImage={this.updateImage}/>
         </MuiThemeProvider>
       )
     }
