@@ -31,16 +31,8 @@ class Preference extends React.Component {
       })
     })
 
-    // console.log('prefs props ==', this.props.prefs)
   }
-//If this breaks it is line 37 map. waiting for data
-// {this.state.prefs.map(function(item) {
-//             return (
-//               <ul>item</ul>
-//             )
-//           })}
 
-//TEMP deleted from deal breakers {this.state.prefs}
   render() {
     if (this.state.prefsClicked) {
       return (
