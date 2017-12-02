@@ -15,6 +15,7 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
+import Image from './components/image.jsx'
 import axios from 'axios';
 
 const muiTheme = getMuiTheme({
@@ -36,6 +37,7 @@ class Index extends React.Component {
     super(props);
     this.state= {
       currentUser: null,
+      imageUrl: 'https://avatars1.githubusercontent.com/u/29010046?s=460&v=4',
       appView: 'login',
       location: '',
       peopleNum: '',
@@ -56,10 +58,16 @@ class Index extends React.Component {
     this.handleToggle = this.handleToggle.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    this.updateImage = this.updateImage.bind(this);
+    this.betterUpdateState = this.betterUpdateState.bind(this);
   }
 
   updateUser(username) {
     this.setState({currentUser: username});
+  }
+
+  updateImage(imageUrl) {
+    this.setState({imageUrl: imageUrl});
   }
 
   submitForm() {
@@ -105,6 +113,10 @@ class Index extends React.Component {
     }
   }
 
+  betterUpdateState(value) {
+    this.setState({appView: value});
+  }
+
   // catches which input field in input.jsx the user in entering information into,
   // takes the value, updates the corresponding state with that value
   updateState(e, val) {
@@ -116,7 +128,6 @@ class Index extends React.Component {
       obj[key] = val;
       return obj;
     }.bind(e)();
-
     this.setState( stateObj );
   }
 
@@ -197,7 +208,7 @@ class Index extends React.Component {
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
                     <Divider />
             </Drawer>
-            <Home currentUser={this.state.currentUser} appView={this.state.appView}
+            <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
                   clickHandle={this.clickHandle} prefs={this.state.prefs} />
           </MuiThemeProvider>
         </div>
@@ -325,8 +336,21 @@ class Index extends React.Component {
       return (
         <Dummy clickHandle={this.clickHandle} />
       )
+    } else if (this.state.appView === 'image') {
+      return (
+        <MuiThemeProvider muiTheme={muiTheme}>
+            <AppBar
+              title="uChews"
+              style={style.nav}
+              showMenuIconButton={false}
+              />
+            <Image updateImage={this.updateImage}/>
+        </MuiThemeProvider>
+      )
     }
   }
 }
+
+ReactDOM.render(<Index/>, document.getElementById('app'));
 
 ReactDOM.render(<Index/>, document.getElementById('app'));
