@@ -124,7 +124,7 @@ class Signup extends React.Component {
                       label="SIGNUP"
                       onClick={this.handleSubmit}
                     />
-                    <h3>Have an account?</h3>
+                    <h3>Have an account already?</h3>
                     <RaisedButton
                       style={style.button}
                       label="login"

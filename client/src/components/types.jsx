@@ -36,7 +36,7 @@ class Types extends React.Component {
     return (
       <div>
       <Paper style={style.paper} zDepth={3}>
-        <h1>Chewser #{this.props.counter}</h1>
+        <h1>CHEWSER: #{this.props.counter}</h1>
         <h2>Which cuisine types would you like to eat?</h2>
         <div style={style.container}>
           {this.state.types.map(function(type) {
@@ -55,7 +55,7 @@ class Types extends React.Component {
         </div>
         <RaisedButton label="Next"
                       primary={true}
-                      onClick={ () => this.props.clickHandle("waiting") } />
+                      onClick={ () => this.props.clickHandle(this.state.wantToEat.length !== 0 ? "waiting" : ) } />
       </Paper>
       </div>
     )

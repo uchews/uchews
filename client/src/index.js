@@ -1,4 +1,4 @@
-import React from 'react';
+4444rrrimport React from 'react';
 import ReactDOM from 'react-dom';
 import {redA200} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -103,7 +103,6 @@ class Index extends React.Component {
 
     axios.post('/update', data)
     .then( (response) => {
-      console.log('line 91 index.js POST of prefs complete');
       this.setState({ prefs: data }); //made a state to pass to prefs.jsx
     });
 
@@ -212,10 +211,10 @@ class Index extends React.Component {
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
                     <MenuItem onClick={() => this.clickHandle('home')}>
-                        Home
+                        HOME
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
                     <Divider />
             </Drawer>
             <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
@@ -247,10 +246,10 @@ class Index extends React.Component {
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
                     <MenuItem onClick={() => this.clickHandle('home')}>
-                        Home
+                        HOME
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    <MenuItem onClick={this.handleLogout}>LOGOOUT</MenuItem>
                     <Divider />
             </Drawer>
             <Input data={this.state.data}
@@ -273,10 +272,10 @@ class Index extends React.Component {
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
                     <MenuItem onClick={() => this.clickHandle('home')}>
-                        Home
+                        HOME
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
                     <Divider />
             </Drawer>
             <Types clickHandle={this.clickHandle}
@@ -298,10 +297,10 @@ class Index extends React.Component {
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
                     <MenuItem onClick={() => this.clickHandle('home')}>
-                        Home
+                        HOME
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    <MenuItem onClick={this.handleLogout}>HOME</MenuItem>
                     <Divider />
             </Drawer>
             <Waiting submitForm={this.submitForm} />
@@ -320,10 +319,10 @@ class Index extends React.Component {
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}>
                     <MenuItem onClick={() => this.clickHandle('home')}>
-                        Home
+                        HOME
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
                     <Divider />
             </Drawer>
             <Results clickHandle={this.clickHandle}

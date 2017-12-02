@@ -20,7 +20,7 @@ const Waiting = ({ submitForm }) => {
     <div>
       <Paper style={style.paper} zDepth={3}>
         <CircularProgress size={80} thickness={5} />
-        <h3>Compiling your results!</h3>
+        <h3>Generating results!</h3>
       </Paper>
     </div>
   )

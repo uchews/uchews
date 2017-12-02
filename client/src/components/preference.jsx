@@ -15,7 +15,7 @@ class Preference extends React.Component {
     var thisContext = this;
     axios.get('/prefs')
     .then(function(response) {
-      console.log('RESPONSE GET line 18 prefs.jsx', response.data)
+      console.log('prefs.jsx', response.data)
 
       thisContext.setState({
         prefsClicked: !thisContext.state.prefsClicked,
@@ -46,7 +46,7 @@ class Preference extends React.Component {
             )
           })}</h2>
           <br/>
-          <h2>Deal Breakers: {this.state.prefs[0].willNotEat.map(function(item) {
+          <h2>Deal-Breakers: {this.state.prefs[0].willNotEat.map(function(item) {
             return (
               <ul>{item}</ul>
             )
@@ -56,7 +56,7 @@ class Preference extends React.Component {
     } else {
       return (
       <div>
-        <h2>click for prefs</h2>
+        <h2>Click here for preferences!</h2>
         <button onClick={this.getPrefs}></button>
       </div>
     )

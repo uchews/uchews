@@ -21,23 +21,23 @@ const Results = ({ results }) => {
   return (
     <div>
       <Paper style={style.paper} zDepth={3}>
-        <h2>Your Results!</h2>
+        <h2>Here are your Results!</h2>
         <MapsContainer results={results}/>
         <div style={style.separater}></div>  {/* this provides the buffer between the map and the results */}
         <h1>#1</h1>                          {/* otherwise the map will overlap the results */}
         <h2>{results[0][0].name}</h2>
         {results[0][0].formatted_address}
-        <h3>Stars: {results[0][0].rating}</h3>
+        <h3>Rating: {results[0][0].rating}</h3>
 
         <h1>#2</h1>
         <h2>{results[1][0].name}</h2>
         {results[1][0].formatted_address}
-        <h3>Stars: {results[1][0].rating}</h3>
+        <h3>Rating: {results[1][0].rating}</h3>
 
         <h1>#3</h1>
         <h2>{results[2][0].name}</h2>
         {results[2][0].formatted_address}
-        <h3>Stars: {results[2][0].rating}</h3>
+        <h3>Rating: {results[2][0].rating}</h3>
       </Paper>
     </div>
   )
