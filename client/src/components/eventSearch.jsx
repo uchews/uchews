@@ -21,14 +21,18 @@ class EventSearch extends React.Component {
 
     };
     this.postEvents = this.postEvents.bind(this);
+    this.entryZip = this.entryZip.bind(this);
+    this.entryQuery = this.entryQuery.bind(this);
+
+
   }
 
 //EVENTS API ATTEMPT
   postEvents() {
     var thisContext = this;
     axios.post('/events', {
-      query: 'jazz',
-      zip: '72201',
+      query: this.state.query,
+      zip: this.state.zip,
 
 
     })
@@ -42,34 +46,27 @@ class EventSearch extends React.Component {
     })
   }
 
+  entryZip(input) {
+    this.setState({zip: input.target.value})
+  }
+  entryQuery(input) {
+    this.setState({query: input.target.value})
+  }
+
   render() {
-    if (this.state.Clicked) {
       return (
         <div>
-          <h2>click for prefs</h2>
-          <RaisedButton style={style.button} primary={true} onClick={this.postEvents} label="Get My Prefs" />
+
+          <label>Zip</label>
+          <input placeholder="Zip" onChange={this.entryZip} />
+          <label>Type of Events Nearby</label>
+          <input placeholder="Type of Event" onChange={this.entryQuery} />
+
+          <h2>Find Nearby Events</h2>
+          <RaisedButton style={style.button} primary={true} onClick={this.postEvents} label="Events" />
           <br/>
-          <h2>Preferences: {this.state.prefs[0].foodType.map(function(item) {
-            return (
-              <ul>{item}</ul>
-            )
-          })}</h2>
-          <br/>
-          <h2>Deal Breakers: {this.state.prefs[0].willNotEat.map(function(item) {
-            return (
-              <ul>{item}</ul>
-            )
-          })}</h2>
         </div>
       )
-    } else {
-      return (
-      <div>
-        <h2>click for prefs</h2>
-        <RaisedButton style={style.button} primary={true} onClick={this.postEvents} label="Get My Prefs" />
-      </div>
-    )
-    }
 
   }
 }

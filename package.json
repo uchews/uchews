@@ -41,6 +41,7 @@
     "material-ui": "^0.19.4",
     "material-ui-upload": "^1.2.1",
     "mongoose": "^4.13.2",
+    "node-fetch": "^1.7.3",
     "node-geocoder": "^3.21.1",
     "nodemon": "^1.12.1",
     "passport": "^0.4.0",
@@ -48,6 +49,7 @@
     "passport-local": "^1.0.0",
     "passport-session": "^1.0.2",
     "path": "^0.12.7",
+    "predicthq": "0.0.18",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "webpack": "^3.8.1"
