@@ -15,6 +15,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   username: { type: String },
   password: { type: String },
+  imageUrl: { type: String },
   googleId: { type: String },
   sessionID: { type: String },
   budget: { type: Number },

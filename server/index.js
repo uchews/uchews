@@ -142,6 +142,16 @@ app.post('/group', (req, res) => {
   )
 })
 
+app.post('/image', (req, res) => {
+  const username = req.currentUser;
+  const imageUrl = req.imageUrl;
+  db.User.findOneAndUpdate({ username: username }, { imageUrl: imageUrl }, { new: true }, (err, updatedUser) => {
+    if (err) throw err;
+    res.send('success');
+    res.end();
+  })
+})
+
 app.post('/login', (req, res) => {
   const user = req.body;
   username1 = user.username;

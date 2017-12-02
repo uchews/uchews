@@ -58,7 +58,7 @@ class Image extends React.Component {
           title="Change your Image URL"
           showMenuIconButton={false}
           />
-          <Avatar id="avatarimage" size={70} src={this.props.imageUrl}/>
+          <Avatar id="avatarimage" size={107} src={this.props.imageUrl}/>
           <div>
             <Paper style={style.text} zDepth={1}>
                 <div>
