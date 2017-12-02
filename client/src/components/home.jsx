@@ -76,7 +76,7 @@ class Home extends React.Component {
           <Avatar onClick={ () => this.props.betterUpdateState('image') } size={107} id="avatar" src={this.props.imageUrl}/>
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
           <h2 style={style.hungry}>Hungry?</h2><br/>
-          <NewGroup clickHandle={this.props.clickHandle} currentgroup={this.props.currentgroup}
+          <NewGroup clickHandle={this.props.clickHandle}
             updateGroup={this.props.updateGroup}/>
           <FlatButton label="Choose file" labelPosition="before">
             <input type="file" />
