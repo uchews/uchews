@@ -15,6 +15,7 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
+import Image from './components/image.jsx'
 import axios from 'axios';
 
 const muiTheme = getMuiTheme({
@@ -36,6 +37,7 @@ class Index extends React.Component {
     super(props);
     this.state= {
       currentUser: null,
+      imageUrl: 'https://avatars1.githubusercontent.com/u/29010046?s=460&v=4',
       appView: 'login',
       location: '',
       peopleNum: '',
@@ -46,7 +48,9 @@ class Index extends React.Component {
       errorText: '',
       counter: 1,
       results: [],
-      open: false
+      open: false,
+      prefs: {}
+
     };
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
@@ -54,10 +58,16 @@ class Index extends React.Component {
     this.handleToggle = this.handleToggle.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    this.updateImage = this.updateImage.bind(this);
+    this.betterUpdateState = this.betterUpdateState.bind(this);
   }
 
   updateUser(username) {
     this.setState({currentUser: username});
+  }
+
+  updateImage(imageUrl) {
+    this.setState({imageUrl: imageUrl});
   }
 
   submitForm() {
@@ -71,17 +81,28 @@ class Index extends React.Component {
 
     console.log('submitting', data);
 
-    //need to update user's preference
-    axios.post('/update', data)
-    .then( (response) => {
-
-    });
-
     axios.post('/input/findRestaurants', data)
     .then( (response) => {
       this.setState({ results: response.data }, () => this.clickHandle('results'));
     });
+
+    let dataAndUser = {
+      location: this.state.location,
+      budget: this.state.budget,
+      radius: this.state.distance,
+      wantToEat: this.state.wantToEat,
+      willNotEat: this.state.willNotEat,
+      username: this.state.currentUser
+    }
+    console.log('-------DATAandUser---- l82 index.js', dataAndUser)
+    //New Benji
+    axios.post('/update', data)
+    .then( (response) => {
+      console.log('line 91 index.js POST of prefs complete');
+      this.setState({ prefs: data }); //made a state to pass to prefs.jsx
+    });
   }
+
 
   // handles empty value errors in input.jsx
   errorHandle(val) {
@@ -90,6 +111,10 @@ class Index extends React.Component {
         errorText: 'Required'
       });
     }
+  }
+
+  betterUpdateState(value) {
+    this.setState({appView: value});
   }
 
   // catches which input field in input.jsx the user in entering information into,
@@ -103,7 +128,6 @@ class Index extends React.Component {
       obj[key] = val;
       return obj;
     }.bind(e)();
-
     this.setState( stateObj );
   }
 
@@ -184,8 +208,8 @@ class Index extends React.Component {
                     <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
                     <Divider />
             </Drawer>
-            <Home currentUser={this.state.currentUser} appView={this.state.appView}
-                  clickHandle={this.clickHandle}/>
+            <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
+                  clickHandle={this.clickHandle} prefs={this.state.prefs} />
           </MuiThemeProvider>
         </div>
       )
@@ -314,16 +338,19 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'image') {
       return (
-        <div>
-          <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-          </MuiThemeProvider>
-        </div>
+        <MuiThemeProvider muiTheme={muiTheme}>
+            <AppBar
+              title="uChews"
+              style={style.nav}
+              showMenuIconButton={false}
+              />
+            <Image updateImage={this.updateImage}/>
+        </MuiThemeProvider>
       )
     }
   }
 }
+
+ReactDOM.render(<Index/>, document.getElementById('app'));
 
 ReactDOM.render(<Index/>, document.getElementById('app'));

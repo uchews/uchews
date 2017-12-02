@@ -7,6 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 import axios from 'axios';
 import GroupList from './grouplist.jsx';
 import NewGroup from './newGroup.jsx';
+import Preference from './preference.jsx';
 import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
 
@@ -61,11 +62,12 @@ class Home extends React.Component {
     return (
       <div>
         <Paper style={style.paper} zDepth={3}>
-          <Avatar size={70} id="avatar" src="https://avatars1.githubusercontent.com/u/29010046?s=460&v=4"/>
+          <Avatar onClick={ () => this.props.betterUpdateState('image') } size={70} id="avatar" src={this.props.imageUrl}/>
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
           <h2 style={style.hungry}>Hungry?</h2>
           <RaisedButton style={style.button} primary={true} onClick={ () => this.props.clickHandle('input')} label="Get Started!" />
-          <NewGroup clickHandle={this.props.clickHandle}/>
+          <NewGroup />
+
           <FlatButton label="Choose file" labelPosition="before">
             <input type="file" />
           </FlatButton>
@@ -74,6 +76,5 @@ class Home extends React.Component {
     )
   }
 }
-
 
 export default Home;
