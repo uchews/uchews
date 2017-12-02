@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
 
-
 const style = {
   button: {
     margin: '0 0 100px 0'
@@ -24,13 +23,11 @@ class Preference extends React.Component {
     axios.get('/prefs')
     .then(function(response) {
       console.log('prefs.jsx', response.data)
-
       thisContext.setState({
         prefsClicked: !thisContext.state.prefsClicked,
         prefs: response.data
       })
     })
-
   }
 
   render() {
@@ -56,14 +53,11 @@ class Preference extends React.Component {
     } else {
       return (
       <div>
-        <h2>Click here for preferences!</h2>
-        <button onClick={this.getPrefs}></button>
         <h2>click for prefs</h2>
         <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Prefs" />
       </div>
     )
     }
-
   }
 }
 export default Preference;
