@@ -14,7 +14,7 @@ class EventSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      prefs: {},
+      events: {},
       clicked: false,
       query: '',
       zip: '',
@@ -39,10 +39,10 @@ class EventSearch extends React.Component {
     .then(function(response) {
       console.log('RESPONSE GET line 38 prefs.jsx', response.data)
 
-      // thisContext.setState({
-      //   Clicked: !thisContext.state.Clicked,
-      //   prefs: response.data
-      // })
+      thisContext.setState({
+        clicked: !thisContext.state.clicked,
+        events: response.data
+      })
     })
   }
 
@@ -54,20 +54,27 @@ class EventSearch extends React.Component {
   }
 
   render() {
+    if (this.state.clicked) {
       return (
         <div>
+          <h2>Nearby Events:</h2>
 
+          <br/>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <h2>Find Nearby Events</h2>
           <label>Zip</label>
           <input placeholder="Zip" onChange={this.entryZip} />
           <label>Type of Events Nearby</label>
           <input placeholder="Type of Event" onChange={this.entryQuery} />
-
-          <h2>Find Nearby Events</h2>
-          <RaisedButton style={style.button} primary={true} onClick={this.postEvents} label="Events" />
+          <RaisedButton style={style.button} primary={true} onClick={this.postEvents} label="Show Events" />
           <br/>
         </div>
       )
-
+    }
   }
 }
 export default EventSearch;
