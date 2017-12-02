@@ -57,8 +57,7 @@ class Input extends React.Component {
       <div>
 
         <form>
-        <h2>Group Name:</h2>
-          <TextField name="title" value={this.state.title} onChange={this.handleInputChange} /><br/>
+
           <h2>Location:</h2><TextField name="location"
                                        hintText="Address or zip code..."
                                        errorText={this.props.errorText}

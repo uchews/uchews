@@ -26,6 +26,7 @@ class NewGroup extends React.Component {
     this.changeHandle = this.changeHandle.bind(this);
     // this.clickHandle = this.clickHandle.bind(this);
     this.errorHandle = this.errorHandle.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
   //handle input change of group name
@@ -58,8 +59,22 @@ class NewGroup extends React.Component {
     }
   }
 
+  updateState(e, val) {
+    val === undefined ? val = e.target.value : val;  // catch location input field value since it behaves differently
+    let key = e.target.name;
+    // you must use a function to set state if the key is a variable
+    let stateObj = function() {
+      var obj = {};
+      obj[key] = val;
+      return obj;
+    }.bind(e)();
+    this.setState( stateObj );
+  }
+
   render() {
     return (<div>
+      <h2>Group Name:</h2>
+          <TextField name="title" value={this.state.title} onChange={this.handleInputChange} /><br/>
       <Input clickHandle={this.clickHandle}
              changeHandle={this.changeHandle}
              errorText={this.state.errorText}/>
