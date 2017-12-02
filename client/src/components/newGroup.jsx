@@ -25,15 +25,12 @@ class NewGroup extends React.Component {
 
   //handle input change of group name
   handleInputChange(event) {
-    this.setState({title: event.target.value})
+    this.setState({title: event.target.value});
   }
 
-  //send post request to server to create or update group (title and location)
-handleClick() {
-    var scope = this;
-    axios.post('/group', {title: scope.state.title})
-    .then((res) => console.log('new group post succeed', res))
-    .catch((err) => console.log('new group post error', err));
+  //pass group title to updeGroup from index, change view to 'input'
+  handleClick() {
+    this.props.updateGroup(this.state.title);
     this.props.clickHandle('input');
   }
 
