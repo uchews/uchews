@@ -87,9 +87,6 @@ class Home extends React.Component {
           <NewGroup clickHandle={this.props.clickHandle}
             updateGroup={this.props.updateGroup}/>
           <GroupList grouplist={this.state.grouplist}/>
-          <FlatButton label="Choose file" labelPosition="before">
-            <input type="file" />
-          </FlatButton>
           <Preference prefs={this.props.prefs} />
           <EventSearch />
           <Invitation />
