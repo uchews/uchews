@@ -142,6 +142,16 @@ app.post('/group', (req, res) => {
   )
 })
 
+
+// --------- We are currently using username1 but as soon as Mike implement session.user we will change it to req.session.user
+app.get('/image', (req, res) => {
+  db.User.find({ username: username1 }, function(err, user) {
+    if (err) throw err;
+    res.send(user.imageUrl);
+    res.end();
+  })
+})
+
 app.post('/image', (req, res) => {
   const username = req.currentUser;
   const imageUrl = req.imageUrl;
@@ -151,6 +161,8 @@ app.post('/image', (req, res) => {
     res.end();
   })
 })
+// --------- We are currently using username1 but as soon as Mike implement session.user we will change it to req.session.user
+
 
 app.post('/login', (req, res) => {
   const user = req.body;
@@ -198,6 +210,7 @@ app.get('/checkSession', (req, res) => {
     }
   });
 });
+
 
 //Client sends survey results to /input/findRestaurants for API querying and ranking
 app.post('/input/findRestaurants', (req, res) => {
