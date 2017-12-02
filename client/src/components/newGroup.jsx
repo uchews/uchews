@@ -17,8 +17,7 @@ class NewGroup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      location: ''
+      title: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -41,12 +40,6 @@ handleClick() {
 
   render() {
     return (<div>
-      <form>
-        <label>
-          <h2>Group Name:</h2>
-          <TextField name="title" value={this.state.title} onChange={this.handleInputChange} />
-        </label><br/>
-      </form>
       <Input />
     </div>)
   }
