@@ -10,8 +10,8 @@ import NewGroup from './newGroup.jsx';
 import Preference from './preference.jsx';
 import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
-import Invitation from './invitation.jsx';
 
+import Invitation from './invitation.jsx';
 
 
 
@@ -76,8 +76,7 @@ class Home extends React.Component {
           <Avatar onClick={ () => this.props.betterUpdateState('image') } size={107} id="avatar" src={this.props.imageUrl}/>
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
           <h2 style={style.hungry}>Hungry?</h2>
-          <RaisedButton style={style.button} primary={true} onClick={ () => this.props.clickHandle('input')} label="Get Started!" />
-          <NewGroup clickHandle={this.props.clickHandle}/>
+          <NewGroup clickHandle={this.props.clickHandle} currentgroup={this.props.currentgroup}/>
           <FlatButton label="Choose file" labelPosition="before">
             <input type="file" />
           </FlatButton>
