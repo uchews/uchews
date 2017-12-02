@@ -140,8 +140,8 @@ app.post('/events', (function(req, res) {
 
 //*New* get user's Prefs from db for preference.jsx
 app.get('/prefs', (function(req, res) {
-  console.log('Hellow from server/index.js line 79 USERNAME-------->', username1);
-  db.User.find({username: username1}, function(error, something) {
+  console.log('Hellow from server/index.js line 79 USERNAME-------->', req.session.user );
+  db.User.find({username: req.session.user }, function(error, something) {
     if (error) {
       console.log('Error userinfo Get server/index.js line 82', error);
     }
@@ -150,12 +150,11 @@ app.get('/prefs', (function(req, res) {
   });
 }));
 
-var username1; //gets it's value from app.post('/login'...
 
 
 app.post('/update', (req, res) => {
   console.log('line 94 SERVER/INDEX.JS REQ = ', req.body)
-  db.User.findOneAndUpdate({ username: username1 },
+  db.User.findOneAndUpdate({ username: req.session.user },
     {
       distance: req.body.distance,
       location: req.body.location,
@@ -189,7 +188,8 @@ app.post('/group', (req, res) => {
 
 // --------- We are currently using username1 but as soon as Mike implement session.user we will change it to req.session.user
 app.get('/image', (req, res) => {
-  db.User.find({ username: username1 }, function(err, user) {
+  console.log('THIS IS THE CURRENT SESSION USER', req.session.user);
+  db.User.find({ username: req.session.user }, function(err, user) {
     if (err) throw err;
     console.log('THIS IS THE USER', user)
     res.send(user[0].imageUrl);
@@ -212,11 +212,11 @@ app.post('/image', (req, res) => {
 
 app.post('/login', (req, res) => {
   const user = req.body;
-  username1 = user.username;
   db.User.findOne({ username: req.body.username }, (err, user) => {
     if (!user) {
       res.send(false);
     } else {
+      req.session.user = req.body.username;
       bcrypt.compare(req.body.password, user.password, (err2, result) => {
         if (result) {
           db.User.findOneAndUpdate({ username: req.body.username }, { sessionID: req.sessionID }, { new: true }, (err, updatedUser) => {
