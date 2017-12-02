@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import Paper from 'material-ui/Paper';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
@@ -7,6 +9,14 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 // sets styles for material ui components
 const style = {
+  paper: {
+    display: 'inline-block',
+    height: '50%',
+    margin: '0 auto',
+    padding: 50,
+    textAlign: 'center',
+    width: '50%'
+  },
   radio: {
     textAlign: 'left',
     marginLeft: '40%'
@@ -17,6 +27,7 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      location: '',
       people: 0,
       distance: 0,
     };
@@ -31,8 +42,7 @@ class Input extends React.Component {
   */
   setPeople(e, i, val) {
     this.setState({
-      people: val,
-      location: ''
+      people: val
     }, function() {
       e.target.value = val;
       e.target.name = 'peopleNum';
@@ -52,29 +62,17 @@ class Input extends React.Component {
     });
   }
 
-  handleInputChange(event) {
-    this.setState({location: event.target.value});
-    console.log(this.props.currentgroup);
-  }
-
-  handleClick() {
-    var scope = this;
-    axios.post('/group', {title: scope.state.title})
-    .then((res) => console.log('new group post succeed', res))
-    .catch((err) => console.log('new group post error', err));
-    this.props.clickHandle('input');
-  }
-
   render() {
     return (
       <div>
+       <Paper style={style.paper} zDepth={3}>
         <form>
-          <h2>Location:</h2><TextField name="location"
-                                       hintText="Address or zip code..."
-                                       value={this.state.title}
-                                       errorText={this.props.errorText}
-                                       onChange={this.props.changeHandle}/><br />
-
+          <h2>Location:</h2>
+          <TextField name="location"
+                     hintText="Address or zip code..."
+                     value={this.state.title}
+                     errorText={this.props.errorText}
+                     onChange={this.props.changeHandle} /><br />
           <h2>Number of Chewsers:</h2>
           <SelectField
             value={this.state.people}
@@ -114,10 +112,10 @@ class Input extends React.Component {
             <RadioButton value={4} label="$$$$" />
           </RadioButtonGroup><br />
 
-          <RaisedButton label="Get Started!" primary={true} onClick={() => {this.props.clickHandle("types"); this.handleClick}} />
+          <RaisedButton label="Next" primary={true} onClick={() => this.props.clickHandle("types")} />
 
         </form>
-
+      </Paper>
       </div>
     )
   }
