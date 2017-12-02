@@ -77,6 +77,50 @@ class Index extends React.Component {
     console.log('currentgroup in index', this.state.currentgroup)
   }
 
+  foodsYUM() {
+    return (
+      <section>
+        <ul>
+          <li>
+            <figure className="meal-photo">
+            </figure>
+          </li>
+          <li>
+            <figure className-"meal-photo">
+            </figure>
+          </li>
+          <li>
+            <figure className="meal-photo">
+            </figure>
+          </li>
+          <li>
+            <figure className="meal-photo">
+            </figure>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <figure className="meal-photo">
+
+            </figure>
+          </li>
+          <li>
+            <figure className="meal-photo">
+            </figure>
+          </li>
+          <li>
+            <figure className="meal-photo">
+            </figure>
+          </li>
+          <li>
+            <figure className="meal-photo">
+            </figure>
+          </li>
+        </ul>
+      </section>
+    )
+  }
+
   submitForm() {
     let data = {
       location: this.state.location,
