@@ -18,6 +18,7 @@ const storeNewUser = (user, sessionID, cb) => {
     bcrypt.hash(user.password, salt, (err, hash) => {
       const newUser = {
         username: user.username,
+        imageUrl: user.imageUrl || 'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z_400x400.jpg',
         password: hash,
         sessionID: sessionID
       };

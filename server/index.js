@@ -191,16 +191,18 @@ app.post('/group', (req, res) => {
 app.get('/image', (req, res) => {
   db.User.find({ username: username1 }, function(err, user) {
     if (err) throw err;
-    res.send(user.imageUrl);
+    console.log('THIS IS THE USER', user)
+    res.send(user[0].imageUrl);
     res.end();
   })
 })
 
 app.post('/image', (req, res) => {
-  const username = req.currentUser;
-  const imageUrl = req.imageUrl;
+  const username = req.body.currentUser;
+  const imageUrl = req.body.imageUrl;
   db.User.findOneAndUpdate({ username: username }, { imageUrl: imageUrl }, { new: true }, (err, updatedUser) => {
     if (err) throw err;
+    console.log('SUCCESSFULLY SAVED IMAGEURL TO USER');
     res.send('success');
     res.end();
   })
@@ -218,7 +220,7 @@ app.post('/login', (req, res) => {
       bcrypt.compare(req.body.password, user.password, (err2, result) => {
         if (result) {
           db.User.findOneAndUpdate({ username: req.body.username }, { sessionID: req.sessionID }, { new: true }, (err, updatedUser) => {
-            res.send(result);
+            res.send('hello world');
           });
         } else {
           res.send(result);

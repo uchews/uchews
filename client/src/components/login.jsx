@@ -60,7 +60,7 @@ class Login extends React.Component {
             floatUser: 'incorrect username or password'
           })
         } else {
-          console.log('THIS PORTION IS HIT WHEN LOGGING IN')
+          console.log('THIS PORTION IS HIT WHEN SUCCESSFUL LOGIN')
           this.props.clickHandle('home');
         }
       })

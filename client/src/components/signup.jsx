@@ -48,12 +48,17 @@ class Signup extends React.Component {
   }
 
   handleSubmit() {
+    var scope = this;
     axios.post('/signup', {
       username: this.state.username,
       password: this.state.password,
       imageUrl: this.state.imageUrl
     })
       .then((response) => {
+        if (!scope.state.imageUrl) {
+          scope.props.updateImage('https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z_400x400.jpg');
+        }
+        scope.props.updateUser(scope.state.username);
         this.setState({
           username: '',
           password: '',

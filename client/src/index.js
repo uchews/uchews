@@ -38,7 +38,8 @@ class Index extends React.Component {
     super(props);
     this.state= {
       currentUser: null,
-      imageUrl: 'https://avatars1.githubusercontent.com/u/29010046?s=460&v=4',
+      //default image
+      imageUrl: 'https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z_400x400.jpg',
       appView: 'login',
       location: '',
       peopleNum: '',
@@ -63,6 +64,18 @@ class Index extends React.Component {
     this.betterUpdateState = this.betterUpdateState.bind(this);
     this.updateGroup = this.updateGroup.bind(this);
     this.foodsYum = this.foodsYum.bind(this);
+  }
+
+  componentDidMount() {
+    // var context = this;
+    // axios.get('/image')
+    // .then((response) => {
+    //   context.updateImage(response.data);
+    //   console.log('THIS IS THE RESPONSE DATA', response.data);
+    // })
+    // .catch((error) => {
+    //   console.log('Error');
+    // })
   }
 
   updateUser(username) {
@@ -218,19 +231,15 @@ class Index extends React.Component {
         this.setState({ appView: view }, () => this.submitForm() );
       }
     } else if (view === 'home') {
+      var scope = this;
       // resets all user inputted states
-      this.setState({
-        appView: 'home',
-        location: '',
-        peopleNum: '',
-        distance: '',
-        budget: '',
-        wantToEat: [],
-        willNotEat: [],
-        errorText: '',
-        counter: 1,
-        results: [],
-        open: false
+      axios.get('/image')
+      .then((response) => {
+        scope.setState({appView: 'home', open: false, imageUrl:response.data});
+        console.log('THIS IS THE RESPONSE DATA', response.data);
+      })
+      .catch((error) => {
+        console.log('Error');
       })
     } else {
       this.setState({ appView: view, open: false });
@@ -402,7 +411,7 @@ class Index extends React.Component {
               style={style.nav}
               showMenuIconButton={false}
               />
-          <Signup appView={this.state.appView} clickHandle={this.clickHandle}
+          <Signup updateUser={this.updateUser} updateImage={this.updateImage} appView={this.state.appView} clickHandle={this.clickHandle}
                   clickHandle={this.clickHandle}
                   googleClick={this.googleClick}/>
         </MuiThemeProvider>
