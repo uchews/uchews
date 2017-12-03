@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
+import $ from 'jquery';
 
 const style = {
   text: {
@@ -43,6 +44,11 @@ class Login extends React.Component {
     })
   }
 
+  componentDidMount() {
+    $('body')[0].id = 'login';
+  }
+
+
   handleSubmit() {
     axios.post('/login', {
       username: this.state.username,
@@ -60,6 +66,7 @@ class Login extends React.Component {
             floatUser: 'incorrect username or password'
           })
         } else {
+          $('#login')[0].id = "";
           console.log('THIS PORTION IS HIT WHEN SUCCESSFUL LOGIN')
           this.props.clickHandle('home');
         }
@@ -97,7 +104,7 @@ class Login extends React.Component {
                 <div>
                   <TextField
                     hintText="Password Field"
-                    floatingLabelText="Password"
+                    floatingLabelText="password"
                     type="password"
                     underlineShow={false}
                     onChange={this.onUserChange}

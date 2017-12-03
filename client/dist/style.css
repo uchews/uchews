@@ -7,10 +7,16 @@ body {
 
  h1 {
   color: #FF5252;
-  font-family: "Chewy","Libre Barcode 39 Text", "Zilla Slab Highlight", "Londrina Outline";
-  font-size: 54px;
-  font-weight: bold;
+  font-family: sans-serif, "Chewy";
  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+      transition-delay: background-color 5000s, color 5000s;
+  }
 
  #avatar {
   margin-top: 27%;
@@ -20,10 +26,10 @@ body {
   margin-top: 17%;
  }
 
- body {
-/*   background-image: url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=2131&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
-/*  */  background-size: cover;
- */ }
+ #login {
+  background-image: url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=2131&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
+  background-size: cover;
+ }
 
  .header {
   width: 100%;
@@ -41,14 +47,17 @@ body {
   position: relative;
 }
 
+img {
+  margin-top: 0;
+}
 
 .section-meals img {
     float: left;
     display: inline-block;
-    background-color: black;
+    background-color: red;
     width: 25%;
     height: auto;
-    opacity: 0.77;
+    opacity: 0.7;
     margin: 3%;
     padding-left: 0;
     height: auto;
@@ -60,6 +69,12 @@ body {
     backface-visibility: hidden
 }
 
+#cssSelector {
+  height: 50px;
+  width: 50px;
+  background-color: red;
+}
+
 #active {
   opacity: 1;
   -webkit-transform: scale(1.03);
@@ -67,16 +82,9 @@ body {
   transform: scale(1.03);
 }
 
-.container:hover img {
-  opacity: 1;
-  -webkit-transform: scale(1.03);
-  -ms-transform: scale(1.03);
-  transform: scale(1.03);
-}
+#dealbreaker {
 
-/* .container:hover .middle {
-  opacity: 1;
-} */
+}
 
 .text {
   background-color: #4CAF50;

@@ -11,7 +11,7 @@ import Input from './components/input.jsx';
 import Results from './components/results.jsx';
 import Types from './components/types.jsx';
 import Waiting from './components/wating.jsx';
-import Dummy from './components/dummy.jsx';
+import Template from './components/template.jsx';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -29,7 +29,7 @@ const muiTheme = getMuiTheme({
 const style = {
   nav:  {
     backgroundColor: '#FF5252',
-    marginBottom: '10%'
+    marginBottom: '1%'
   }
 }
 
@@ -64,6 +64,9 @@ class Index extends React.Component {
     this.betterUpdateState = this.betterUpdateState.bind(this);
     this.updateGroup = this.updateGroup.bind(this);
     this.foodsYum = this.foodsYum.bind(this);
+    this.appBar = this.appBar.bind(this);
+    this.drawer = this.drawer.bind(this);
+    this.logo = this.logo.bind(this);
   }
 
   componentDidMount() {
@@ -158,7 +161,7 @@ class Index extends React.Component {
           </div>
         </div>
         <div className="container">
-          <img alt="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3Da"/>
+          <img alt="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=2550&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
           <div className="middle">
             <div className="text">Chinese</div>
           </div>
@@ -197,7 +200,7 @@ class Index extends React.Component {
       this.setState({ prefs: data }); //made a state to pass to prefs.jsx
     });
 
-    axios.post('/group', {title: this.state.currentgroup, location: this.state.location, people: this.state.currentUser})
+    axios.post('/group', {title: this.state.currentgroup, location: this.state.location, members: this.state.currentUser})
     .then((res) => console.log('new group post succeed in index', res))
     .catch((err) => console.log('new group post error in index', err));
   }
@@ -285,25 +288,49 @@ class Index extends React.Component {
       })
   }
 
+  drawer() {
+    return (
+      <Drawer docked={false}
+                        width={200}
+                        open={this.state.open}
+                        onRequestChange={(open) => this.setState({open})}>
+                        <MenuItem onClick={() => this.clickHandle('home')}>
+                            HOME
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
+                        <Divider />
+                </Drawer>
+    )
+  }
+
+  logo() {
+    return(
+      <img src="https://lh3.googleusercontent.com/OhgRzJOqLQsE5yx5gTPNkny2d-dAJdnPiYiiX8M8OAv6Km1tkUN6VaC2S9bfcDRC-akZhvimW5oYJBYALY-Kz3gW37L05Rwqb1NuIGu90HZAxKigiLK41e49WC4OvTbOjsV6Fb8n6ddiY5hg1VTm4wVBOuXLbwr7wvu40WF7EkfUA9g1jrCO5VNSbIR0jprQ3sk7oNe7cKMJsvFWzMGIncKMW0WArVdnV5ivQBx3A5agQbbVJO6vZ_8a3nKas2da92M193HvvC6OmLnnKWQM1ie4mSoOQidXVqMnPPFVxUh5a1aqxoHSrQoTjtCyRhRHd0D3x01jVzY3_YU0WwAJ3xBFN-cgCIeJz0WYxc-f8rhjTSRVUDE9_yaCAbKhi_e1fBAUE0-bo3MhDqZsF7AUFNjOAgWJAHC89Dh4ElOVPNIE8wUDxVzbOiBZF7IuNieQkdMiPNIwyxsMilRaN5dB4cPr_zQSOmCap5vfz6fF4CMhM85Mx_yA5kuuqRYmVYYg7svYgiMQ8pW3uE7WATuLtbW03JsbXuLubI0Rt_V6yChY-XcvqWF-usGnmUv1p2_JtCfQBfaamvkCZpbo3ngEFUadi7WxR6g469bsHOGkyA=s200-no">
+      </img>
+    )
+  }
+
+  appBar() {
+    if ( this.state.currentUser ) {
+      return(
+          <AppBar id="appbar" title="" style={style.nav} onLeftIconButtonTouchTap={this.handleToggle}></AppBar>
+      )
+    } else {
+      return(
+        <AppBar id="appbar" title="" style={style.nav} showMenuIconButton={false}></AppBar>
+      )
+    }
+  }
+
   render() {
     if (this.state.appView === 'home') {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
-                    <Divider />
-            </Drawer>
+            {this.appBar()}
+            {this.drawer()}
+            {this.logo()}
             {this.foodsYum()}
             <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
                   clickHandle={this.clickHandle} prefs={this.state.prefs}
@@ -313,33 +340,21 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'login') {
       return (
+        <div id='logindiv'>
         <MuiThemeProvider muiTheme={muiTheme}>
-          <AppBar
-            title="uChews"
-            style={style.nav}
-            showMenuIconButton={false}
-            />
+          {this.appBar()}
+          {this.logo()}
           <Login updateUser={this.updateUser} appView={this.state.appView} clickHandle={this.clickHandle}/>
         </MuiThemeProvider>
+        </div>
       )
     } else if (this.state.appView === 'input') {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>LOGOOUT</MenuItem>
-                    <Divider />
-            </Drawer>
+            {this.appBar()}
+            {this.drawer()}
+            {this.logo()}
             <Input data={this.state.data}
                    clickHandle={this.clickHandle}
                    changeHandle={this.changeHandle}
@@ -351,21 +366,11 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
-                    <Divider />
-            </Drawer>
-            <Types clickHandle={this.clickHandle}
+            {this.appBar()}
+            {this.drawer()}
+            {this.logo()}
+            <Types foodsYum={this.foodsYum}
+                   clickHandle={this.clickHandle}
                    counter={this.state.counter}
                    willNotEat={this.state.willNotEat}
                    wantToEat={this.state.wantToEat}/>
@@ -376,20 +381,9 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>HOME</MenuItem>
-                    <Divider />
-            </Drawer>
+            {this.appBar()}
+            {this.drawer()}
+            {this.logo()}
             <Waiting submitForm={this.submitForm} />
           </MuiThemeProvider>
         </div>
@@ -398,20 +392,9 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
-                    <Divider />
-            </Drawer>
+            {this.appBar()}
+            {this.drawer()}
+            {this.logo()}
             <Results clickHandle={this.clickHandle}
                      results={this.state.results} />
           </MuiThemeProvider>
@@ -420,11 +403,8 @@ class Index extends React.Component {
     } else if (this.state.appView === 'signup') {
       return (
         <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar
-              title="uChews"
-              style={style.nav}
-              showMenuIconButton={false}
-              />
+            {this.appBar()};
+            {this.logo()};
           <Signup updateUser={this.updateUser} updateImage={this.updateImage} appView={this.state.appView} clickHandle={this.clickHandle}
                   clickHandle={this.clickHandle}
                   googleClick={this.googleClick}/>
@@ -432,16 +412,14 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'dummy') {
       return (
-        <Dummy clickHandle={this.clickHandle} />
+        <Template clickHandle={this.clickHandle} />
       )
     } else if (this.state.appView === 'image') {
       return (
         <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar
-              title="uChews"
-              style={style.nav}
-              showMenuIconButton={false}
-              />
+            {this.appBar()}
+            {this.drawer()}
+            {this.logo()}
             <Image currentUser={this.state.currentUser} imageUrl={this.state.imageUrl} clickHandle={this.clickHandle} updateImage={this.updateImage}/>
         </MuiThemeProvider>
       )

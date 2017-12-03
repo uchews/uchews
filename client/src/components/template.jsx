@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Dummy = ({ clickHandle }) => {
+const Template = ({ clickHandle }) => {
   return (
     <div>
       {clickHandle('types')}
@@ -8,4 +8,4 @@ const Dummy = ({ clickHandle }) => {
   )
 }
 
-export default Dummy;
+export default Template;
