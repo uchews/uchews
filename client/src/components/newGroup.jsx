@@ -30,8 +30,12 @@ class NewGroup extends React.Component {
 
   //pass group title to updeGroup from index, change view to 'input'
   handleClick() {
-    this.props.updateGroup(this.state.title);
-    this.props.clickHandle('input');
+    let scope = this;
+    this.props.updateGroup(scope.state.title, () => {
+      console.log('in new group');
+      scope.props.clickHandle('input');
+
+    })
   }
 
   render() {

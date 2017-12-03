@@ -70,7 +70,6 @@ class Input extends React.Component {
           <h2>Location:</h2>
           <TextField name="location"
                      hintText="Address or zip code..."
-                     value={this.state.title}
                      errorText={this.props.errorText}
                      onChange={this.props.changeHandle} /><br />
           <h2>Number of Chewsers:</h2>
