@@ -75,10 +75,6 @@ class Home extends React.Component {
     console.log(e.target.result, file.name);
   }
 
-  handleClick() {
-
-  }
-
 
   render() {
     return (
@@ -86,7 +82,7 @@ class Home extends React.Component {
         <Paper style={style.paper} zDepth={3}>
           <Avatar onClick={ () => this.props.betterUpdateState('image') } size={107} id="avatar" src={this.props.imageUrl}/>
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
-          <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Update your preferences!"/>
+          <RaisedButton style={style.button} primary={true} onClick={() => {this.props.clickHandle('types')}} label="Update your preferences!"/>
           <h2 style={style.hungry}>Hungry?</h2><br/>
           <NewGroup clickHandle={this.props.clickHandle}
             updateGroup={this.props.updateGroup}/>
