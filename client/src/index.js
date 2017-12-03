@@ -285,6 +285,25 @@ class Index extends React.Component {
       })
   }
 
+  appBar() {
+    return(
+      <AppBar title="uChews 2.0"
+                    style={style.nav}
+                    onLeftIconButtonTouchTap={this.handleToggle}/>
+            <Drawer docked={false}
+                    width={200}
+                    open={this.state.open}
+                    onRequestChange={(open) => this.setState({open})}>
+                    <MenuItem onClick={() => this.clickHandle('home')}>
+                        HOME
+                    </MenuItem>
+                    <Divider />
+                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
+                    <Divider />
+            </Drawer>
+    )
+  }
+
   render() {
     if (this.state.appView === 'home') {
       return (
