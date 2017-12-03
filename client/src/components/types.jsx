@@ -28,7 +28,9 @@ class Types extends React.Component {
       types: ['American', 'Asian', 'Chinese', 'Dessert', 'Greek', 'Hamburgers', 'Healthy', 'Indian',
               'Italian', 'Japanese', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Pasta', 'Pizza',
               'Salads', 'Sandwiches', 'Seafood', 'Soup', 'Sushi', 'Thai', 'Vegetarian', 'Wings', 'Wraps'],
+      firstUserClicked: false,
     };
+
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -36,6 +38,13 @@ class Types extends React.Component {
     this.props.updatePreference(() => {
       this.props.clickHandle('home');
     });
+
+    this.firstUserComplete = this.firstUserComplete.bind(this);
+  }
+
+  firstUserComplete() {
+    this.setState({firstUserClicked: true})
+
   }
 
   render() {
@@ -72,9 +81,8 @@ tracing down how to prevent second user on same dvice from saving as first users
                           choose={that.props.willNotEat} />
           })}
         </div>*/}
-        <RaisedButton className="submitbutton" label="Next"
-                      primary={true}
-                      onClick={ () => that.handleClick() } />
+
+
       </Paper>
       </div>
     )
