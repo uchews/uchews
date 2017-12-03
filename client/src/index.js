@@ -28,7 +28,7 @@ const muiTheme = getMuiTheme({
 
 const style = {
   nav:  {
-    backgroundColor: '#FF5252',
+    // backgroundColor: '#D500F9',
     marginBottom: '1%'
   }
 }
@@ -67,6 +67,7 @@ class Index extends React.Component {
     this.appBar = this.appBar.bind(this);
     this.drawer = this.drawer.bind(this);
     this.logo = this.logo.bind(this);
+    this.header = this.header.bind(this);
   }
 
   componentDidMount() {
@@ -239,18 +240,17 @@ class Index extends React.Component {
   clickHandle(view) {
     // this if statement handles how many types.jsx forms are loaded based on peopleNum
     if (view === 'waiting') { // if view equals 'waiting', that means a typs.jsx for was just submitted
-      if (this.state.counter < this.state.peopleNum) { // check to see if everyone has submitted a form
-        let increment = this.state.counter + 1;
-        // we have to set the appView to a dummy page briefly, which in turn loads
-        // another types page, otherwise the checkboxes won't reset
-        this.setState({ counter: increment, appView: 'dummy' });
-      } else {
+      // if (this.state.counter < this.state.peopleNum) { // check to see if everyone has submitted a form
+      //   let increment = this.state.counter + 1;
+      //   // we have to set the appView to a dummy page briefly, which in turn loads
+      //   // another types page, otherwise the checkboxes won't reset
+      //   this.setState({ counter: increment, appView: 'template' });
+      // } else {
         // when everyone has filled out a types.jsx form, comtinue to the waiting page
-        this.setState({ appView: view }, () => this.submitForm() );
-      }
+      this.setState({ appView: view }, () => this.submitForm() );
+
     } else if (view === 'home') {
       var scope = this;
-      // resets all user inputted states
       axios.get('/image')
       .then((response) => {
         scope.setState({appView: 'home', open: false, imageUrl:response.data});
@@ -290,7 +290,7 @@ class Index extends React.Component {
 
   drawer() {
     return (
-      <Drawer docked={false}
+      <Drawer docked={false} style={style.nav}
                         width={200}
                         open={this.state.open}
                         onRequestChange={(open) => this.setState({open})}>
@@ -304,9 +304,22 @@ class Index extends React.Component {
     )
   }
 
+  header() {
+    return(
+    <header id="top">
+          <nav>
+            <div className="row">
+            </div>
+            {/*<div className="row2"></div>*/}
+            {/*<div className="row3"></div>*/}
+          </nav>
+        </header>
+    )
+  }
+
   logo() {
     return(
-      <img src="https://lh3.googleusercontent.com/OhgRzJOqLQsE5yx5gTPNkny2d-dAJdnPiYiiX8M8OAv6Km1tkUN6VaC2S9bfcDRC-akZhvimW5oYJBYALY-Kz3gW37L05Rwqb1NuIGu90HZAxKigiLK41e49WC4OvTbOjsV6Fb8n6ddiY5hg1VTm4wVBOuXLbwr7wvu40WF7EkfUA9g1jrCO5VNSbIR0jprQ3sk7oNe7cKMJsvFWzMGIncKMW0WArVdnV5ivQBx3A5agQbbVJO6vZ_8a3nKas2da92M193HvvC6OmLnnKWQM1ie4mSoOQidXVqMnPPFVxUh5a1aqxoHSrQoTjtCyRhRHd0D3x01jVzY3_YU0WwAJ3xBFN-cgCIeJz0WYxc-f8rhjTSRVUDE9_yaCAbKhi_e1fBAUE0-bo3MhDqZsF7AUFNjOAgWJAHC89Dh4ElOVPNIE8wUDxVzbOiBZF7IuNieQkdMiPNIwyxsMilRaN5dB4cPr_zQSOmCap5vfz6fF4CMhM85Mx_yA5kuuqRYmVYYg7svYgiMQ8pW3uE7WATuLtbW03JsbXuLubI0Rt_V6yChY-XcvqWF-usGnmUv1p2_JtCfQBfaamvkCZpbo3ngEFUadi7WxR6g469bsHOGkyA=s200-no">
+      <img id="logo" src="https://lh3.googleusercontent.com/OhgRzJOqLQsE5yx5gTPNkny2d-dAJdnPiYiiX8M8OAv6Km1tkUN6VaC2S9bfcDRC-akZhvimW5oYJBYALY-Kz3gW37L05Rwqb1NuIGu90HZAxKigiLK41e49WC4OvTbOjsV6Fb8n6ddiY5hg1VTm4wVBOuXLbwr7wvu40WF7EkfUA9g1jrCO5VNSbIR0jprQ3sk7oNe7cKMJsvFWzMGIncKMW0WArVdnV5ivQBx3A5agQbbVJO6vZ_8a3nKas2da92M193HvvC6OmLnnKWQM1ie4mSoOQidXVqMnPPFVxUh5a1aqxoHSrQoTjtCyRhRHd0D3x01jVzY3_YU0WwAJ3xBFN-cgCIeJz0WYxc-f8rhjTSRVUDE9_yaCAbKhi_e1fBAUE0-bo3MhDqZsF7AUFNjOAgWJAHC89Dh4ElOVPNIE8wUDxVzbOiBZF7IuNieQkdMiPNIwyxsMilRaN5dB4cPr_zQSOmCap5vfz6fF4CMhM85Mx_yA5kuuqRYmVYYg7svYgiMQ8pW3uE7WATuLtbW03JsbXuLubI0Rt_V6yChY-XcvqWF-usGnmUv1p2_JtCfQBfaamvkCZpbo3ngEFUadi7WxR6g469bsHOGkyA=s200-no">
       </img>
     )
   }
@@ -314,11 +327,16 @@ class Index extends React.Component {
   appBar() {
     if ( this.state.currentUser ) {
       return(
+        <MuiThemeProvider muiTheme={muiTheme}>
           <AppBar id="appbar" title="" style={style.nav} onLeftIconButtonTouchTap={this.handleToggle}></AppBar>
+        </MuiThemeProvider>
+
       )
     } else {
       return(
-        <AppBar id="appbar" title="" style={style.nav} showMenuIconButton={false}></AppBar>
+        <MuiThemeProvider muiTheme={muiTheme}>
+          <AppBar id="appbar" title="" style={style.nav} showMenuIconButton={false}></AppBar>
+        </MuiThemeProvider>
       )
     }
   }
@@ -326,27 +344,25 @@ class Index extends React.Component {
   render() {
     if (this.state.appView === 'home') {
       return (
-        <div>
           <MuiThemeProvider muiTheme={muiTheme}>
+
             {this.appBar()}
             {this.drawer()}
             {this.logo()}
+            {this.header()}
             {this.foodsYum()}
             <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
                   clickHandle={this.clickHandle} prefs={this.state.prefs}
                   updateGroup={this.updateGroup} />
           </MuiThemeProvider>
-        </div>
       )
     } else if (this.state.appView === 'login') {
       return (
-        <div id='logindiv'>
         <MuiThemeProvider muiTheme={muiTheme}>
           {this.appBar()}
           {this.logo()}
           <Login updateUser={this.updateUser} appView={this.state.appView} clickHandle={this.clickHandle}/>
         </MuiThemeProvider>
-        </div>
       )
     } else if (this.state.appView === 'input') {
       return (
@@ -355,7 +371,7 @@ class Index extends React.Component {
             {this.appBar()}
             {this.drawer()}
             {this.logo()}
-            <Input data={this.state.data}
+            <Input style={style.nav} data={this.state.data}
                    clickHandle={this.clickHandle}
                    changeHandle={this.changeHandle}
                    errorText={this.state.errorText} />
@@ -369,7 +385,7 @@ class Index extends React.Component {
             {this.appBar()}
             {this.drawer()}
             {this.logo()}
-            <Types foodsYum={this.foodsYum}
+            <Types style={style.nav} foodsYum={this.foodsYum}
                    clickHandle={this.clickHandle}
                    counter={this.state.counter}
                    willNotEat={this.state.willNotEat}
@@ -410,7 +426,7 @@ class Index extends React.Component {
                   googleClick={this.googleClick}/>
         </MuiThemeProvider>
       )
-    } else if (this.state.appView === 'dummy') {
+    } else if (this.state.appView === 'template') {
       return (
         <Template clickHandle={this.clickHandle} />
       )
@@ -423,6 +439,12 @@ class Index extends React.Component {
             <Image currentUser={this.state.currentUser} imageUrl={this.state.imageUrl} clickHandle={this.clickHandle} updateImage={this.updateImage}/>
         </MuiThemeProvider>
       )
+    } else if (this.state.appView === 'preference') {
+      <MuiThemeProvider muiTheme={muiTheme}>
+        {this.appBar()};
+        {this.logo()};
+
+      </MuiThemeProvider>
     }
   }
 }

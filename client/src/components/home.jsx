@@ -23,7 +23,7 @@ const style = {
     height: '50%',
     margin: '0 auto',
     textAlign: 'center',
-    width: '70%'
+    width: '77%'
   },
   button: {
     margin: '0 0 100px 0'
@@ -75,6 +75,10 @@ class Home extends React.Component {
     console.log(e.target.result, file.name);
   }
 
+  handleClick() {
+
+  }
+
 
   render() {
     return (
@@ -82,6 +86,7 @@ class Home extends React.Component {
         <Paper style={style.paper} zDepth={3}>
           <Avatar onClick={ () => this.props.betterUpdateState('image') } size={107} id="avatar" src={this.props.imageUrl}/>
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
+          <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Update your preferences!"/>
           <h2 style={style.hungry}>Hungry?</h2><br/>
           <NewGroup clickHandle={this.props.clickHandle}
             updateGroup={this.props.updateGroup}/>
