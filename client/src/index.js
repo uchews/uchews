@@ -71,7 +71,7 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    $(document).on('click', 'img', function(event) {
+    $(document).on('click', '.section-meals img', function(event) {
         event.preventDefault();
         if (event.target.id === "active") {
           console.log(event.target);
@@ -83,6 +83,7 @@ class Index extends React.Component {
           console.log('set to active');
         }
       })
+
     // var context = this;
     // axios.get('/image')
     // .then((response) => {
@@ -238,17 +239,8 @@ class Index extends React.Component {
   // handles button clicks at the bottom of the app as forms are completed and
   // changes the current view
   clickHandle(view) {
-    // this if statement handles how many types.jsx forms are loaded based on peopleNum
-    if (view === 'waiting') { // if view equals 'waiting', that means a typs.jsx for was just submitted
-      // if (this.state.counter < this.state.peopleNum) { // check to see if everyone has submitted a form
-      //   let increment = this.state.counter + 1;
-      //   // we have to set the appView to a dummy page briefly, which in turn loads
-      //   // another types page, otherwise the checkboxes won't reset
-      //   this.setState({ counter: increment, appView: 'template' });
-      // } else {
-        // when everyone has filled out a types.jsx form, comtinue to the waiting page
+    if (view === 'waiting') {
       this.setState({ appView: view }, () => this.submitForm() );
-
     } else if (view === 'home') {
       var scope = this;
       axios.get('/image')
@@ -318,10 +310,17 @@ class Index extends React.Component {
   }
 
   logo() {
-    return(
-      <img id="logo" src="https://lh3.googleusercontent.com/OhgRzJOqLQsE5yx5gTPNkny2d-dAJdnPiYiiX8M8OAv6Km1tkUN6VaC2S9bfcDRC-akZhvimW5oYJBYALY-Kz3gW37L05Rwqb1NuIGu90HZAxKigiLK41e49WC4OvTbOjsV6Fb8n6ddiY5hg1VTm4wVBOuXLbwr7wvu40WF7EkfUA9g1jrCO5VNSbIR0jprQ3sk7oNe7cKMJsvFWzMGIncKMW0WArVdnV5ivQBx3A5agQbbVJO6vZ_8a3nKas2da92M193HvvC6OmLnnKWQM1ie4mSoOQidXVqMnPPFVxUh5a1aqxoHSrQoTjtCyRhRHd0D3x01jVzY3_YU0WwAJ3xBFN-cgCIeJz0WYxc-f8rhjTSRVUDE9_yaCAbKhi_e1fBAUE0-bo3MhDqZsF7AUFNjOAgWJAHC89Dh4ElOVPNIE8wUDxVzbOiBZF7IuNieQkdMiPNIwyxsMilRaN5dB4cPr_zQSOmCap5vfz6fF4CMhM85Mx_yA5kuuqRYmVYYg7svYgiMQ8pW3uE7WATuLtbW03JsbXuLubI0Rt_V6yChY-XcvqWF-usGnmUv1p2_JtCfQBfaamvkCZpbo3ngEFUadi7WxR6g469bsHOGkyA=s200-no">
-      </img>
-    )
+    if (this.state.appView === 'login') {
+      return(
+        <img id="logo" src="https://lh3.googleusercontent.com/OhgRzJOqLQsE5yx5gTPNkny2d-dAJdnPiYiiX8M8OAv6Km1tkUN6VaC2S9bfcDRC-akZhvimW5oYJBYALY-Kz3gW37L05Rwqb1NuIGu90HZAxKigiLK41e49WC4OvTbOjsV6Fb8n6ddiY5hg1VTm4wVBOuXLbwr7wvu40WF7EkfUA9g1jrCO5VNSbIR0jprQ3sk7oNe7cKMJsvFWzMGIncKMW0WArVdnV5ivQBx3A5agQbbVJO6vZ_8a3nKas2da92M193HvvC6OmLnnKWQM1ie4mSoOQidXVqMnPPFVxUh5a1aqxoHSrQoTjtCyRhRHd0D3x01jVzY3_YU0WwAJ3xBFN-cgCIeJz0WYxc-f8rhjTSRVUDE9_yaCAbKhi_e1fBAUE0-bo3MhDqZsF7AUFNjOAgWJAHC89Dh4ElOVPNIE8wUDxVzbOiBZF7IuNieQkdMiPNIwyxsMilRaN5dB4cPr_zQSOmCap5vfz6fF4CMhM85Mx_yA5kuuqRYmVYYg7svYgiMQ8pW3uE7WATuLtbW03JsbXuLubI0Rt_V6yChY-XcvqWF-usGnmUv1p2_JtCfQBfaamvkCZpbo3ngEFUadi7WxR6g469bsHOGkyA=s200-no">
+        </img>
+      )
+    } else {
+      return (
+        <img id="logo" className="left" src="https://lh3.googleusercontent.com/OhgRzJOqLQsE5yx5gTPNkny2d-dAJdnPiYiiX8M8OAv6Km1tkUN6VaC2S9bfcDRC-akZhvimW5oYJBYALY-Kz3gW37L05Rwqb1NuIGu90HZAxKigiLK41e49WC4OvTbOjsV6Fb8n6ddiY5hg1VTm4wVBOuXLbwr7wvu40WF7EkfUA9g1jrCO5VNSbIR0jprQ3sk7oNe7cKMJsvFWzMGIncKMW0WArVdnV5ivQBx3A5agQbbVJO6vZ_8a3nKas2da92M193HvvC6OmLnnKWQM1ie4mSoOQidXVqMnPPFVxUh5a1aqxoHSrQoTjtCyRhRHd0D3x01jVzY3_YU0WwAJ3xBFN-cgCIeJz0WYxc-f8rhjTSRVUDE9_yaCAbKhi_e1fBAUE0-bo3MhDqZsF7AUFNjOAgWJAHC89Dh4ElOVPNIE8wUDxVzbOiBZF7IuNieQkdMiPNIwyxsMilRaN5dB4cPr_zQSOmCap5vfz6fF4CMhM85Mx_yA5kuuqRYmVYYg7svYgiMQ8pW3uE7WATuLtbW03JsbXuLubI0Rt_V6yChY-XcvqWF-usGnmUv1p2_JtCfQBfaamvkCZpbo3ngEFUadi7WxR6g469bsHOGkyA=s200-no">
+        </img>
+      )
+    }
   }
 
   appBar() {
@@ -345,11 +344,9 @@ class Index extends React.Component {
     if (this.state.appView === 'home') {
       return (
           <MuiThemeProvider muiTheme={muiTheme}>
-
             {this.appBar()}
             {this.drawer()}
             {this.logo()}
-            {this.header()}
             {this.foodsYum()}
             <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
                   clickHandle={this.clickHandle} prefs={this.state.prefs}

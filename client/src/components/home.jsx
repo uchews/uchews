@@ -23,7 +23,7 @@ const style = {
     height: '50%',
     margin: '0 auto',
     textAlign: 'center',
-    width: '77%'
+    width: '70%'
   },
   button: {
     margin: '0 0 100px 0'

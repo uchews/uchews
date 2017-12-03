@@ -21,6 +21,11 @@ body {
 #logo {
   height: 157px;
 }
+
+#left {
+  float: left;
+}
+
  #avatar {
   margin-top: 27%;
  }
@@ -60,7 +65,7 @@ img {
   max-width:  1140px;
   margin: 0 auto;
   background-color: #fff;
-  background-image: url('https://images.unsplash.com/photo-1502911478555-cada2f65234f?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
+  background-image: linear-gradient(rgba(0,0,0, 0.57), rgba(0,0,0, 0.57)), url('https://images.unsplash.com/photo-1502911478555-cada2f65234f?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
   background-size: cover;
   background-attachment: fixed;
   -webkit-animation: fadein 2.7s; /* Safari, Chrome and Opera > 12.1 */
@@ -121,6 +126,13 @@ img {
 
 #dealbreaker {
 
+}
+
+.left {
+  float: left;
+  position: fixed;
+  top: 50px;
+  left: 0;
 }
 
 .text {
