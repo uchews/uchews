@@ -76,6 +76,7 @@ class Index extends React.Component {
     this.header = this.header.bind(this);
     this.addWantToEat = this.addWantToEat.bind(this);
     this.addWillNotEat = this.addWillNotEat.bind(this);
+    this.updatePreference = this.updatePreference.bind(this);
   }
 
   componentDidMount() {
@@ -247,10 +248,14 @@ class Index extends React.Component {
     )
   }
 
-  updatePreference() {
-
+  updatePreference(cb) {
+    var data = {
+      wantToEat: this.state.wantToEat;
+      willNotEat: this.state.willNotEat;
+    }
     axios.post('/update', data)
     .then( (response) => {
+      cb();
       this.setState({ prefs: data }); //made a state to pass to prefs.jsx
     });
   }
@@ -270,15 +275,6 @@ class Index extends React.Component {
     .then( (response) => {
       this.setState({ results: response.data }, () => this.clickHandle('results'));
     });
-
-    let dataAndUser = {
-      location: this.state.location,
-      budget: this.state.budget,
-      radius: this.state.distance,
-      wantToEat: this.state.wantToEat,
-      willNotEat: this.state.willNotEat,
-      username: this.state.currentUser
-    }
 
     axios.post('/update', data)
     .then( (response) => {
@@ -465,7 +461,7 @@ class Index extends React.Component {
             {this.appBar()}
             {this.drawer()}
             {this.logo()}
-            <Types style={style.nav} foodsYum={this.foodsYum}
+            <Types style={style.nav} foodsYum={this.foodsYum} updatePreference={this.updatePreference}
                    foodsEww={this.foodsEww}
                    clickHandle={this.clickHandle}
                    counter={this.state.counter}

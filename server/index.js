@@ -150,10 +150,6 @@ app.get('/prefs', (function(req, res) {
   });
 }));
 
-
-
-
-
 app.post('/update', (req, res) => {
   console.log('line 94 SERVER/INDEX.JS REQ = ', req.body)
   db.User.findOneAndUpdate({ username: req.session.user },
