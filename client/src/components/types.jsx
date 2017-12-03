@@ -10,7 +10,7 @@ const style = {
     margin: '0 auto',
     padding: 50,
     textAlign: 'center',
-    width: '50%',
+    width: '70%',
   },
   container: {
     display: 'flex',
@@ -38,6 +38,7 @@ class Types extends React.Component {
       <Paper style={style.paper} zDepth={3}>
         <h1>CHEWSER: #{this.props.counter}</h1>
         <h2>Which cuisine types would you like to eat?</h2>
+        {this.props.foodsYum()};<br></br><br></br>
         <div style={style.container}>
           {this.state.types.map(function(type) {
             return <Check name={"wantToEat"}

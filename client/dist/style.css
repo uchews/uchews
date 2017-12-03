@@ -45,10 +45,10 @@ body {
 .section-meals img {
     float: left;
     display: inline-block;
-    background-color: black;
+    background-color: red;
     width: 25%;
     height: auto;
-    opacity: 0.77;
+    opacity: 0.7;
     margin: 3%;
     padding-left: 0;
     height: auto;
@@ -67,16 +67,9 @@ body {
   transform: scale(1.03);
 }
 
-.container:hover img {
-  opacity: 1;
-  -webkit-transform: scale(1.03);
-  -ms-transform: scale(1.03);
-  transform: scale(1.03);
-}
+#dealbreaker {
 
-/* .container:hover .middle {
-  opacity: 1;
-} */
+}
 
 .text {
   background-color: #4CAF50;

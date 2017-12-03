@@ -11,7 +11,7 @@ import Input from './components/input.jsx';
 import Results from './components/results.jsx';
 import Types from './components/types.jsx';
 import Waiting from './components/wating.jsx';
-import Dummy from './components/dummy.jsx';
+import Template from './components/template.jsx';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -158,7 +158,7 @@ class Index extends React.Component {
           </div>
         </div>
         <div className="container">
-          <img alt="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3Da"/>
+          <img alt="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=2550&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
           <div className="middle">
             <div className="text">Chinese</div>
           </div>
@@ -197,7 +197,7 @@ class Index extends React.Component {
       this.setState({ prefs: data }); //made a state to pass to prefs.jsx
     });
 
-    axios.post('/group', {title: this.state.currentgroup, location: this.state.location, people: this.state.currentUser})
+    axios.post('/group', {title: this.state.currentgroup, location: this.state.location, members: this.state.currentUser})
     .then((res) => console.log('new group post succeed in index', res))
     .catch((err) => console.log('new group post error in index', err));
   }
@@ -365,7 +365,8 @@ class Index extends React.Component {
                     <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
                     <Divider />
             </Drawer>
-            <Types clickHandle={this.clickHandle}
+            <Types foodsYum={this.foodsYum}
+                   clickHandle={this.clickHandle}
                    counter={this.state.counter}
                    willNotEat={this.state.willNotEat}
                    wantToEat={this.state.wantToEat}/>
@@ -432,7 +433,7 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'dummy') {
       return (
-        <Dummy clickHandle={this.clickHandle} />
+        <Template clickHandle={this.clickHandle} />
       )
     } else if (this.state.appView === 'image') {
       return (
