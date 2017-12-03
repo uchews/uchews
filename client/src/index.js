@@ -247,6 +247,14 @@ class Index extends React.Component {
     )
   }
 
+  updatePreference() {
+
+    axios.post('/update', data)
+    .then( (response) => {
+      this.setState({ prefs: data }); //made a state to pass to prefs.jsx
+    });
+  }
+
   submitForm() {
     let data = {
       location: this.state.location,
