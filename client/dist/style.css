@@ -10,13 +10,13 @@ body {
   font-family: sans-serif, "Chewy";
  }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
-    transition-delay: background-color 5000s, color 5000s;
-}
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+      transition-delay: background-color 5000s, color 5000s;
+  }
 
  #avatar {
   margin-top: 27%;
@@ -47,6 +47,9 @@ input:-webkit-autofill:active {
   position: relative;
 }
 
+img {
+  margin-top: 0;
+}
 
 .section-meals img {
     float: left;

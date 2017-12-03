@@ -104,7 +104,7 @@ class Login extends React.Component {
                 <div>
                   <TextField
                     hintText="Password Field"
-                    floatingLabelText="Password"
+                    floatingLabelText="password"
                     type="password"
                     underlineShow={false}
                     onChange={this.onUserChange}
