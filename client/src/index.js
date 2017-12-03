@@ -313,6 +313,7 @@ class Index extends React.Component {
       )
     } else if (this.state.appView === 'login') {
       return (
+        <div id='logindiv'>
         <MuiThemeProvider muiTheme={muiTheme}>
           <AppBar
             title="uChews"
@@ -321,6 +322,7 @@ class Index extends React.Component {
             />
           <Login updateUser={this.updateUser} appView={this.state.appView} clickHandle={this.clickHandle}/>
         </MuiThemeProvider>
+        </div>
       )
     } else if (this.state.appView === 'input') {
       return (
