@@ -11,7 +11,7 @@ import Preference from './preference.jsx';
 import EventSearch from './eventSearch.jsx';
 import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
-
+import $ from 'jquery';
 import Invitation from './invitation.jsx';
 
 
@@ -54,7 +54,6 @@ class Home extends React.Component {
       .catch((error) => {
         console.log('error inside home')
       })
-
     // axios.get('/image')
     //   .then((response) => {
     //     context.props.updateImage(response.data);

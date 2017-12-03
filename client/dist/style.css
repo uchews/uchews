@@ -60,7 +60,12 @@ body {
     backface-visibility: hidden
 }
 
-
+#active {
+  opacity: 1;
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+}
 
 .container:hover img {
   opacity: 1;

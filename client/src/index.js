@@ -67,6 +67,18 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
+    $(document).on('click', 'img', function(event) {
+        event.preventDefault();
+        if (event.target.id === "active") {
+          console.log(event.target);
+          event.target.id = "";
+          console.log('set to inactive');
+        } else {
+          console.log(event.target);
+          event.target.id = "active";
+          console.log('set to active');
+        }
+      })
     // var context = this;
     // axios.get('/image')
     // .then((response) => {
