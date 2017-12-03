@@ -86,9 +86,12 @@ class Index extends React.Component {
     this.setState({imageUrl: imageUrl});
   }
 
-  updateGroup(title) {
-    this.setState({currentgroup: title});
-    console.log('currentgroup in index', this.state.currentgroup)
+  updateGroup(title, cb) {
+    this.setState({currentgroup: title}, () => {
+    // console.log('currentgroup in index', this.state.currentgroup)
+    cb();
+
+    });
   }
 
   foodsYum() {
@@ -328,8 +331,7 @@ class Index extends React.Component {
             <Input data={this.state.data}
                    clickHandle={this.clickHandle}
                    changeHandle={this.changeHandle}
-                   errorText={this.state.errorText}
-                   currentgroup={this.state.currentgroup} />
+                   errorText={this.state.errorText} />
           </MuiThemeProvider>
         </div>
       )
