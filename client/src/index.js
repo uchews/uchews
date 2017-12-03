@@ -290,7 +290,7 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
+            <AppBar title="uChews 2.0"
                     style={style.nav}
                     onLeftIconButtonTouchTap={this.handleToggle}/>
             <Drawer docked={false}
@@ -316,7 +316,7 @@ class Index extends React.Component {
         <div id='logindiv'>
         <MuiThemeProvider muiTheme={muiTheme}>
           <AppBar
-            title="uChews"
+            title="uChews 2.0"
             style={style.nav}
             showMenuIconButton={false}
             />
@@ -328,7 +328,7 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
+            <AppBar title="uChews 2.0"
                     style={style.nav}
                     onLeftIconButtonTouchTap={this.handleToggle}/>
             <Drawer docked={false}
@@ -353,7 +353,7 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
+            <AppBar title="uChews 2.0"
                     style={style.nav}
                     onLeftIconButtonTouchTap={this.handleToggle}/>
             <Drawer docked={false}
@@ -379,7 +379,7 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
+            <AppBar title="uChews 2.0"
                     style={style.nav}
                     onLeftIconButtonTouchTap={this.handleToggle}/>
             <Drawer docked={false}
@@ -401,7 +401,7 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews"
+            <AppBar title="uChews 2.0"
                     style={style.nav}
                     onLeftIconButtonTouchTap={this.handleToggle}/>
             <Drawer docked={false}

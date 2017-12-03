@@ -7,10 +7,16 @@ body {
 
  h1 {
   color: #FF5252;
-  font-family: "Chewy","Libre Barcode 39 Text", "Zilla Slab Highlight", "Londrina Outline";
-  font-size: 54px;
-  font-weight: bold;
+  font-family: sans-serif, "Chewy";
  }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+    transition-delay: background-color 5000s, color 5000s;
+}
 
  #avatar {
   margin-top: 27%;
