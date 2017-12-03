@@ -170,9 +170,7 @@ app.get('/group', (req, res) => {
     if (err) {
       console.log("current user not found as member of any group")
     } groups.forEach(function(group) {
-      console.log(group);
-      if (group.members.includes(username)) {
-        console.log(group.members);
+      if (group.members && group.members.includes(username)) {
         userGroups.push(group);
       }
       res.send(userGroups);
