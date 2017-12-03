@@ -109,6 +109,10 @@ class Index extends React.Component {
     this.setState({imageUrl: imageUrl});
   }
 
+  addWantToEat(cuisine) {
+    this.setState({wantToEat: this.wantToEat.concat(cuisine)});
+  }
+
   updateGroup(title, cb) {
     this.setState({currentgroup: title}, () => {
     // console.log('currentgroup in index', this.state.currentgroup)
