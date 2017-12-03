@@ -23,8 +23,8 @@ import {red500, yellow500, blue500} from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({
   palette: {
-    primary1Color: redA200,
-    primary2Color: redA200
+    primary1Color: '#F06292',
+    primary2Color: '#AB47BC'
   }
 });
 
@@ -422,7 +422,6 @@ class Index extends React.Component {
             {this.appBar()}
             {this.drawer()}
             {this.logo()}
-            {this.foodsYum()}
             <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
                   clickHandle={this.clickHandle} prefs={this.state.prefs}
                   updateGroup={this.updateGroup} />

@@ -56,7 +56,7 @@ class Types extends React.Component {
         </div>*/}
         <RaisedButton className="submitbutton" label="Next"
                       primary={true}
-                      onClick={ () => this.props.clickHandle("waiting") } />
+                      onClick={ () => this.props.clickHandle("home") } />
       </Paper>
       </div>
     )

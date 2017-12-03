@@ -20,6 +20,8 @@ body {
 
 #logo {
   height: 157px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 #left {
@@ -27,7 +29,7 @@ body {
 }
 
  #avatar {
-  margin-top: 27%;
+  margin-top: 17%;
  }
 
  #avatarimage {
@@ -107,6 +109,11 @@ img {
 #h1-header {
   font-size: 2.5em;
   color: white;
+  margin-top: 10%;
+}
+
+h1 {
+  margin: 7%;
 }
 
 @keyframes fadein {
