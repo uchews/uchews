@@ -74,6 +74,7 @@ class Index extends React.Component {
     this.drawer = this.drawer.bind(this);
     this.logo = this.logo.bind(this);
     this.header = this.header.bind(this);
+    this.addWantToEat = this.addWantToEat.bind(this);
   }
 
   componentDidMount() {
@@ -110,7 +111,14 @@ class Index extends React.Component {
   }
 
   addWantToEat(cuisine) {
+    var wantToEat = this.state.wantToEat.splice();
+    if (wantToEat.includes(cuisine)) {
+      var index = wantToEat.indexOf(cuisine);
+      wantToEat.splice(index, 1);
+      this.setState({ wantToEat: wantToEat });
+    } else {
     this.setState({wantToEat: this.wantToEat.concat(cuisine)});
+    }
   }
 
   updateGroup(title, cb) {
