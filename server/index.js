@@ -165,16 +165,22 @@ app.post('/update', (req, res) => {
 
 app.get('/group', (req, res) => {
   var userGroups = [];
+  var username = req.session.user;
   db.Group.find({}, function(err, groups) {
     if (err) {
       console.log("current user not found as member of any group")
-    } if (groups.members.contains(username) === true) {
-      userGroups.push(groups);
-    }
-    res.send(userGroups);
-    res.end();
-  })
-})
+    } groups.forEach(function(group) {
+      console.log(group);
+      if (group.members.includes(username)) {
+        console.log(group.members);
+        userGroups.push(group);
+      }
+      res.send(userGroups);
+      res.end();
+    });
+  });
+});
+
 
 app.post('/group', (req, res) => {
   db.Group.findOneAndUpdate({ title: req.body.title },
