@@ -249,13 +249,14 @@ class Index extends React.Component {
   }
 
   updatePreference(cb) {
+    var callback = cb;
     var data = {
-      wantToEat: this.state.wantToEat;
-      willNotEat: this.state.willNotEat;
+      wantToEat: this.state.wantToEat,
+      willNotEat: this.state.willNotEat
     }
     axios.post('/update', data)
     .then( (response) => {
-      cb();
+      callback();
       this.setState({ prefs: data }); //made a state to pass to prefs.jsx
     });
   }
