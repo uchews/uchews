@@ -16,6 +16,8 @@ const style = {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    width:'23%',
+    height:'130%'
   },
 };
 
@@ -38,23 +40,21 @@ class Types extends React.Component {
       <Paper style={style.paper} zDepth={3}>
         <h1>CHEWSER: #{this.props.counter}</h1>
         <h2>Which cuisine types would you like to eat?</h2>
-        {this.props.foodsYum()};<br></br><br></br>
-        <div style={style.container}>
-          {this.state.types.map(function(type) {
-            return <Check name={"wantToEat"}
-                          type={type}
-                          choose={that.props.wantToEat} />
-          })}
-        </div>
-        <h2>Which types do you refuse to eat?</h2>
-        <div style={style.container}>
+        {this.props.foodsYum()}
+        <div style={style.container}></div>
+        <h2>Which cuisine types do you refuse to eat?</h2>
+
+        {this.props.foodsEww()}
+        <div style={style.container}></div>
+
+        {/*<div style={style.container}>
           {this.state.types.map(function(type) {
             return <Check name={"willNotEat"}
                           type={type}
                           choose={that.props.willNotEat} />
           })}
-        </div>
-        <RaisedButton label="Next"
+        </div>*/}
+        <RaisedButton className="submitbutton" label="Next"
                       primary={true}
                       onClick={ () => this.props.clickHandle("waiting") } />
       </Paper>

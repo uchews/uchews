@@ -21,11 +21,9 @@ class Check extends React.Component {
     let val = e.target.value;
 
     this.setState({ checked: !this.state.checked }, () => {
-      if (this.state.checked) { // if check checked is true
-        // push checkbox value to choose array
+      if (this.state.checked) {
         this.props.choose.push(val);
-      } else { // else if check is false
-        // remove checkbox value from choose array
+      } else {
         let i = this.props.choose.indexOf(val);
         this.props.choose.splice(i, 1);
       }

@@ -18,6 +18,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import Image from './components/image.jsx'
 import axios from 'axios';
+import FontIcon from 'material-ui/FontIcon';
+import {red500, yellow500, blue500} from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -26,9 +28,13 @@ const muiTheme = getMuiTheme({
   }
 });
 
+const iconStyles = {
+  marginRight: 24
+}
+
 const style = {
   nav:  {
-    backgroundColor: '#FF5252',
+    // backgroundColor: '#D500F9',
     marginBottom: '1%'
   }
 }
@@ -67,10 +73,13 @@ class Index extends React.Component {
     this.appBar = this.appBar.bind(this);
     this.drawer = this.drawer.bind(this);
     this.logo = this.logo.bind(this);
+    this.header = this.header.bind(this);
+    this.addWantToEat = this.addWantToEat.bind(this);
+    this.addWillNotEat = this.addWillNotEat.bind(this);
   }
 
   componentDidMount() {
-    $(document).on('click', 'img', function(event) {
+    $(document).on('click', '.section-meals img', function(event) {
         event.preventDefault();
         if (event.target.id === "active") {
           console.log(event.target);
@@ -82,6 +91,7 @@ class Index extends React.Component {
           console.log('set to active');
         }
       })
+
     // var context = this;
     // axios.get('/image')
     // .then((response) => {
@@ -101,6 +111,34 @@ class Index extends React.Component {
     this.setState({imageUrl: imageUrl});
   }
 
+  addWantToEat(cuisine) {
+    var wantToEat = this.state.wantToEat.slice();
+    if (wantToEat.includes(cuisine)) {
+      console.log('removing cuisine to wantToEat');
+      var index = wantToEat.indexOf(cuisine);
+      wantToEat.splice(index, 1);
+      this.setState({ wantToEat: wantToEat });
+    } else {
+      console.log('adding cuisine to wantToEat');
+      console.log(this.state.wantToEat);
+      this.setState({ wantToEat: this.state.wantToEat.concat(cuisine) });
+    }
+  }
+
+  addWillNotEat(cuisine) {
+    var willNotEat = this.state.willNotEat.slice();
+    if (willNotEat.includes(cuisine)) {
+      console.log('removing cuisine to willNotEat');
+      var index = willNotEat.indexOf(cuisine);
+      willNotEat.splice(index, 1);
+      this.setState({ willNotEat: willNotEat });
+    } else {
+      console.log('adding cuisine to willNotEat');
+      console.log(this.state.willNotEat);
+      this.setState({ willNotEat: this.state.willNotEat.concat(cuisine) });
+    }
+  }
+
   updateGroup(title, cb) {
     this.setState({currentgroup: title}, () => {
     // console.log('currentgroup in index', this.state.currentgroup)
@@ -110,61 +148,100 @@ class Index extends React.Component {
   }
 
   foodsYum() {
+    var scope = this;
     return (
       <section className="section-meals">
         <div className="container">
-          <img alt="Korean Bibimbop" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Korean</div>
-          </div>
+          <img onClick={() => {scope.addWantToEat('Korean')}} alt="Korean Bibimbop" value="Korean" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Korean</div>
         </div>
         <div className="container">
-          <img alt="Pizza" src="https://images.unsplash.com/photo-1507927822105-9a760e57a419?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Pizza</div>
-          </div>
+          <img onClick={() => {scope.addWantToEat('Pizza')}} alt="Pizza" value="Pizza" src="https://images.unsplash.com/photo-1507927822105-9a760e57a419?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Pizza</div>
         </div>
         <div className="container">
-          <img alt="Sushi" src="https://images.unsplash.com/photo-1501735972267-d5c1bc03655c?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Sushi</div>
-          </div>
+          <img onClick={() => {scope.addWantToEat('Sushi')}} alt="Sushi" value="Sushi" src="https://images.unsplash.com/photo-1501735972267-d5c1bc03655c?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Sushi</div>
         </div>
         <div className="container">
-          <img alt="Thai" src="https://images.unsplash.com/photo-1441850605338-1b0b5a22e7b9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Thai</div>
-          </div>
+          <img onClick={() => {scope.addWantToEat('Thai')}} alt="Thai" value="Thai" src="https://images.unsplash.com/photo-1441850605338-1b0b5a22e7b9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Thai</div>
         </div>
         <div className="container">
-          <img alt="Hamburger" src="https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Burger</div>
-          </div>
+          <img onClick={() => {scope.addWantToEat('Burger')}} alt="Hamburger" value="Burger" src="https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Burger</div>
         </div>
         <div className="container">
-          <img alt="Burrito" src="https://images.unsplash.com/photo-1464219222984-216ebffaaf85?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Mexican</div>
-          </div>
+          <img onClick={() => {scope.addWantToEat('Mexican')}} alt="Burrito" value="Mexican" src="https://images.unsplash.com/photo-1464219222984-216ebffaaf85?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Mexican</div>
         </div>
         <div className="container">
-          <img alt="Subs" src="https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Sub</div>
-          </div>
+          <img onClick={() => {scope.addWantToEat('Sub')}} alt="Subs" value="Sub" src="https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Sub</div>
         </div>
         <div className="container">
-          <img alt="Chicken" src="https://images.unsplash.com/photo-1456404823214-a69ef7a1fae5?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Chicken</div>
-          </div>
+          <img onClick={() => {scope.addWantToEat('Chicken')}} alt="Chicken" value="Chicken" src="https://images.unsplash.com/photo-1504670813815-f43e2383e08d?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Chicken</div>
         </div>
         <div className="container">
-          <img alt="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=2550&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Chinese</div>
-          </div>
+          <img onClick={() => {scope.addWantToEat('Chinese')}} alt="Chinese" value="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=2550&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Chinese</div>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWantToEat('Brunch')}} alt="Brunch" value="Brunch" src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=2550&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Brunch</div>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWantToEat('Salad')}} alt="Salad" value="Salad" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1335&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Salad</div>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWantToEat('Pasta')}} alt="Pasta" value="Pasta" src="https://images.unsplash.com/photo-1437526248130-8448edca2e36?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Pasta</div>
+        </div>
+      </section>
+    )
+  }
+
+  foodsEww() {
+    var scope = this;
+    return (
+      <section className="section-meals">
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Korean')}} alt="Korean Bibimbop" value="Korean" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Pizza')}} alt="Pizza" value="Pizza" src="https://images.unsplash.com/photo-1507927822105-9a760e57a419?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Sushi')}} alt="Sushi" value="Sushi" src="https://images.unsplash.com/photo-1501735972267-d5c1bc03655c?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Thai')}} alt="Thai" value="Thai" src="https://images.unsplash.com/photo-1441850605338-1b0b5a22e7b9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Burger')}} alt="Hamburger" value="Burger" src="https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Mexican')}} alt="Burrito" value="Mexican" src="https://images.unsplash.com/photo-1464219222984-216ebffaaf85?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Sub')}} alt="Subs" value="Sub" src="https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Chicken')}} alt="Chicken" value="Chicken" src="https://images.unsplash.com/photo-1504670813815-f43e2383e08d?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Chinese')}} alt="Chinese" value="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=2550&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Brunch')}} alt="Brunch" value="Brunch" src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=2550&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Salad')}} alt="Salad" value="Salad" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1335&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+        </div>
+        <div className="container">
+          <img onClick={() => {scope.addWillNotEat('Pasta')}} alt="Pasta" value="Pasta" src="https://images.unsplash.com/photo-1437526248130-8448edca2e36?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
         </div>
       </section>
     )
@@ -237,20 +314,10 @@ class Index extends React.Component {
   // handles button clicks at the bottom of the app as forms are completed and
   // changes the current view
   clickHandle(view) {
-    // this if statement handles how many types.jsx forms are loaded based on peopleNum
-    if (view === 'waiting') { // if view equals 'waiting', that means a typs.jsx for was just submitted
-      if (this.state.counter < this.state.peopleNum) { // check to see if everyone has submitted a form
-        let increment = this.state.counter + 1;
-        // we have to set the appView to a dummy page briefly, which in turn loads
-        // another types page, otherwise the checkboxes won't reset
-        this.setState({ counter: increment, appView: 'dummy' });
-      } else {
-        // when everyone has filled out a types.jsx form, comtinue to the waiting page
-        this.setState({ appView: view }, () => this.submitForm() );
-      }
+    if (view === 'waiting') {
+      this.setState({ appView: view }, () => this.submitForm() );
     } else if (view === 'home') {
       var scope = this;
-      // resets all user inputted states
       axios.get('/image')
       .then((response) => {
         scope.setState({appView: 'home', open: false, imageUrl:response.data});
@@ -290,7 +357,7 @@ class Index extends React.Component {
 
   drawer() {
     return (
-      <Drawer docked={false}
+      <Drawer docked={false} style={style.nav}
                         width={200}
                         open={this.state.open}
                         onRequestChange={(open) => this.setState({open})}>
@@ -304,21 +371,46 @@ class Index extends React.Component {
     )
   }
 
-  logo() {
+  header() {
     return(
-      <img src="https://lh3.googleusercontent.com/OhgRzJOqLQsE5yx5gTPNkny2d-dAJdnPiYiiX8M8OAv6Km1tkUN6VaC2S9bfcDRC-akZhvimW5oYJBYALY-Kz3gW37L05Rwqb1NuIGu90HZAxKigiLK41e49WC4OvTbOjsV6Fb8n6ddiY5hg1VTm4wVBOuXLbwr7wvu40WF7EkfUA9g1jrCO5VNSbIR0jprQ3sk7oNe7cKMJsvFWzMGIncKMW0WArVdnV5ivQBx3A5agQbbVJO6vZ_8a3nKas2da92M193HvvC6OmLnnKWQM1ie4mSoOQidXVqMnPPFVxUh5a1aqxoHSrQoTjtCyRhRHd0D3x01jVzY3_YU0WwAJ3xBFN-cgCIeJz0WYxc-f8rhjTSRVUDE9_yaCAbKhi_e1fBAUE0-bo3MhDqZsF7AUFNjOAgWJAHC89Dh4ElOVPNIE8wUDxVzbOiBZF7IuNieQkdMiPNIwyxsMilRaN5dB4cPr_zQSOmCap5vfz6fF4CMhM85Mx_yA5kuuqRYmVYYg7svYgiMQ8pW3uE7WATuLtbW03JsbXuLubI0Rt_V6yChY-XcvqWF-usGnmUv1p2_JtCfQBfaamvkCZpbo3ngEFUadi7WxR6g469bsHOGkyA=s200-no">
-      </img>
+    <header id="top">
+          <nav>
+            <div className="row">
+            </div>
+            {/*<div className="row2"></div>*/}
+            {/*<div className="row3"></div>*/}
+          </nav>
+        </header>
     )
+  }
+
+  logo() {
+    if (this.state.appView === 'login') {
+      return(
+        <img id="logo" src="https://lh3.googleusercontent.com/OhgRzJOqLQsE5yx5gTPNkny2d-dAJdnPiYiiX8M8OAv6Km1tkUN6VaC2S9bfcDRC-akZhvimW5oYJBYALY-Kz3gW37L05Rwqb1NuIGu90HZAxKigiLK41e49WC4OvTbOjsV6Fb8n6ddiY5hg1VTm4wVBOuXLbwr7wvu40WF7EkfUA9g1jrCO5VNSbIR0jprQ3sk7oNe7cKMJsvFWzMGIncKMW0WArVdnV5ivQBx3A5agQbbVJO6vZ_8a3nKas2da92M193HvvC6OmLnnKWQM1ie4mSoOQidXVqMnPPFVxUh5a1aqxoHSrQoTjtCyRhRHd0D3x01jVzY3_YU0WwAJ3xBFN-cgCIeJz0WYxc-f8rhjTSRVUDE9_yaCAbKhi_e1fBAUE0-bo3MhDqZsF7AUFNjOAgWJAHC89Dh4ElOVPNIE8wUDxVzbOiBZF7IuNieQkdMiPNIwyxsMilRaN5dB4cPr_zQSOmCap5vfz6fF4CMhM85Mx_yA5kuuqRYmVYYg7svYgiMQ8pW3uE7WATuLtbW03JsbXuLubI0Rt_V6yChY-XcvqWF-usGnmUv1p2_JtCfQBfaamvkCZpbo3ngEFUadi7WxR6g469bsHOGkyA=s200-no">
+        </img>
+      )
+    } else {
+      return (
+        <img id="logo" className="left" src="https://lh3.googleusercontent.com/OhgRzJOqLQsE5yx5gTPNkny2d-dAJdnPiYiiX8M8OAv6Km1tkUN6VaC2S9bfcDRC-akZhvimW5oYJBYALY-Kz3gW37L05Rwqb1NuIGu90HZAxKigiLK41e49WC4OvTbOjsV6Fb8n6ddiY5hg1VTm4wVBOuXLbwr7wvu40WF7EkfUA9g1jrCO5VNSbIR0jprQ3sk7oNe7cKMJsvFWzMGIncKMW0WArVdnV5ivQBx3A5agQbbVJO6vZ_8a3nKas2da92M193HvvC6OmLnnKWQM1ie4mSoOQidXVqMnPPFVxUh5a1aqxoHSrQoTjtCyRhRHd0D3x01jVzY3_YU0WwAJ3xBFN-cgCIeJz0WYxc-f8rhjTSRVUDE9_yaCAbKhi_e1fBAUE0-bo3MhDqZsF7AUFNjOAgWJAHC89Dh4ElOVPNIE8wUDxVzbOiBZF7IuNieQkdMiPNIwyxsMilRaN5dB4cPr_zQSOmCap5vfz6fF4CMhM85Mx_yA5kuuqRYmVYYg7svYgiMQ8pW3uE7WATuLtbW03JsbXuLubI0Rt_V6yChY-XcvqWF-usGnmUv1p2_JtCfQBfaamvkCZpbo3ngEFUadi7WxR6g469bsHOGkyA=s200-no">
+        </img>
+      )
+    }
   }
 
   appBar() {
     if ( this.state.currentUser ) {
       return(
+        <MuiThemeProvider muiTheme={muiTheme}>
           <AppBar id="appbar" title="" style={style.nav} onLeftIconButtonTouchTap={this.handleToggle}></AppBar>
+        </MuiThemeProvider>
+
       )
     } else {
       return(
-        <AppBar id="appbar" title="" style={style.nav} showMenuIconButton={false}></AppBar>
+        <MuiThemeProvider muiTheme={muiTheme}>
+          <AppBar id="appbar" title="" style={style.nav} showMenuIconButton={false}></AppBar>
+        </MuiThemeProvider>
       )
     }
   }
@@ -326,7 +418,6 @@ class Index extends React.Component {
   render() {
     if (this.state.appView === 'home') {
       return (
-        <div>
           <MuiThemeProvider muiTheme={muiTheme}>
             {this.appBar()}
             {this.drawer()}
@@ -336,17 +427,15 @@ class Index extends React.Component {
                   clickHandle={this.clickHandle} prefs={this.state.prefs}
                   updateGroup={this.updateGroup} />
           </MuiThemeProvider>
-        </div>
       )
     } else if (this.state.appView === 'login') {
       return (
-        <div id='logindiv'>
         <MuiThemeProvider muiTheme={muiTheme}>
           {this.appBar()}
+          {/*<i className="material-icons" style={iconStyles}>home</i>*/}
           {this.logo()}
           <Login updateUser={this.updateUser} appView={this.state.appView} clickHandle={this.clickHandle}/>
         </MuiThemeProvider>
-        </div>
       )
     } else if (this.state.appView === 'input') {
       return (
@@ -355,7 +444,7 @@ class Index extends React.Component {
             {this.appBar()}
             {this.drawer()}
             {this.logo()}
-            <Input data={this.state.data}
+            <Input style={style.nav} data={this.state.data}
                    clickHandle={this.clickHandle}
                    changeHandle={this.changeHandle}
                    errorText={this.state.errorText} />
@@ -369,7 +458,8 @@ class Index extends React.Component {
             {this.appBar()}
             {this.drawer()}
             {this.logo()}
-            <Types foodsYum={this.foodsYum}
+            <Types style={style.nav} foodsYum={this.foodsYum}
+                   foodsEww={this.foodsEww}
                    clickHandle={this.clickHandle}
                    counter={this.state.counter}
                    willNotEat={this.state.willNotEat}
@@ -410,7 +500,7 @@ class Index extends React.Component {
                   googleClick={this.googleClick}/>
         </MuiThemeProvider>
       )
-    } else if (this.state.appView === 'dummy') {
+    } else if (this.state.appView === 'template') {
       return (
         <Template clickHandle={this.clickHandle} />
       )
@@ -423,6 +513,12 @@ class Index extends React.Component {
             <Image currentUser={this.state.currentUser} imageUrl={this.state.imageUrl} clickHandle={this.clickHandle} updateImage={this.updateImage}/>
         </MuiThemeProvider>
       )
+    } else if (this.state.appView === 'preference') {
+      <MuiThemeProvider muiTheme={muiTheme}>
+        {this.appBar()};
+        {this.logo()};
+
+      </MuiThemeProvider>
     }
   }
 }
