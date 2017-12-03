@@ -64,6 +64,7 @@ class Index extends React.Component {
     this.betterUpdateState = this.betterUpdateState.bind(this);
     this.updateGroup = this.updateGroup.bind(this);
     this.foodsYum = this.foodsYum.bind(this);
+    this.appBar = this.appBar.bind(this);
   }
 
   componentDidMount() {
@@ -286,22 +287,34 @@ class Index extends React.Component {
   }
 
   appBar() {
-    return(
-      <AppBar title="uChews 2.0"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
-                    <Divider />
-            </Drawer>
-    )
+    if ( this.state.currentUser ) {
+      return(
+        <div>
+          <AppBar title="uChews 2.0"
+                        style={style.nav}
+                        onLeftIconButtonTouchTap={this.handleToggle}/>
+                <Drawer docked={false}
+                        width={200}
+                        open={this.state.open}
+                        onRequestChange={(open) => this.setState({open})}>
+                        <MenuItem onClick={() => this.clickHandle('home')}>
+                            HOME
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
+                        <Divider />
+                </Drawer>
+        </div>
+      )
+    } else {
+      return(
+        <AppBar
+            title="uChews 2.0"
+            style={style.nav}
+            showMenuIconButton={false}
+            />
+      )
+    }
   }
 
   render() {
@@ -309,20 +322,7 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews 2.0"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
-                    <Divider />
-            </Drawer>
+            {this.appBar()}
             {this.foodsYum()}
             <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
                   clickHandle={this.clickHandle} prefs={this.state.prefs}
@@ -334,11 +334,7 @@ class Index extends React.Component {
       return (
         <div id='logindiv'>
         <MuiThemeProvider muiTheme={muiTheme}>
-          <AppBar
-            title="uChews 2.0"
-            style={style.nav}
-            showMenuIconButton={false}
-            />
+          {this.appBar()}
           <Login updateUser={this.updateUser} appView={this.state.appView} clickHandle={this.clickHandle}/>
         </MuiThemeProvider>
         </div>
@@ -347,20 +343,7 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews 2.0"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>LOGOOUT</MenuItem>
-                    <Divider />
-            </Drawer>
+            {this.appBar()}
             <Input data={this.state.data}
                    clickHandle={this.clickHandle}
                    changeHandle={this.changeHandle}
@@ -372,20 +355,7 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews 2.0"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
-                    <Divider />
-            </Drawer>
+            {this.appBar()}
             <Types foodsYum={this.foodsYum}
                    clickHandle={this.clickHandle}
                    counter={this.state.counter}
@@ -398,20 +368,7 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews 2.0"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>HOME</MenuItem>
-                    <Divider />
-            </Drawer>
+            {this.appBar()}
             <Waiting submitForm={this.submitForm} />
           </MuiThemeProvider>
         </div>
@@ -420,20 +377,7 @@ class Index extends React.Component {
       return (
         <div>
           <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar title="uChews 2.0"
-                    style={style.nav}
-                    onLeftIconButtonTouchTap={this.handleToggle}/>
-            <Drawer docked={false}
-                    width={200}
-                    open={this.state.open}
-                    onRequestChange={(open) => this.setState({open})}>
-                    <MenuItem onClick={() => this.clickHandle('home')}>
-                        HOME
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={this.handleLogout}>LOGOUT</MenuItem>
-                    <Divider />
-            </Drawer>
+            {this.appBar()}
             <Results clickHandle={this.clickHandle}
                      results={this.state.results} />
           </MuiThemeProvider>
@@ -442,11 +386,7 @@ class Index extends React.Component {
     } else if (this.state.appView === 'signup') {
       return (
         <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar
-              title="uChews"
-              style={style.nav}
-              showMenuIconButton={false}
-              />
+            {this.appBar()};
           <Signup updateUser={this.updateUser} updateImage={this.updateImage} appView={this.state.appView} clickHandle={this.clickHandle}
                   clickHandle={this.clickHandle}
                   googleClick={this.googleClick}/>
@@ -459,11 +399,7 @@ class Index extends React.Component {
     } else if (this.state.appView === 'image') {
       return (
         <MuiThemeProvider muiTheme={muiTheme}>
-            <AppBar
-              title="uChews"
-              style={style.nav}
-              showMenuIconButton={false}
-              />
+            {this.appBar()};
             <Image currentUser={this.state.currentUser} imageUrl={this.state.imageUrl} clickHandle={this.clickHandle} updateImage={this.updateImage}/>
         </MuiThemeProvider>
       )
