@@ -18,6 +18,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import Image from './components/image.jsx'
 import axios from 'axios';
+import FontIcon from 'material-ui/FontIcon';
+import {red500, yellow500, blue500} from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -25,6 +27,10 @@ const muiTheme = getMuiTheme({
     primary2Color: redA200
   }
 });
+
+const iconStyles = {
+  marginRight: 24
+}
 
 const style = {
   nav:  {
@@ -115,58 +121,52 @@ class Index extends React.Component {
     return (
       <section className="section-meals">
         <div className="container">
-          <img alt="Korean Bibimbop" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Korean</div>
-          </div>
+          <img alt="Korean Bibimbop" value="Korean" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Korean</div>
         </div>
         <div className="container">
-          <img alt="Pizza" src="https://images.unsplash.com/photo-1507927822105-9a760e57a419?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Pizza</div>
-          </div>
+          <img alt="Pizza" value="Pizza" src="https://images.unsplash.com/photo-1507927822105-9a760e57a419?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Pizza</div>
         </div>
         <div className="container">
-          <img alt="Sushi" src="https://images.unsplash.com/photo-1501735972267-d5c1bc03655c?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Sushi</div>
-          </div>
+          <img alt="Sushi" value="Sushi" src="https://images.unsplash.com/photo-1501735972267-d5c1bc03655c?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Sushi</div>
         </div>
         <div className="container">
-          <img alt="Thai" src="https://images.unsplash.com/photo-1441850605338-1b0b5a22e7b9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Thai</div>
-          </div>
+          <img alt="Thai" value="Thai" src="https://images.unsplash.com/photo-1441850605338-1b0b5a22e7b9?auto=format&fit=crop&w=2850&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Thai</div>
         </div>
         <div className="container">
-          <img alt="Hamburger" src="https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Burger</div>
-          </div>
+          <img alt="Hamburger" value="Burger" src="https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Burger</div>
         </div>
         <div className="container">
-          <img alt="Burrito" src="https://images.unsplash.com/photo-1464219222984-216ebffaaf85?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Mexican</div>
-          </div>
+          <img alt="Burrito" value="Mexican" src="https://images.unsplash.com/photo-1464219222984-216ebffaaf85?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Mexican</div>
         </div>
         <div className="container">
-          <img alt="Subs" src="https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Sub</div>
-          </div>
+          <img alt="Subs" value="Sub" src="https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Sub</div>
         </div>
         <div className="container">
-          <img alt="Chicken" src="https://images.unsplash.com/photo-1456404823214-a69ef7a1fae5?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Chicken</div>
-          </div>
+          <img alt="Chicken" value="Chicken" src="https://images.unsplash.com/photo-1504670813815-f43e2383e08d?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Chicken</div>
         </div>
         <div className="container">
-          <img alt="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=2550&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
-          <div className="middle">
-            <div className="text">Chinese</div>
-          </div>
+          <img alt="Chinese" value="Chinese" src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=2550&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Chinese</div>
+        </div>
+        <div className="container">
+          <img alt="Brunch" value="Brunch" src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=2550&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Brunch</div>
+        </div>
+        <div className="container">
+          <img alt="Salad" value="Salad" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1335&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Salad</div>
+        </div>
+        <div className="container">
+          <img alt="Pasta" value="Pasta" src="https://images.unsplash.com/photo-1437526248130-8448edca2e36?auto=format&fit=crop&w=1350&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"/>
+          <div className="text">Pasta</div>
         </div>
       </section>
     )
@@ -357,6 +357,7 @@ class Index extends React.Component {
       return (
         <MuiThemeProvider muiTheme={muiTheme}>
           {this.appBar()}
+          {/*<i className="material-icons" style={iconStyles}>home</i>*/}
           {this.logo()}
           <Login updateUser={this.updateUser} appView={this.state.appView} clickHandle={this.clickHandle}/>
         </MuiThemeProvider>
