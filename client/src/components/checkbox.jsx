@@ -11,10 +11,10 @@ const style = {
 class Check extends React.Component {
   constructor(props) {
     super(props);
-    this.checkHandle = this.checkHandle.bind(this);
     this.state = {
       checked: false,
     };
+    this.checkHandle = this.checkHandle.bind(this);
   }
 
   checkHandle(e) {
