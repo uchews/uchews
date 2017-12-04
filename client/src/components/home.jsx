@@ -87,7 +87,7 @@ class Home extends React.Component {
           <Avatar onClick={ () => this.props.betterUpdateState('image') } size={107} id="avatar" src={this.props.imageUrl}/>
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
           <RaisedButton style={style.button} default={true} onClick={() => {this.props.clickHandle('types')}} icon={<ActionAndroid />} label="Update your preferences!"/>
-          <RaisedButton icon={<Face/>} style={style.button} default={true} onClick={() => {this.props.clickHandle('types')}} label="Create a Group!"/>
+          <RaisedButton icon={<Face/>} style={style.button} default={true} onClick={() => {this.props.clickHandle('input')}} label="Create a Group!"/>
           <RaisedButton icon={<Favorite/>} style={style.button} default={true} onClick={() => {this.props.clickHandle('types')}} label="Join a Group!"/>
           <h2 style={style.hungry}>Hungry?</h2><br/>
           <NewGroup clickHandle={this.props.clickHandle}
