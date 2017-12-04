@@ -28,9 +28,7 @@ class Types extends React.Component {
       types: ['American', 'Asian', 'Chinese', 'Dessert', 'Greek', 'Hamburgers', 'Healthy', 'Indian',
               'Italian', 'Japanese', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Pasta', 'Pizza',
               'Salads', 'Sandwiches', 'Seafood', 'Soup', 'Sushi', 'Thai', 'Vegetarian', 'Wings', 'Wraps'],
-      firstUserClicked: false,
     };
-
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -38,13 +36,6 @@ class Types extends React.Component {
     this.props.updatePreference(() => {
       this.props.clickHandle('home');
     });
-
-    this.firstUserComplete = this.firstUserComplete.bind(this);
-  }
-
-  firstUserComplete() {
-    this.setState({firstUserClicked: true})
-
   }
 
   render() {
@@ -64,25 +55,15 @@ class Types extends React.Component {
         <div style={style.container}></div>
 
         {/*<div style={style.container}>
-
-        <div style={style.container}>
-          {this.state.types.map(function(type) {
-            return <Check name={"wantToEat"}
-                          type={type}
-                          choose={that.props.wantToEat} /> //change so does not get saved after first user
-          })}
-        </div>
-        <h2>Which types do you refuse to eat?</h2>
-        <div style={style.container}>
-tracing down how to prevent second user on same dvice from saving as first users prefs
           {this.state.types.map(function(type) {
             return <Check name={"willNotEat"}
                           type={type}
                           choose={that.props.willNotEat} />
           })}
         </div>*/}
-
-
+        <RaisedButton className="submitbutton" label="Next"
+                      primary={true}
+                      onClick={ () => that.handleClick() } />
       </Paper>
       </div>
     )
