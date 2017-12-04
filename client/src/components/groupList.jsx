@@ -89,7 +89,7 @@ class GroupList extends React.Component {
   }
 
   render() {
-    return (<div>
+    return (<div id="grouplist">
       {/*{this.groupList()}*/}
       {this.contactList()}
       {/*<h2>These are your CHEWY groups</h2>

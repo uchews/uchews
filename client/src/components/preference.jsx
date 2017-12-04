@@ -35,7 +35,7 @@ class Preference extends React.Component {
   preferenceList() {
     return (
       <div>
-        <h1>Preferences</h1>
+        <h1 id="preferences">Preferences</h1>
         {this.state.prefs[0].foodType.map((food) => {
           return (
             <div id="prefer">
@@ -50,7 +50,7 @@ class Preference extends React.Component {
   dealbreakerList() {
     return (
       <div>
-        <h1>Deal Breakers</h1>
+        <h1 id="dealbreakers">Deal Breakers</h1>
         {this.state.prefs[0].willNotEat.map((food) => {
           return (
             <div id="break">
