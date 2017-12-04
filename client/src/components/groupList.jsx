@@ -12,7 +12,7 @@ class GroupList extends React.Component {
 
   render() {
     return (<div>
-      <h2>Your Groups:</h2>
+      <h2>These are your CHEWY groups</h2>
       <List>
         {this.props.grouplist.map((group) => {
           let locandmem = `location: ${group.location}
