@@ -273,6 +273,12 @@ app.get('/checkSession', (req, res) => {
 
 //Client sends survey results to /input/findRestaurants for API querying and ranking
 app.post('/input/findRestaurants', (req, res) => {
+  db.User.find({username: req.session.user}, (err, user) => {
+    if (err) {console.log('server post findRestaurants db err', err)};
+    req.body.wantToEat.push(user[0].wantToEat);
+    req.body.willNotEat.push(user[0].willNotEat);
+    console.log('server post merge user prefs', req.body)
+  } )
   google.handleQueries(req.body, (results) => {
     res.send(results);
   });
