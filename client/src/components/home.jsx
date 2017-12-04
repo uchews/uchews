@@ -178,7 +178,7 @@ class Home extends React.Component {
           <div id="searchGroup">
             <h2>Let's join an existing group</h2>
             <TextField name="title" value={this.state.searchGroup} onChange={this.handleInputChange} /><br/>
-            <RaisedButton style={style.button} default={true} onClick={this.joinGroup} label="Search Group"/>
+            <RaisedButton style={style.button} primary={true} onClick={this.joinGroup} label="Search Group"/>
           </div>
           <div id="blueberries"></div>
           {/*<div id="strawberries"></div>

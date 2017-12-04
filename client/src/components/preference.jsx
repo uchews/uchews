@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
   button: {
-    margin: '0 0 100px 0'
+    margin: '0 0 0 0'
   },
 };
 
@@ -34,7 +34,7 @@ class Preference extends React.Component {
 
   preferenceList() {
     return (
-      <div>
+      <div id="div">
         <h1 id="preferences">Preferences</h1>
         {this.state.prefs[0].foodType.map((food) => {
           return (
@@ -49,7 +49,7 @@ class Preference extends React.Component {
 
   dealbreakerList() {
     return (
-      <div>
+      <div id="div">
         <h1 id="dealbreakers">Deal Breakers</h1>
         {this.state.prefs[0].willNotEat.map((food) => {
           return (
