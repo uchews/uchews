@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 // import Client from 'predicthq'
 
 
@@ -83,16 +84,17 @@ class EventSearch extends React.Component {
     } else {
       return (
         <div>
-          <h2>Find Nearby Events</h2>
-          <label>Zip</label>
-          <input placeholder="Zip" onChange={this.entryZip} />
-          <label>Type of Events Nearby</label>
-          <input placeholder="Type of Event" onChange={this.entryQuery} />
+          <h1 style={style.hungry}>Find Nearby Events</h1>
+          <TextField name="zip" hintText="Zip" value={this.state.zip} onChange={this.entryZip} /><br/>
+          <TextField name="query" hintText="Type of Event" value={this.state.query} onChange={this.entryQuery} /><br/>
           <RaisedButton style={style.button} primary={true} onClick={this.postEvents} label="Show Events" />
-          <br/>
         </div>
       )
     }
   }
 }
 export default EventSearch;
+
+// <input placeholder="Zip" onChange={this.entryZip} />
+// <label>Type of Events Nearby</label>
+          // <input placeholder="Type of Event" onChange={this.entryQuery} />
