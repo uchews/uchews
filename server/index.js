@@ -22,6 +22,7 @@ var phq = require('predicthq')
 var client = new phq.Client({access_token: "vcbZQQcuQvsXd2lwYDZyAfDxUbG6Sd"})
 // var phq = new Client({access_token: "vcbZQQcuQvsXd2lwYDZyAfDxUbG6Sd"})
 
+
 require('dotenv').config();
 
 //Set up google login protocol
@@ -149,10 +150,15 @@ app.get('/prefs', (function(req, res) {
   });
 }));
 
+
+
 app.post('/update', (req, res) => {
   console.log('line 94 SERVER/INDEX.JS REQ = ', req.body)
   db.User.findOneAndUpdate({ username: req.session.user },
     {
+      distance: req.body.distance,
+      location: req.body.location,
+      budget: req.body.budget,
       foodType: req.body.wantToEat,
       willNotEat: req.body.willNotEat,
       // username: 'dug' //TEMPORARY was  req.body.username but index.js of app was sending empty string.
@@ -166,23 +172,26 @@ app.post('/update', (req, res) => {
 app.get('/group', (req, res) => {
   var userGroups = [];
   var username = req.session.user;
+  var members = req.body.members;
   db.Group.find({}, function(err, groups) {
     if (err) {
       console.log("current user not found as member of any group")
-    } groups.forEach(function(group) {
+    }
+    groups.forEach(function(group) {
+      console.log("GROUP: ", group);
       if (group.members && group.members.includes(username)) {
         userGroups.push(group);
       }
-      res.send(userGroups);
-      res.end();
     });
   });
+  res.send(userGroups);
+  res.end();
 });
 
 
 app.post('/group', (req, res) => {
   db.Group.findOneAndUpdate({ title: req.body.title },
-    {$push: {members: req.body.members}, location: req.body.location }, { upsert: true, new: true }, (err, group) => {
+    { members: req.body.members, location: req.body.location }, { upsert: true, new: true }, (err, group) => {
       res.send(group);
       res.end();
     }
