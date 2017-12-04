@@ -19,6 +19,9 @@ body {
   display: none;
  }
 
+ #findnearbyevents {
+ }
+
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
