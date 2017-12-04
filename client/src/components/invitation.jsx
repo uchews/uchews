@@ -1,5 +1,7 @@
 import React from 'react';
-import axios from 'axios';
+import axios from 'axios'
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';;
 
 
 
@@ -34,34 +36,32 @@ class Invitation extends React.Component {
 
   handleChange(input) {
     // console.log('should be guests email =', input.target.value)
-    this.setState({guest: input.target.value});
+    this.setState({[input.target.name]: input.target.value});
   }
 
   sendEmail() {
     //SEND EMAIl
     var input = {
         guest: this.state.guest,
-        tableId: 'hackreactor'//this.state.tableId TODO UPDATE to real table ID
-    }//TODO update server to handle data passing through
+        tableId: this.state.group,
+        currentUser: this.props.currentUser
+    };
     axios.post('/invitation', input).then(function(success) {
         console.log('sent email: ', success);
     }).catch(function(error) {
         console.log('error email not sent, line 49 invitation.jsx: ', error)
-    })
-
-
+    }).then(this.setState({guest: '', group: ''}));
   }
 
 
   render() {
     return (
       <div>
-        <Paper style={style.paper} zDepth={3}>
           <h1 style={style.hungry}>Invite Guest</h1>
-          <input placeholder="Email" onChange={this.handleChange} />
+          <TextField name="guest" hintText="Email" value={this.state.guest} onChange={this.handleChange} /><br/>
+          <TextField name="group" hintText="Group" value={this.state.group} onChange={this.handleChange} />
           <h2 style={style.hungry}>Hungry?</h2>
           <RaisedButton style={style.button} primary={true} onClick={this.sendEmail} label="Invite!" />
-        </Paper>
       </div>
     )
   }
