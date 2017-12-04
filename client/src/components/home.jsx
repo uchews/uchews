@@ -44,12 +44,14 @@ class Home extends React.Component {
     super(props);
     this.state = {
       grouplist: [],
-      searchGroup: ''
+      searchGroup: '',
+      state: false
     }
     this.onFileLoad = this.onFileLoad.bind(this);
     this.searchBar = this.searchBar.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.joinGroup = this.joinGroup.bind(this);
+    this.getGroup = this.getGroup.bind(this);
   }
 
   componentDidMount() {
@@ -75,6 +77,12 @@ class Home extends React.Component {
 
     axios.get('/group')
       .then((res) => context.setState({grouplist: res.data}))
+      .catch((err) => console.log('group list get request', err))
+  }
+
+  getGroup() {
+    axios.get('/group')
+      .then((res) => this.setState({grouplist: res.data}))
       .catch((err) => console.log('group list get request', err))
   }
 
@@ -137,7 +145,10 @@ class Home extends React.Component {
     console.log(this.state.searchGroup);
     axios.post('/searchGroup', data).then((response) => {
       var members = response.data;
-      axios.post('/joinGroup', { title: scope.state.searchGroup, members: members }).then((response) => console.log('SUCCESSFULLY JOINED GROUP'))
+      axios.post('/joinGroup', { title: scope.state.searchGroup, members: members }).then((response) => {
+        this.getGroup();
+        this.setState({ searchGroup: '' })
+      })
     })
   }
 
