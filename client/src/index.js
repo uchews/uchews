@@ -529,8 +529,8 @@ class Index extends React.Component {
     } else if (this.state.appView === 'signup') {
       return (
         <MuiThemeProvider muiTheme={muiTheme}>
-            {this.appBar()};
-            {this.logo()};
+            {this.appBar()}
+            {this.logo()}
           <Signup updateUser={this.updateUser} updateImage={this.updateImage} appView={this.state.appView} clickHandle={this.clickHandle}
                   clickHandle={this.clickHandle}
                   googleClick={this.googleClick}/>
