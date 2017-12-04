@@ -13,6 +13,9 @@ import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
 import $ from 'jquery';
 import Invitation from './invitation.jsx';
+import ActionAndroid from 'material-ui/svg-icons/action/android';
+import Face from 'material-ui/svg-icons/action/face';
+import Favorite from 'material-ui/svg-icons/action/favorite';
 
 
 
@@ -26,10 +29,11 @@ const style = {
     width: '70%'
   },
   button: {
-    margin: '0 0 100px 0'
+    margin: '0 25% 17px 25%',
+    textColor: 'white'
   },
   hungry: {
-    margin: '100px 0 20px 0'
+    margin: '37px 0 20px 0'
   }
 };
 
@@ -82,7 +86,9 @@ class Home extends React.Component {
         <Paper style={style.paper} zDepth={3}>
           <Avatar onClick={ () => this.props.betterUpdateState('image') } size={107} id="avatar" src={this.props.imageUrl}/>
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
-          <RaisedButton style={style.button} primary={true} onClick={() => {this.props.clickHandle('types')}} label="Update your preferences!"/>
+          <RaisedButton style={style.button} default={true} onClick={() => {this.props.clickHandle('types')}} icon={<ActionAndroid />} label="Update your preferences!"/>
+          <RaisedButton icon={<Face/>} style={style.button} default={true} onClick={() => {this.props.clickHandle('types')}} label="Create a Group!"/>
+          <RaisedButton icon={<Favorite/>} style={style.button} default={true} onClick={() => {this.props.clickHandle('types')}} label="Join a Group!"/>
           <h2 style={style.hungry}>Hungry?</h2><br/>
           <NewGroup clickHandle={this.props.clickHandle}
             updateGroup={this.props.updateGroup}/>

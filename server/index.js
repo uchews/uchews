@@ -150,15 +150,10 @@ app.get('/prefs', (function(req, res) {
   });
 }));
 
-
-
 app.post('/update', (req, res) => {
   console.log('line 94 SERVER/INDEX.JS REQ = ', req.body)
   db.User.findOneAndUpdate({ username: req.session.user },
     {
-      distance: req.body.distance,
-      location: req.body.location,
-      budget: req.body.budget,
       foodType: req.body.wantToEat,
       willNotEat: req.body.willNotEat,
       // username: 'dug' //TEMPORARY was  req.body.username but index.js of app was sending empty string.

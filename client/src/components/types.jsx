@@ -29,6 +29,13 @@ class Types extends React.Component {
               'Italian', 'Japanese', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Pasta', 'Pizza',
               'Salads', 'Sandwiches', 'Seafood', 'Soup', 'Sushi', 'Thai', 'Vegetarian', 'Wings', 'Wraps'],
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.updatePreference(() => {
+      this.props.clickHandle('home');
+    });
   }
 
   render() {
@@ -56,7 +63,7 @@ class Types extends React.Component {
         </div>*/}
         <RaisedButton className="submitbutton" label="Next"
                       primary={true}
-                      onClick={ () => this.props.clickHandle("waiting") } />
+                      onClick={ () => that.handleClick() } />
       </Paper>
       </div>
     )
