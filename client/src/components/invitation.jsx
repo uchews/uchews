@@ -19,7 +19,7 @@ const style = {
     margin: '0 0 100px 0'
   },
   hungry: {
-    margin: '0 0 20px 0'
+    margin: '20.7px 0 20px 0'
   },
   daniel: {
     margin: '37px 0 20px 0'
