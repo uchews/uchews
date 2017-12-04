@@ -40,9 +40,9 @@ class NewGroup extends React.Component {
 
   render() {
     return (<div id="makeGroup">
-      <h2>Create a new Group!</h2>
+      <h2>Let's make a new Group</h2>
       <TextField name="title" value={this.state.title} onChange={this.handleInputChange} /><br/>
-      <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Get Started!"/>
+      <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Create"/>
     </div>)
   }
 }

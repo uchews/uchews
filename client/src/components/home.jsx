@@ -129,9 +129,9 @@ class Home extends React.Component {
             updateGroup={this.props.updateGroup}/>
           <RaisedButton icon={<Favorite/>} style={style.button} default={true} onClick={this.toggleSearch} label="Join a Group!"/>
           <div id="searchGroup">
-          <h2>Search for the Group you want to join!</h2>
+          <h2>Let's join an existing group</h2>
           <TextField name="title" value={this.state.searchGroup} onChange={this.handleInputChange} /><br/>
-          <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Get Started!"/>
+          <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Search Group"/>
           </div>
           <GroupList grouplist={this.state.grouplist}/>
           <Preference prefs={this.props.prefs} />
