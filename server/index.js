@@ -110,13 +110,15 @@ app.post('/events', (function(req, res) {
   var geoLat;
   var geoLong;
   //get coordinates from zip:
-  axios.get('https://www.zipcodeapi.com/rest/yhQtTsIlD8YDqFFt3SLGO9SUFD7nPHjicMoj5LTedYejbvG5av6AXiCNwDcvuKuh/info.json/' + req.body.zip + '/degrees')
+  axios.get('https://www.zipcodeapi.com/rest/boNLXhEF8B9vaJihdy8c1Sqs4h3uGshczS6pwsw2YTF2iuLymjwEZXkSPZ6jRUou/info.json/' + req.body.zip + '/degrees')
     .then(function(response){
       console.log('response.data', response.data);
       console.log('response.status', response.status);
       geoLat = response.data.lat;
       geoLong =response.data.lng;
       callEventsApi();
+    }).catch(function(error) {
+      console.log('ERROR ------line 121 server events =', error)
     });
 
   var callEventsApi = function() {
@@ -126,7 +128,7 @@ app.post('/events', (function(req, res) {
         // for(var i=0; i < events.length; i++) {
         //     console.info(events[i].rank, events[i].category, events[i].title, events[i].start, events[i].location )
         //   }
-          // console.log('EVENTS WAS SUCCESSFUL =', events)
+          console.log('EVENTS WAS SUCCESSFUL =', events)
       res.status(200).send(events)
       })
         // console.log('BENJI --------> line 11 sever/index.js', results)
@@ -170,7 +172,7 @@ app.get('/group', (req, res) => {
       console.log("current user not found as member of any group")
     }
     groups.forEach(function(group) {
-      console.log("GROUP: ", group);
+      // console.log("GROUP: ", group);
       if (group.members && group.members.includes(username)) {
         userGroups.push(group);
       }
