@@ -395,12 +395,12 @@ class Index extends React.Component {
   logo() {
     if (this.state.appView === 'login') {
       return(
-        <img id="logo" src="https://lh3.googleusercontent.com/IX0M2nAQ_Dqki43nYPKdWfpuOhiTFrUWWBpMABlNKkuVOiMHExQjXUPg--THDZWpPkXwkcMS8AlVvj061Xu_Sbur6PjZq-Oyx7D33NGotBgPluiH7XL4NhdOZE3ITXCd_mmzYIqP3CRHoMX_xpWKzhsc0F4D3EJWcBsNGeDweITch2niPIMc3smyzVsetuJXLuRfjI5gfIDOovMtIvMzmPv7WN51lsS-7cvzozNLC5OKOtg6Cj3PTyiVzP0sr-F0feKTPxf6hry88JwtB3u7p-LHqyLTI59X-2uDtt85yI9N3zgz46equRJd7tAVjnX-mDtWkzjjdWtBm79nHGPCXkfjS8SvJ1Z5keyl0rv87Dep5EoUN0kbe3ljShxJoJQzSJOApNR4WZxTZ757n6tF1likH1NPU1gb-dQJzjasbaZNtFCu6dPJSb-4wn7dZutUAIClyXZRPDP6VH4CCP3JkGelkrbXXO97LsYfv47wIBd0o2--7bCLT8Pg8f8ayVuHwiv5Ok6xJEqYd_VNYVsI1iLf13_JpbChK-yQyeqZnFeE7tFgHRJ-AvdOorYxq7-_v4kU7evyaaULkV2ipcJLVOoNZb8gVb7guSq3t1XfIQ=s200-no">
+        <img id="logo" src="https://i.imgur.com/0Y1WsQI.png">
         </img>
       )
     } else {
       return (
-        <img id="logo" src="https://lh3.googleusercontent.com/IX0M2nAQ_Dqki43nYPKdWfpuOhiTFrUWWBpMABlNKkuVOiMHExQjXUPg--THDZWpPkXwkcMS8AlVvj061Xu_Sbur6PjZq-Oyx7D33NGotBgPluiH7XL4NhdOZE3ITXCd_mmzYIqP3CRHoMX_xpWKzhsc0F4D3EJWcBsNGeDweITch2niPIMc3smyzVsetuJXLuRfjI5gfIDOovMtIvMzmPv7WN51lsS-7cvzozNLC5OKOtg6Cj3PTyiVzP0sr-F0feKTPxf6hry88JwtB3u7p-LHqyLTI59X-2uDtt85yI9N3zgz46equRJd7tAVjnX-mDtWkzjjdWtBm79nHGPCXkfjS8SvJ1Z5keyl0rv87Dep5EoUN0kbe3ljShxJoJQzSJOApNR4WZxTZ757n6tF1likH1NPU1gb-dQJzjasbaZNtFCu6dPJSb-4wn7dZutUAIClyXZRPDP6VH4CCP3JkGelkrbXXO97LsYfv47wIBd0o2--7bCLT8Pg8f8ayVuHwiv5Ok6xJEqYd_VNYVsI1iLf13_JpbChK-yQyeqZnFeE7tFgHRJ-AvdOorYxq7-_v4kU7evyaaULkV2ipcJLVOoNZb8gVb7guSq3t1XfIQ=s200-no">
+        <img id="logo" src="https://i.imgur.com/0Y1WsQI.png">
         </img>
       )
     }
