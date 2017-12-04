@@ -1,6 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import {List, ListItem} from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import {pinkA200, transparent} from 'material-ui/styles/colors';
 // import Client from 'predicthq'
 
 
@@ -34,9 +38,7 @@ class EventSearch extends React.Component {
     var thisContext = this;
     axios.post('/events', {
       query: this.state.query,
-      zip: this.state.zip,
-
-
+      zip: this.state.zip
     })
     .then(function(response) {
       console.log('RESPONSE.data GET line 38 eventSearch.jsx', response.data)
@@ -69,30 +71,32 @@ class EventSearch extends React.Component {
     if (this.state.clicked) {
       return (
         <div>
-          <h2>Nearby Events:</h2>
-          <h3>{this.state.titles.map(function(item) {
+          <h2>Nearby Events</h2>
+          <List>{this.state.titles.map(function(item) {
             return (
-              <li>
-                <a href={'https://www.google.com/search?q='+item} target="_blank">{item}</a>
-              </li>
+              <ListItem className="event" primaryText={item}
+              leftIcon={<ActionGrade color={pinkA200} />}
+              rightIcon={<ActionGrade color={pinkA200} />}
+              href={'https://www.google.com/search?q='+item}
+              target="_blank"/>
             )
-          })}</h3>
-          <br/>
+          })}</List>
         </div>
       )
     } else {
       return (
         <div>
-          <h2>Find Nearby Events</h2>
-          <label>Zip</label>
-          <input placeholder="Zip" onChange={this.entryZip} />
-          <label>Type of Events Nearby</label>
-          <input placeholder="Type of Event" onChange={this.entryQuery} />
+          <h1 style={style.hungry}>Find Nearby Events</h1>
+          <TextField name="zip" hintText="Zip" value={this.state.zip} onChange={this.entryZip} /><br/>
+          <TextField name="query" hintText="Type of Event" value={this.state.query} onChange={this.entryQuery} /><br/>
           <RaisedButton style={style.button} primary={true} onClick={this.postEvents} label="Show Events" />
-          <br/>
         </div>
       )
     }
   }
 }
 export default EventSearch;
+// <a href={'https://www.google.com/search?q='+item} target="_blank">{item}</a>
+// <input placeholder="Zip" onChange={this.entryZip} />
+// <label>Type of Events Nearby</label>
+          // <input placeholder="Type of Event" onChange={this.entryQuery} />
