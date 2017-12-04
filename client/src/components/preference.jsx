@@ -16,6 +16,8 @@ class Preference extends React.Component {
       prefsClicked: false
     };
     this.getPrefs = this.getPrefs.bind(this);
+    this.preferenceList = this.preferenceList.bind(this);
+    this.dealbreakerList = this.dealbreakerList.bind(this);
   }
 
   getPrefs() {
@@ -30,30 +32,49 @@ class Preference extends React.Component {
     })
   }
 
+  preferenceList() {
+    return (
+      <div>
+        <h1>Preferences</h1>
+        {this.state.prefs[0].foodType.map((food) => {
+          return (
+            <div id="prefer">
+              <h4>{food}</h4>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+  dealbreakerList() {
+    return (
+      <div>
+        <h1>Deal Breakers</h1>
+        {this.state.prefs[0].willNotEat.map((food) => {
+          return (
+            <div id="break">
+              <h4>{food}</h4>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
   render() {
     if (this.state.prefsClicked) {
       return (
         <div>
-          <h2>Your preferences:</h2>
+          {this.preferenceList()}
+          {this.dealbreakerList()}
           <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Prefs" />
-          <br/>
-          <h2>Favor: {this.state.prefs[0].foodType.map(function(item) {
-            return (
-              <ul>{item}</ul>
-            )
-          })}</h2>
-          <br/>
-          <h2>Avoid: {this.state.prefs[0].willNotEat.map(function(item) {
-            return (
-              <ul>{item}</ul>
-            )
-          })}</h2>
         </div>
       )
     } else {
       return (
       <div>
-        <h2>Your preferences:</h2>
+        <h2>Your taste</h2>
         <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Prefs" />
       </div>
     )
