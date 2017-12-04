@@ -30,6 +30,8 @@ const GroupSchema = new Schema({
   members: {type: Array, "default" : []},
   wantToEat: {type: Array, "default": []},
   willNotEat: {type: Array, "default" : []},
+  radius: {type: Number},
+  budget: {type: Number}
 })
 
 const Group = mongoose.model('Group', GroupSchema);

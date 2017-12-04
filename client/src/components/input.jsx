@@ -67,29 +67,13 @@ class Input extends React.Component {
       <div>
        <Paper style={style.paper} zDepth={3}>
         <form>
-          <h2>Location:</h2>
+          <h2>Enter Zip Code!</h2>
           <TextField name="location"
                      hintText="Address or zip code..."
                      errorText={this.props.errorText}
                      onChange={this.props.changeHandle} /><br />
-          <h2>Number of Chewsers:</h2>
-          <SelectField
-            value={this.state.people}
-            maxHeight={200}
-            name="peopleNum"
-            onChange={this.setPeople}>
-            <MenuItem value={2} primaryText="2"/>
-            <MenuItem value={3} primaryText="3"/>
-            <MenuItem value={4} primaryText="4"/>
-            <MenuItem value={5} primaryText="5"/>
-            <MenuItem value={6} primaryText="6"/>
-            <MenuItem value={7} primaryText="7"/>
-            <MenuItem value={8} primaryText="8"/>
-            <MenuItem value={9} primaryText="9"/>
-            <MenuItem value={10} primaryText="10"/>
-          </SelectField><br />
 
-          <h2>Maximum Distance:</h2>
+          <h2>Distance?</h2>
           <RadioButtonGroup value={this.state.distance}
                             name="distance"
                             style={style.radio}
@@ -100,7 +84,7 @@ class Input extends React.Component {
             <RadioButton value={10} label="10 mi" />
           </RadioButtonGroup><br />
 
-          <h2>Budget:</h2>
+          <h2>How much do you have?</h2>
           <RadioButtonGroup value={this.state.budget}
                             name="budget"
                             style={style.radio}

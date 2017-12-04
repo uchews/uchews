@@ -78,6 +78,7 @@ class Index extends React.Component {
     this.addWantToEat = this.addWantToEat.bind(this);
     this.updatePreference = this.updatePreference.bind(this);
     this.addWillNotEat = this.addWillNotEat.bind(this);
+    this.submitGroup = this.submitGroup.bind(this);
   }
 
   componentDidMount() {
@@ -264,6 +265,23 @@ class Index extends React.Component {
     });
   }
 
+  submitGroup() {
+    let data = {
+      title: this.state.currentGroup,
+      location: this.state.location,
+      budget: this.state.budget,
+      radius: this.state.distance,
+      members: [this.state.currentUser],
+      wantToEat: [],
+      willNotEat:[]
+    }
+
+    axios.post('/group', data)
+    .then((res) => {
+      this.setState({appView:"home"})
+    })
+  }
+
   submitForm() {
     let data = {
       title: this.state.currentGroup,
@@ -288,15 +306,15 @@ class Index extends React.Component {
     });
 
 
-    axios.post('/group', {title: this.state.currentgroup, location: this.state.location, members: this.state.currentUser})
-    .then((res) =>
+    // axios.post('/group', {title: this.state.currentgroup, location: this.state.location, members: this.state.currentUser})
+    // .then((res) =>
 
-    console.log('new group post succeed in index', res))
-    .catch((err) => console.log('new group post error in index', err));
+    // console.log('new group post succeed in index', res))
+    // .catch((err) => console.log('new group post error in index', err));
 
-    axios.post('/group', {title: this.state.currentGroup, location: this.state.location, members: this.state.currentUser})
-    .then((res) => console.log('new group post succeed in index', res))
-    .catch((err) => console.log('new group post error in index', err.config));
+    // // axios.post('/group', {title: this.state.currentGroup, location: this.state.location, members: this.state.currentUser})
+    // // .then((res) => console.log('new group post succeed in index', res))
+    // // .catch((err) => console.log('new group post error in index', err.config));
   }
 
 
@@ -332,7 +350,7 @@ class Index extends React.Component {
   // changes the current view
   clickHandle(view) {
     if (view === 'waiting') {
-      this.setState({ appView: view }, () => this.submitForm() );
+      this.setState({ appView: view }, () => this.submitGroup() );
     } else if (view === 'home') {
       var scope = this;
       axios.get('/image')
@@ -421,7 +439,6 @@ class Index extends React.Component {
         <MuiThemeProvider muiTheme={muiTheme}>
           <AppBar id="appbar" title="" style={style.nav} onLeftIconButtonTouchTap={this.handleToggle}></AppBar>
         </MuiThemeProvider>
-
       )
     } else {
       return(

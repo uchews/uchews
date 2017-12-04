@@ -186,9 +186,11 @@ app.get('/group', (req, res) => {
 
 });
 
+
+
 app.post('/group', (req, res) => {
   db.Group.findOneAndUpdate({ title: req.body.title },
-    { $push: {members: req.body.members}, location: req.body.location }, { upsert: true, new: true }, (err, group) => {
+    { members: [req.session.user], location: req.body.location, radius: req.body.radius, budget: req.body.radius, wantToEat: [], willNotEat: []}, { upsert: true, new: true }, (err, group) => {
       res.send(group);
       res.end();
     }

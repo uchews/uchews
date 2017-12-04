@@ -16,7 +16,7 @@ class GroupList extends React.Component {
       <List>
         {this.props.grouplist.map((group) => {
           let locandmem = `location: ${group.location}
-                           members: ${group.member}`;
+                           members: ${group.members}`;
           return (<ListItem
             primaryText={group.title} primaryTogglesNestedList={true}
             nestedItems={[
