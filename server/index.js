@@ -90,13 +90,13 @@ app.post('/signup', (req, res) => {
 app.post('/invitation', function(req, res) {
   // console.log('EMAIL---line 82 SERVER/INDEX.JS REQ = ', req.body)
   const msg = {
-    to: req.body.guest,
-    from: 'uchewsnnvitation@uchews.com',
-    subject: `${req.body.currentUser} invites you!`,
-    text: `Simply enter the group name '${req.body.tableId}' to chews with ${req.body.currentUser}!`
-    // from: 'JediSchoolOfMasterDan@dan.com',
-    // subject: 'Jedi Mast Dan Kwon has summond you',
-  };
+      to: req.body.guest,
+      from: 'uchewsinvitation@uchews.com',
+      subject: `${req.body.currentUser} invites you!`,
+      text: `Simply enter the group name '${req.body.tableId}' to chews with ${req.body.currentUser}!`
+      // from: 'JediSchoolOfMasterDan@dan.com',
+      // subject: 'Jedi Mast Dan Kwon has summond you',
+    };
     sgMail.send(msg).then(function() {
       res.send('sent success');
       res.end();
