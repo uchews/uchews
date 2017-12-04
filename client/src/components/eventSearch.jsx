@@ -3,6 +3,8 @@ import axios from 'axios';
 import {List, ListItem} from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import {pinkA200, transparent} from 'material-ui/styles/colors';
 // import Client from 'predicthq'
 
 
@@ -69,10 +71,14 @@ class EventSearch extends React.Component {
     if (this.state.clicked) {
       return (
         <div>
-          <h2>Nearby Events:</h2>
+          <h2>Nearby Events</h2>
           <List>{this.state.titles.map(function(item) {
             return (
-              <ListItem href={'https://www.google.com/search?q='+item} target="_blank"/>
+              <ListItem className="event" primaryText={item}
+              leftIcon={<ActionGrade color={pinkA200} />}
+              rightIcon={<ActionGrade color={pinkA200} />}
+              href={'https://www.google.com/search?q='+item}
+              target="_blank"/>
             )
           })}</List>
         </div>
