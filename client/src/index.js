@@ -266,6 +266,7 @@ class Index extends React.Component {
 
   submitForm() {
     let data = {
+      title: this.state.currentgroup,
       location: this.state.location,
       budget: this.state.budget,
       radius: this.state.distance,
@@ -286,7 +287,9 @@ class Index extends React.Component {
     });
 
     axios.post('/group', {title: this.state.currentgroup, location: this.state.location, members: this.state.currentUser})
-    .then((res) => console.log('new group post succeed in index', res))
+    .then((res) =>
+
+    console.log('new group post succeed in index', res))
     .catch((err) => console.log('new group post error in index', err));
   }
 

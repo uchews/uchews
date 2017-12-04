@@ -102,10 +102,6 @@ app.post('/invitation', function(req, res) {
   )
 })
 
-
-
-
-
 app.post('/events', (function(req, res) {
   console.log('line 109 events get req.body =', req.body);
 
@@ -172,7 +168,6 @@ app.post('/update', (req, res) => {
 app.get('/group', (req, res) => {
   var userGroups = [];
   var username = req.session.user;
-  var members = req.body.members;
   db.Group.find({}, function(err, groups) {
     if (err) {
       console.log("current user not found as member of any group")
@@ -188,7 +183,6 @@ app.get('/group', (req, res) => {
   res.end();
 });
 
-
 app.post('/group', (req, res) => {
   db.Group.findOneAndUpdate({ title: req.body.title },
     { members: req.body.members, location: req.body.location }, { upsert: true, new: true }, (err, group) => {
@@ -196,6 +190,37 @@ app.post('/group', (req, res) => {
       res.end();
     }
   )
+})
+
+app.get('/searchGroup', (req, res) => {
+  db.Group.find({ title: req.body.title }, function(err, group) {
+    if (err) throw err;
+    if (group) {
+      res.send(group);
+      res.end()
+    } else {
+      res.send('false');
+      res.end();
+    }
+  })
+})
+
+app.post('/joinGroup', (req, res) => {
+  db.Group.find({ title: req.body.title }, function(err, group) {
+    var members = group.members;
+    if (err) throw err;
+    if (group) {
+      db.Group.findOneAndUpdate({ title: req.body.title }, { members: members.concat(req.body.user) }, { new: true }, (err, update) => {
+        if (err) throw err;
+        res.send('success');
+        res.end();
+      })
+    } else {
+      //this should not be hit
+      res.send('false');
+      res.end();
+    }
+  })
 })
 
 
@@ -221,7 +246,6 @@ app.post('/image', (req, res) => {
   })
 })
 // --------- We are currently using username1 but as soon as Mike implement session.user we will change it to req.session.user
-
 
 app.post('/login', (req, res) => {
   const user = req.body;
