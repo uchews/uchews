@@ -10,8 +10,11 @@ import {pinkA200, transparent} from 'material-ui/styles/colors';
 
 const style = {
   button: {
-    margin: '0 0 100px 0'
+    margin: '27.7px 0 47px 0'
   },
+  hungry: {
+    margin: '57px 0 0 0'
+  }
 };
 
 class EventSearch extends React.Component {
@@ -70,7 +73,7 @@ class EventSearch extends React.Component {
   render() {
     if (this.state.clicked) {
       return (
-        <div>
+        <div id="findnearbyevents">
           <h2>Nearby Events</h2>
           <List>{this.state.titles.map(function(item) {
             return (
@@ -85,7 +88,7 @@ class EventSearch extends React.Component {
       )
     } else {
       return (
-        <div>
+        <div id="findnearbyevents">
           <h1 style={style.hungry}>Find Nearby Events</h1>
           <TextField name="zip" hintText="Zip" value={this.state.zip} onChange={this.entryZip} /><br/>
           <TextField name="query" hintText="Type of Event" value={this.state.query} onChange={this.entryQuery} /><br/>
