@@ -67,7 +67,7 @@ class GroupList extends React.Component {
         return(
           <div id="group">
             <h2>{this.groupTitle(group.title)}</h2>
-            <RaisedButton icon={<Build/>} default={true} label="Result"/>
+            <RaisedButton icon={<Build/>} default={true} onClick={() => {this.props.updateGroup(group.title)}} label="Result"/>
               <List>
                 {group.members.map((member)=> {
                   return(

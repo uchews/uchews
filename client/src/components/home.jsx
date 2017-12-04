@@ -186,7 +186,7 @@ class Home extends React.Component {
           <div>
             <FlatButton label="" onClick={this.toggleGroupList} labelPosition="before" default={true} icon={<Loyalty />}/>
           </div>
-          <GroupList grouplist={this.state.grouplist}/>
+          <GroupList updateGroup={this.props.updateGroup} grouplist={this.state.grouplist}/>
           <Preference prefs={this.props.prefs} />
           <EventSearch />
           <Invitation currentUser={this.props.currentUser} />
