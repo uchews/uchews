@@ -67,7 +67,6 @@ class Login extends React.Component {
           })
         } else {
           $('#login')[0].id = "";
-          console.log('THIS PORTION IS HIT WHEN SUCCESSFUL LOGIN')
           this.props.clickHandle('home');
         }
       })

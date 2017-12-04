@@ -34,10 +34,10 @@ const Results = ({ results }) => {
         {results[1][0].formatted_address}
         <h3>Rating: {results[1][0].rating}</h3>
 
-        {/*<h1>#3</h1>
+        <h1>#3</h1>
         <h2>{results[2][0].name}</h2>
         {results[2][0].formatted_address}
-        <h3>Rating: {results[2][0].rating}</h3>*/}
+        <h3>Rating: {results[2][0].rating}</h3>
       </Paper>
     </div>
   )
