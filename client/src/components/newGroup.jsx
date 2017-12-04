@@ -6,7 +6,7 @@ import Input from './input.jsx';
 
 const style = {
   button: {
-    margin: '0 0 100px 0'
+    margin: '0 25% 27px 25%'
   },
   hungry: {
     margin: '100px 0 20px 0'
@@ -39,8 +39,8 @@ class NewGroup extends React.Component {
   }
 
   render() {
-    return (<div>
-      <h2>New Group:</h2>
+    return (<div id="makeGroup">
+      <h2>Create a new Group!</h2>
       <TextField name="title" value={this.state.title} onChange={this.handleInputChange} /><br/>
       <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Get Started!"/>
     </div>)

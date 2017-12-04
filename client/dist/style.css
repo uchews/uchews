@@ -5,9 +5,18 @@ body {
    text-align: center;
  }
 
- h1 {
+ h1{
   color: #FF5252;
   font-family: sans-serif, "Chewy";
+ }
+
+ h2{
+  color: #29B6F6;
+  font-family: sans-serif, "Chewy";
+ }
+
+ #makeGroup {
+  display: none;
  }
 
   input:-webkit-autofill,
@@ -122,6 +131,10 @@ h1 {
 @keyframes fadein {
   from { opacity:  0; }
   to { opacity:  1; }
+}
+
+#searchGroup {
+  display: none;
 }
 
 .section-meals img {

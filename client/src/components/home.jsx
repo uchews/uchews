@@ -16,6 +16,8 @@ import Invitation from './invitation.jsx';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import Face from 'material-ui/svg-icons/action/face';
 import Favorite from 'material-ui/svg-icons/action/favorite';
+import SearchBar from 'material-ui-search-bar';
+import TextField from 'material-ui/TextField';
 
 
 
@@ -29,7 +31,7 @@ const style = {
     width: '70%'
   },
   button: {
-    margin: '0 25% 17px 25%',
+    margin: '0 25% 27px 25%',
     textColor: 'white'
   },
   hungry: {
@@ -41,12 +43,16 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grouplist: []
+      grouplist: [],
+      searchGroup: ''
     }
     this.onFileLoad = this.onFileLoad.bind(this);
+    this.searchBar = this.searchBar.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
+
     const context = this;
     axios.get('/checkSession')
       .then((response) => {
@@ -79,6 +85,36 @@ class Home extends React.Component {
     console.log(e.target.result, file.name);
   }
 
+  searchBar() {
+    if (this.state.searchBar) {
+      return (
+        <SearchBar id="searchBar"
+        onChange={() => console.log('onChange')}
+        onRequestSearch={() => console.log('onRequestSearch')}
+        style={{
+          margin: '0 auto',
+          maxWidth: 800
+        }}
+        />
+      )
+    }
+  }
+
+  toggleSearch() {
+    $('#searchGroup').slideToggle('slow', function() {
+      console.log('toggling searchGroup');
+    })
+  }
+
+  toggleMake() {
+    $('#makeGroup').slideToggle('slow', function() {
+      console.log('toggling makeGroup');
+    })
+  }
+
+  handleInputChange(event) {
+    this.setState({searchGroup: event.target.value})
+  }
 
   render() {
     return (
@@ -86,12 +122,17 @@ class Home extends React.Component {
         <Paper style={style.paper} zDepth={3}>
           <Avatar onClick={ () => this.props.betterUpdateState('image') } size={107} id="avatar" src={this.props.imageUrl}/>
           <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
+          {this.searchBar()}
           <RaisedButton style={style.button} default={true} onClick={() => {this.props.clickHandle('types')}} icon={<ActionAndroid />} label="Update your preferences!"/>
-          <RaisedButton icon={<Face/>} style={style.button} default={true} onClick={() => {this.props.clickHandle('input')}} label="Create a Group!"/>
-          <RaisedButton icon={<Favorite/>} style={style.button} default={true} onClick={() => {this.props.clickHandle('types')}} label="Join a Group!"/>
-          <h2 style={style.hungry}>Hungry?</h2><br/>
+          <RaisedButton icon={<Face/>} style={style.button} default={true} onClick={this.toggleMake} label="Create a Group!"/>
           <NewGroup clickHandle={this.props.clickHandle}
             updateGroup={this.props.updateGroup}/>
+          <RaisedButton icon={<Favorite/>} style={style.button} default={true} onClick={this.toggleSearch} label="Join a Group!"/>
+          <div id="searchGroup">
+          <h2>Search for the Group you want to join!</h2>
+          <TextField name="title" value={this.state.searchGroup} onChange={this.handleInputChange} /><br/>
+          <RaisedButton style={style.button} primary={true} onClick={this.handleClick} label="Get Started!"/>
+          </div>
           <GroupList grouplist={this.state.grouplist}/>
           <Preference prefs={this.props.prefs} />
           <EventSearch />
