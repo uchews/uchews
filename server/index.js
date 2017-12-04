@@ -91,9 +91,11 @@ app.post('/invitation', function(req, res) {
   // console.log('EMAIL---line 82 SERVER/INDEX.JS REQ = ', req.body)
   const msg = {
       to: req.body.guest,
-      from: 'JediSchoolOfMasterDan@dan.com',
-      subject: 'Jedi Mast Dan Kwon has summond you',
-      text: 'Simply enter the group name: ' + 'HACKREACTOR',
+      from: 'uchewsinvitation@uchews.com',
+      subject: `${req.body.currentUser} invites you!`,
+      text: `Simply enter the group name '${req.body.tableId}' to chews with ${req.body.currentUser}!`
+      // from: 'JediSchoolOfMasterDan@dan.com',
+      // subject: 'Jedi Mast Dan Kwon has summond you',
     };
     sgMail.send(msg).then(function() {
       res.send('sent success');
@@ -186,7 +188,7 @@ app.get('/group', (req, res) => {
 
 app.post('/group', (req, res) => {
   db.Group.findOneAndUpdate({ title: req.body.title },
-    { members: req.body.members, location: req.body.location }, { upsert: true, new: true }, (err, group) => {
+    { $push: {members: req.body.members}, location: req.body.location }, { upsert: true, new: true }, (err, group) => {
       res.send(group);
       res.end();
     }

@@ -161,7 +161,7 @@ class Home extends React.Component {
           <GroupList grouplist={this.state.grouplist}/>
           <Preference prefs={this.props.prefs} />
           <EventSearch />
-          <Invitation />
+          <Invitation currentUser={this.props.currentUser} />
         </Paper>
       </div>
     )
