@@ -34,16 +34,16 @@ class Preference extends React.Component {
     if (this.state.prefsClicked) {
       return (
         <div>
-          <h2>click for prefs</h2>
+          <h2>Your preferences:</h2>
           <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Prefs" />
           <br/>
-          <h2>Preferences: {this.state.prefs[0].foodType.map(function(item) {
+          <h2>Favor: {this.state.prefs[0].foodType.map(function(item) {
             return (
               <ul>{item}</ul>
             )
           })}</h2>
           <br/>
-          <h2>Deal-Breakers: {this.state.prefs[0].willNotEat.map(function(item) {
+          <h2>Avoid: {this.state.prefs[0].willNotEat.map(function(item) {
             return (
               <ul>{item}</ul>
             )
@@ -53,7 +53,7 @@ class Preference extends React.Component {
     } else {
       return (
       <div>
-        <h2>click for prefs</h2>
+        <h2>Your preferences:</h2>
         <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Prefs" />
       </div>
     )
