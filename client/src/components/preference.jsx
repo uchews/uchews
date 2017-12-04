@@ -21,12 +21,12 @@ class Preference extends React.Component {
   }
 
   getPrefs() {
-    var thisContext = this;
+    var scope = this;
     axios.get('/prefs')
     .then(function(response) {
       console.log('prefs.jsx', response.data)
-      thisContext.setState({
-        prefsClicked: !thisContext.state.prefsClicked,
+      scope.setState({
+        prefsClicked: !scope.state.prefsClicked,
         prefs: response.data
       })
     })
@@ -62,23 +62,31 @@ class Preference extends React.Component {
     )
   }
 
+  // togglePreferences() {
+  //   $('#showpreferences').slideToggle('slow', function() {
+  //     console.log('toggling searchGroup');
+  //   })
+  // }
+
   render() {
     if (this.state.prefsClicked) {
-      return (
-        <div>
+      return(
+      <div>
+        <h2>Your taste</h2>
+        <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Prefs" />
+        <div id="showpreferences">
           {this.preferenceList()}
           {this.dealbreakerList()}
-          <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Prefs" />
         </div>
-      )
-    } else {
-      return (
+      </div>
+    )
+    }
+    return(
       <div>
         <h2>Your taste</h2>
         <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Prefs" />
       </div>
     )
-    }
   }
 }
 export default Preference;

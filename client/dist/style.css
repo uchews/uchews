@@ -187,6 +187,10 @@ h1 {
   display: none;
 }
 
+#showpreferenes {
+  display: none;
+}
+
 .section-meals img {
     float: left;
     display: inline-block;
