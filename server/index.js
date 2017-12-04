@@ -22,7 +22,6 @@ var phq = require('predicthq')
 var client = new phq.Client({access_token: "vcbZQQcuQvsXd2lwYDZyAfDxUbG6Sd"})
 // var phq = new Client({access_token: "vcbZQQcuQvsXd2lwYDZyAfDxUbG6Sd"})
 
-
 require('dotenv').config();
 
 //Set up google login protocol
