@@ -305,6 +305,28 @@ app.get('/checkSession', (req, res) => {
 
 // })
 
+// var iterate = function(members) {
+//   members.forEach((member) => {
+//     console.log('FOUND FOR MEMBER', member);
+//     db.User.find({username: member}, function(err, user) {
+//       data[wantToEat].concat(user.foodType);
+//       data[willNotEat].concat(user.willNotEat);
+//     })
+//   })
+// }
+
+// var query = function(req, res) {
+//   google.handleQueries(req.body, (results) => {
+//     res.send(results);
+//     res.end();
+//   })
+// }
+
+
+// var handleQueries = function(cb1, cb2) {
+
+// }
+
 
 //Client sends survey results to /input/findRestaurants for API querying and ranking
 app.post('/input/findRestaurants', (req, res) => {
@@ -312,25 +334,28 @@ app.post('/input/findRestaurants', (req, res) => {
   var data = {
     title: req.body.title
   }
-
-  db.Group.findOne({title: title}, function(err, group) {
-    data[budget] = group.budget;
-    data[location] = group.location;
-    data[radius] = group.radius;
-    data[wantToEat] = [];
-    data[willNotEat] = [];
+  db.Group.findOne({title: data.title}, function(err, group) {
+    console.log('FOUND THIS', group);
+    data['budget'] = group.budget;
+    data['location'] = group.location;
+    data['radius'] = group.radius;
+    data['wantToEat'] = [];
+    data['willNotEat'] = [];
     // var memberNumber = group.members.length;
     group.members.forEach((member) => {
+      console.log('FOUND FOR MEMBER', member);
       db.User.find({username: member}, function(err, user) {
-        data[wantToEat].concat(user.foodType);
-        data[willNotEat].concat(user.willNotEat);
-      })
-    }).then(() => {
-      google.handleQueries(req.body, (results) => {
-        res.send(results)
+        data['wantToEat'] = data['wantToEat'].concat(user.foodType);
+        data['willNotEat'] = data['willNotEat'].concat(user.willNotEat);
       })
     })
-  })
+  }).then(() => {
+      console.log('HANDLE QUERIES HITTT');
+      google.handleQueries(data, (results) => {
+        res.send(results);
+        res.end();
+      })
+    })
 
   // db.User.find({username: req.session.user}, (err, user) => {
   //   if (err) {console.log('server post findRestaurants db err', err)};
