@@ -180,6 +180,9 @@ class Home extends React.Component {
             <TextField name="title" value={this.state.searchGroup} onChange={this.handleInputChange} /><br/>
             <RaisedButton style={style.button} default={true} onClick={this.joinGroup} label="Search Group"/>
           </div>
+          <div id="blueberries"></div>
+          {/*<div id="strawberries"></div>
+          <div id="oranges"></div>*/}
           <div>
             <FlatButton label="" onClick={this.toggleGroupList} labelPosition="before" default={true} icon={<Loyalty />}/>
           </div>
