@@ -110,7 +110,7 @@ app.post('/events', (function(req, res) {
   var geoLat;
   var geoLong;
   //get coordinates from zip:
-  axios.get('https://www.zipcodeapi.com/rest/pKqMXtSq6aTwEtVa1pQUD1f9SwXfoxrBD6OSFPBbHsbGGUZXSZiak0KQUh4NgoT0/info.json/' + req.body.zip + '/degrees')
+  axios.get('https://www.zipcodeapi.com/rest/boNLXhEF8B9vaJihdy8c1Sqs4h3uGshczS6pwsw2YTF2iuLymjwEZXkSPZ6jRUou/info.json/' + req.body.zip + '/degrees')
     .then(function(response){
       console.log('response.data', response.data);
       console.log('response.status', response.status);
