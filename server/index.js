@@ -178,9 +178,10 @@ app.get('/group', (req, res) => {
         userGroups.push(group);
       }
     });
+    res.send(userGroups);
+    res.end();
   });
-  res.send(userGroups);
-  res.end();
+
 });
 
 app.post('/group', (req, res) => {
@@ -192,34 +193,25 @@ app.post('/group', (req, res) => {
   )
 })
 
-app.get('/searchGroup', (req, res) => {
-  db.Group.find({ title: req.body.title }, function(err, group) {
+app.post('/searchGroup', (req, res) => {
+  var group = db.Group.find({ title: req.body.title },(err, group) => {
     if (err) throw err;
-    if (group) {
-      res.send(group);
-      res.end()
-    } else {
-      res.send('false');
-      res.end();
-    }
-  })
+    var members = group[0].members
+    res.send(members);
+    res.end();
+  });
 })
 
 app.post('/joinGroup', (req, res) => {
-  db.Group.find({ title: req.body.title }, function(err, group) {
-    var members = group.members;
+  var members = req.body.members;
+  if (!members.includes(req.session.user)) {
+    members = members.concat(req.session.user);
+  }
+  var members = req.body.members.concat(req.session.user);
+  db.Group.findOneAndUpdate({ title: req.body.title }, { members: members }, { new: true }, (err, update) => {
     if (err) throw err;
-    if (group) {
-      db.Group.findOneAndUpdate({ title: req.body.title }, { members: members.concat(req.body.user) }, { new: true }, (err, update) => {
-        if (err) throw err;
-        res.send('success');
-        res.end();
-      })
-    } else {
-      //this should not be hit
-      res.send('false');
-      res.end();
-    }
+    res.send(update);
+    res.end();
   })
 })
 
