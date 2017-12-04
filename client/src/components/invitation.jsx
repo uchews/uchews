@@ -1,13 +1,6 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
 import axios from 'axios';
-import GroupList from './grouplist.jsx';
-import NewGroup from './newGroup.jsx';
-import Preference from './preference.jsx';
+
 
 
 
@@ -32,13 +25,14 @@ class Invitation extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        guest: ''
+        guest: '',
+        group: ' '
     }
     this.sendEmail = this.sendEmail.bind(this);
-    this.guestEmail = this.guestEmail.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  guestEmail(input) {
+  handleChange(input) {
     // console.log('should be guests email =', input.target.value)
     this.setState({guest: input.target.value});
   }
@@ -64,7 +58,7 @@ class Invitation extends React.Component {
       <div>
         <Paper style={style.paper} zDepth={3}>
           <h1 style={style.hungry}>Invite Guest</h1>
-          <input placeholder="Email" onChange={this.guestEmail} />
+          <input placeholder="Email" onChange={this.handleChange} />
           <h2 style={style.hungry}>Hungry?</h2>
           <RaisedButton style={style.button} primary={true} onClick={this.sendEmail} label="Invite!" />
         </Paper>

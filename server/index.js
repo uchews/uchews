@@ -58,7 +58,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds119436.mlab.com:19436/uchews`})
+  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds123956.mlab.com:23956/uchewstwo`})
 }));
 
 app.use(passport.initialize());
@@ -90,11 +90,13 @@ app.post('/signup', (req, res) => {
 app.post('/invitation', function(req, res) {
   // console.log('EMAIL---line 82 SERVER/INDEX.JS REQ = ', req.body)
   const msg = {
-      to: req.body.guest,
-      from: 'JediSchoolOfMasterDan@dan.com',
-      subject: 'Jedi Mast Dan Kwon has summond you',
-      text: 'Simply enter the group name: ' + 'HACKREACTOR',
-    };
+    to: req.body.guest,
+    from: 'uchewsnnvitation@uchews.com',
+    subject: `${req.body.currentUser} invites you!`,
+    text: `Simply enter the group name '${req.body.tableId}' to chews with ${req.body.currentUser}!`
+    // from: 'JediSchoolOfMasterDan@dan.com',
+    // subject: 'Jedi Mast Dan Kwon has summond you',
+  };
     sgMail.send(msg).then(function() {
       res.send('sent success');
       res.end();

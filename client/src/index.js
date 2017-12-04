@@ -58,7 +58,7 @@ class Index extends React.Component {
       results: [],
       open: false,
       prefs: {},
-      currentgroup: ''
+      currentGroup: ''
     };
     this.clickHandle = this.clickHandle.bind(this);
     this.changeHandle = this.changeHandle.bind(this);
@@ -143,8 +143,8 @@ class Index extends React.Component {
   }
 
   updateGroup(title, cb) {
-    this.setState({currentgroup: title}, () => {
-    // console.log('currentgroup in index', this.state.currentgroup)
+    this.setState({currentGroup: title}, () => {
+    // console.log('currentGroup in index', this.state.currentGroup)
     cb();
 
     });
@@ -266,7 +266,7 @@ class Index extends React.Component {
 
   submitForm() {
     let data = {
-      title: this.state.currentgroup,
+      title: this.state.currentGroup,
       location: this.state.location,
       budget: this.state.budget,
       radius: this.state.distance,
@@ -279,18 +279,24 @@ class Index extends React.Component {
     axios.post('/input/findRestaurants', data)
     .then( (response) => {
       this.setState({ results: response.data }, () => this.clickHandle('results'));
-    });
+    })
+    .catch((err) => console.log('findRestaurants in index', err.config));
 
     axios.post('/update', data)
     .then( (response) => {
       this.setState({ prefs: data }); //made a state to pass to prefs.jsx
     });
 
+
     axios.post('/group', {title: this.state.currentgroup, location: this.state.location, members: this.state.currentUser})
     .then((res) =>
 
     console.log('new group post succeed in index', res))
     .catch((err) => console.log('new group post error in index', err));
+
+    axios.post('/group', {title: this.state.currentGroup, location: this.state.location, members: this.state.currentUser})
+    .then((res) => console.log('new group post succeed in index', res))
+    .catch((err) => console.log('new group post error in index', err.config));
   }
 
 
@@ -433,9 +439,12 @@ class Index extends React.Component {
             {this.appBar()}
             {this.drawer()}
             {this.logo()}
-            <Home betterUpdateState={this.betterUpdateState} imageUrl={this.state.imageUrl} currentUser={this.state.currentUser} appView={this.state.appView}
-                  clickHandle={this.clickHandle} prefs={this.state.prefs}
-                  updateGroup={this.updateGroup} />
+            <Home betterUpdateState={this.betterUpdateState}
+              imageUrl={this.state.imageUrl}
+              currentUser={this.state.currentUser}
+              appView={this.state.appView}
+              clickHandle={this.clickHandle} prefs={this.state.prefs}
+              updateGroup={this.updateGroup} />
           </MuiThemeProvider>
       )
     } else if (this.state.appView === 'login') {
