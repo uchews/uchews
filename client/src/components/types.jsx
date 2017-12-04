@@ -20,16 +20,12 @@ const style = {
     height:'130%'
   },
   letterStyle1: {
-    color: '#00008B',
     textAlign: 'center',
     fontFamily: 'optima',
-    fontWeight: 'bold'
   },
   letterStyle2: {
-    color: '#00008B',
     textAlign: 'center',
-    fontWeight: 'bold',
-    fontFamily: 'impact'
+    fontFamily: 'helvetica'
   }
 }
 
