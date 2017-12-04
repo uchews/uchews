@@ -19,7 +19,19 @@ const style = {
     width:'23%',
     height:'130%'
   },
-};
+  letterStyle1: {
+    color: '#00008B',
+    textAlign: 'center',
+    fontFamily: 'optima',
+    fontWeight: 'bold'
+  },
+  letterStyle2: {
+    color: '#00008B',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontFamily: 'impact'
+  }
+}
 
 class Types extends React.Component {
   constructor(props) {
@@ -45,8 +57,8 @@ class Types extends React.Component {
     return (
       <div>
       <Paper style={style.paper} zDepth={3}>
-        <h1>CHEWSER: #{this.props.counter}</h1>
-        <h2>Which cuisine types would you like to eat?</h2>
+        <h1 style={style.letterStyle2}>CHEWSER: #{this.props.counter}</h1>
+        <h2 style={style.letterStyle1}>Which cuisine types would you like to eat?</h2>
         {this.props.foodsYum()}
         <div style={style.container}></div>
         <h2>Which cuisine types do you refuse to eat?</h2>
