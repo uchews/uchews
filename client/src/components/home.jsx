@@ -36,6 +36,9 @@ const style = {
     margin: '0 25% 27px 25%',
     textColor: 'white'
   },
+  button1: {
+    margin: '17px 0 0 0 '
+  },
   hungry: {
     margin: '37px 0 20px 0'
   }
@@ -178,14 +181,13 @@ class Home extends React.Component {
           <div id="searchGroup">
             <h2>Let's join an existing group</h2>
             <TextField name="title" value={this.state.searchGroup} onChange={this.handleInputChange} /><br/>
-            <RaisedButton style={style.button} default={true} onClick={this.joinGroup} label="Search Group"/>
+            <RaisedButton style={style.button} primary={true} onClick={this.joinGroup} label="Search Group"/>
           </div>
           <div id="blueberries"></div>
           {/*<div id="strawberries"></div>
           <div id="oranges"></div>*/}
-          <div>
-            <FlatButton label="" onClick={this.toggleGroupList} labelPosition="before" default={true} icon={<Loyalty />}/>
-          </div>
+          <FlatButton style={style.button1} label="" onClick={this.toggleGroupList} labelPosition="before" default={true} icon={<Loyalty />}/>
+
           <GroupList updateGroup={this.props.updateGroup} submitForm={this.props.submitForm} grouplist={this.state.grouplist}/>
           <Preference prefs={this.props.prefs} />
           <EventSearch />
