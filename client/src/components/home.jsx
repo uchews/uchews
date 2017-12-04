@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import axios from 'axios';
-import GroupList from './grouplist.jsx';
+import GroupList from './groupList.jsx';
 import NewGroup from './newGroup.jsx';
 import Preference from './preference.jsx';
 import EventSearch from './eventSearch.jsx';
