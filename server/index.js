@@ -290,28 +290,6 @@ app.get('/checkSession', (req, res) => {
 
 
 //Client sends survey results to /input/findRestaurants for API querying and ranking
-// app.post('/input/findRestaurants', (req, res) => {
-//   //look up members in group schema with currentgroup
-//   console.log('req.body.title--->', req.body.title)
-//   db.Group.find({title: req.body.title}, (err, group) => {
-//     if (err) {console.log('server post findRestaurants group err', err);}
-//     console.log('group in findRestaurants--->', group);
-//     //look up each member in user schema
-//     group[0].members.forEach((user) => {
-//       db.User.find({username: user}, (err, user) => {
-//         if (err) {console.log('server post findRestaurants user err', err)};
-//         req.body.wantToEat.push(user[0].wantToEat);
-//         req.body.willNotEat.push(user[0].willNotEat);
-//         console.log('server post merge user prefs', req.body)
-//       } )
-//       delete req.body.title;
-//       google.handleQueries(req.body, (results) => {
-//         res.send(results);
-//       });
-//     })
-//   });
-// });
-
 app.post('/input/findRestaurants', (req, res) => {
   db.User.find({username: req.session.user}, (err, user) => {
     if (err) {console.log('server post findRestaurants db err', err)};
