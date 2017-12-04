@@ -36,6 +36,9 @@ const style = {
     margin: '0 25% 27px 25%',
     textColor: 'white'
   },
+  button1: {
+    margin: '17px 0 0 0 '
+  },
   hungry: {
     margin: '37px 0 20px 0'
   }
@@ -183,9 +186,8 @@ class Home extends React.Component {
           <div id="blueberries"></div>
           {/*<div id="strawberries"></div>
           <div id="oranges"></div>*/}
-          <div>
-            <FlatButton label="" onClick={this.toggleGroupList} labelPosition="before" default={true} icon={<Loyalty />}/>
-          </div>
+          <FlatButton style={style.button1} label="" onClick={this.toggleGroupList} labelPosition="before" default={true} icon={<Loyalty />}/>
+
           <GroupList updateGroup={this.props.updateGroup} submitForm={this.props.submitForm} grouplist={this.state.grouplist}/>
           <Preference prefs={this.props.prefs} />
           <EventSearch />

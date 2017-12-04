@@ -27,6 +27,8 @@ body {
       transition-delay: background-color 5000s, color 5000s;
   }
 
+
+
 #logo {
   height: 157px;
   margin-top: 0;
@@ -158,7 +160,12 @@ h1 {
   background-attachment: fixed;
 }
 
+#id {
+  margin-top: 10.7px;
+}
+
 #strawberries {
+  margin-top: 20.7px;
   width: 100%;
   height: 77px;
   background-image: url('https://images.unsplash.com/photo-1488551511020-571c741f122a?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
@@ -173,7 +180,6 @@ h1 {
   background-size: cover;
   background-attachment: fixed;
 }
-
 
 
 #group {
