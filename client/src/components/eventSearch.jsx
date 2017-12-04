@@ -10,8 +10,11 @@ import {pinkA200, transparent} from 'material-ui/styles/colors';
 
 const style = {
   button: {
-    margin: '0 0 100px 0'
+    margin: '37px 0 47px 0'
   },
+  hungry: {
+    margin: '57px 0 0 0'
+  }
 };
 
 class EventSearch extends React.Component {

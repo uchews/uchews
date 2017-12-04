@@ -19,8 +19,11 @@ const style = {
     margin: '0 0 100px 0'
   },
   hungry: {
-    margin: '100px 0 20px 0'
-  }
+    margin: '0 0 20px 0'
+  },
+  daniel: {
+    margin: '20px 0 20px 0'
+  },
 };
 
 class Invitation extends React.Component {
@@ -60,7 +63,7 @@ class Invitation extends React.Component {
           <h1 style={style.hungry}>Invite Guest</h1>
           <TextField name="guest" hintText="Email" value={this.state.guest} onChange={this.handleChange} /><br/>
           <TextField name="group" hintText="Group" value={this.state.group} onChange={this.handleChange} />
-          <h2 style={style.hungry}>Hungry?</h2>
+          <h2 style={style.daniel}>Hungry?</h2>
           <RaisedButton style={style.button} primary={true} onClick={this.sendEmail} label="Invite!" />
       </div>
     )
