@@ -58,7 +58,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds123956.mlab.com:23956/uchewstwo`})
+  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds119436.mlab.com:19436/uchews`})
 }));
 
 app.use(passport.initialize());
@@ -173,7 +173,7 @@ app.get('/group', (req, res) => {
 
 app.post('/group', (req, res) => {
   db.Group.findOneAndUpdate({ title: req.body.title },
-    { members: req.body.members, location: req.body.location }, { upsert: true, new: true }, (err, group) => {
+    {$push: {members: req.body.members}, location: req.body.location }, { upsert: true, new: true }, (err, group) => {
       res.send(group);
       res.end();
     }

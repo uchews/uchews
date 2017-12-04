@@ -111,7 +111,7 @@ class Input extends React.Component {
             <RadioButton value={4} label="$$$$" />
           </RadioButtonGroup><br />
 
-          <RaisedButton label="Next" primary={true} onClick={() => this.props.clickHandle("types")} />
+          <RaisedButton label="Next" primary={true} onClick={() => this.props.clickHandle("waiting")} />
 
         </form>
       </Paper>
