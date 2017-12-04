@@ -335,6 +335,9 @@ app.post('/input/findRestaurants', (req, res) => {
     title: req.body.title
   }
   db.Group.findOne({title: data.title}, function(err, group) {
+    var length = group.length;
+    var counter = 0;
+    var promises = [];
     console.log('FOUND THIS', group);
     data['budget'] = group.budget;
     data['location'] = group.location;
@@ -344,18 +347,25 @@ app.post('/input/findRestaurants', (req, res) => {
     // var memberNumber = group.members.length;
     group.members.forEach((member) => {
       console.log('FOUND FOR MEMBER', member);
-      db.User.find({username: member}, function(err, user) {
+      promises.push(db.User.findOne({username: member}, function(err, user) {
         data['wantToEat'] = data['wantToEat'].concat(user.foodType);
         data['willNotEat'] = data['willNotEat'].concat(user.willNotEat);
-      })
+      }))
     })
-  }).then(() => {
-      console.log('HANDLE QUERIES HITTT');
+    Promise.all(promises).then(function() {
       google.handleQueries(data, (results) => {
         res.send(results);
         res.end();
       })
     })
+  })
+  // .then(() => {
+  //     console.log('HANDLE QUERIES HITTT');
+  //     google.handleQueries(data, (results) => {
+  //       res.send(results);
+  //       res.end();
+  //     })
+  //   })
 
   // db.User.find({username: req.session.user}, (err, user) => {
   //   if (err) {console.log('server post findRestaurants db err', err)};
