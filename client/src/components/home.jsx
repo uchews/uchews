@@ -18,6 +18,8 @@ import Face from 'material-ui/svg-icons/action/face';
 import Favorite from 'material-ui/svg-icons/action/favorite';
 import SearchBar from 'material-ui-search-bar';
 import TextField from 'material-ui/TextField';
+import Loyalty from 'material-ui/svg-icons/action/loyalty';
+
 
 
 
@@ -52,6 +54,7 @@ class Home extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.joinGroup = this.joinGroup.bind(this);
     this.getGroup = this.getGroup.bind(this);
+    this.toggleGroupList = this.toggleGroupList.bind(this);
   }
 
   componentDidMount() {
@@ -121,9 +124,17 @@ class Home extends React.Component {
     })
   }
 
+  toggleGroupList() {
+    $('#grouplist').slideToggle('slow', function() {
+      console.log('toggling grouplist');
+    })
+  }
+
   handleInputChange(event) {
     this.setState({searchGroup: event.target.value})
   }
+
+
 
   // showSearchResult() {
   //   axios.post('/searchGroup', {
@@ -167,7 +178,13 @@ class Home extends React.Component {
           <div id="searchGroup">
             <h2>Let's join an existing group</h2>
             <TextField name="title" value={this.state.searchGroup} onChange={this.handleInputChange} /><br/>
-            <RaisedButton style={style.button} primary={true} onClick={this.joinGroup} label="Search Group"/>
+            <RaisedButton style={style.button} default={true} onClick={this.joinGroup} label="Search Group"/>
+          </div>
+          <div id="blueberries"></div>
+          {/*<div id="strawberries"></div>
+          <div id="oranges"></div>*/}
+          <div>
+            <FlatButton label="" onClick={this.toggleGroupList} labelPosition="before" default={true} icon={<Loyalty />}/>
           </div>
           <GroupList grouplist={this.state.grouplist}/>
           <Preference prefs={this.props.prefs} />

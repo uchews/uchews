@@ -110,6 +110,14 @@ img {
         animation: fadein 2.7s;
 }
 
+#preferences, #dealbreakers, #break, #prefer {
+  -webkit-animation: fadein 2.7s; /* Safari, Chrome and Opera > 12.1 */
+   -moz-animation: fadein 2.7s; /* Firefox < 16 */
+    -ms-animation: fadein 2.7s; /* Internet Explorer */
+     -o-animation: fadein 2.7s; /* Opera < 12.1 */
+        animation: fadein 2.7s;
+}
+
 .row2 {
   background-image: url('https://images.unsplash.com/photo-1501171901942-5e8b5c41d6e1?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
 }
@@ -124,6 +132,11 @@ img {
   margin-top: 10%;
 }
 
+#contact {
+  border-style: none;
+  border-width: 7px;
+  border-color: lightblue;
+}
 h1 {
   margin: 7%;
 }
@@ -133,7 +146,48 @@ h1 {
   to { opacity:  1; }
 }
 
+#grouplist {
+  display: none;
+}
+
+#blueberries {
+  width: 100%;
+  height: 77px;
+  background-image: url('https://images.unsplash.com/photo-1502911478555-cada2f65234f?auto=format&fit=crop&w=1650&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#strawberries {
+  width: 100%;
+  height: 77px;
+  background-image: url('https://images.unsplash.com/photo-1488551511020-571c741f122a?auto=format&fit=crop&w=1950&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#oranges {
+  width: 100%;
+  height: 77px;
+  background-image: url('https://images.unsplash.com/photo-1485381473713-c6131409c0be?auto=format&fit=crop&w=1910&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#group {
+  border: 7px;
+  border-style: solid;
+  margin: 7px;
+  border-color: #F48FB1;
+/*   background-image: linear-gradient(), url('https://images.unsplash.com/photo-1425934398893-310a009a77f9?auto=format&fit=crop&w=1951&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D');
+ */  background-attachment: fixed;
+  background-size: cover;
+}
 #searchGroup {
+  display: none;
+}
+
+#showpreferenes {
   display: none;
 }
 
@@ -143,7 +197,7 @@ h1 {
     background-color: red;
     width: 25%;
     height: auto;
-    opacity: 0.7;
+    opacity: 0.77;
     margin: 3%;
     padding-left: 0;
     height: auto;
