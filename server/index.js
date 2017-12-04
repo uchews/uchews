@@ -58,7 +58,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds123956.mlab.com:23956/uchewstwo`})
+  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds119436.mlab.com:19436/uchews`})
 }));
 
 app.use(passport.initialize());
@@ -289,15 +289,21 @@ app.get('/checkSession', (req, res) => {
 
 //Client sends survey results to /input/findRestaurants for API querying and ranking
 app.post('/input/findRestaurants', (req, res) => {
-  db.User.find({username: req.session.user}, (err, user) => {
-    if (err) {console.log('server post findRestaurants db err', err)};
-    req.body.wantToEat.push(user[0].wantToEat);
-    req.body.willNotEat.push(user[0].willNotEat);
-    console.log('server post merge user prefs', req.body)
-  } )
-  google.handleQueries(req.body, (results) => {
-    res.send(results);
+  //look up members in group schema with currentgroup
+  console.log('req.body.title--->', req.body.title)
+  db.Group.find({title: req.body.title}, (err, group) => {
+    if (err) {console.log('server post findRestaurants group err', err);}
+    console.log('group in findRestaurants--->', group);
   });
+    db.User.find({username: req.session.user}, (err, user) => {
+      if (err) {console.log('server post findRestaurants user err', err)};
+      req.body.wantToEat.push(user[0].wantToEat);
+      req.body.willNotEat.push(user[0].willNotEat);
+      console.log('server post merge user prefs', req.body)
+    } )
+    google.handleQueries(req.body, (results) => {
+      res.send(results);
+    });
 });
 
 
