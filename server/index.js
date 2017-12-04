@@ -58,7 +58,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds119436.mlab.com:19436/uchews`})
+  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds123956.mlab.com:23956/uchewstwo`})
 }));
 
 app.use(passport.initialize());

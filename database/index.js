@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds119436.mlab.com:19436/uchews`, { mongoUseClient: true});
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds123956.mlab.com:23956/uchewstwo`, { mongoUseClient: true});
 
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
