@@ -284,26 +284,26 @@ class Index extends React.Component {
 
   submitForm() {
     let data = {
-      title: this.state.currentGroup,
-      location: this.state.location,
-      budget: this.state.budget,
-      radius: this.state.distance,
-      wantToEat: this.state.wantToEat,
-      willNotEat: this.state.willNotEat
+      title: this.state.currentGroup
+      // location: this.state.location,
+      // budget: this.state.budget,
+      // radius: this.state.distance,
+      // wantToEat: this.state.wantToEat,
+      // willNotEat: this.state.willNotEat
     };
 
     console.log('submitting', data);
 
     axios.post('/input/findRestaurants', data)
     .then( (response) => {
-      this.setState({ results: response.data }, () => this.clickHandle('results'));
-    })
+      this.setState({ results: response.data })
+    }).then(()=>{this.setState({ appView: 'results'})})
     .catch((err) => console.log('findRestaurants in index', err.config));
 
-    axios.post('/update', data)
-    .then( (response) => {
-      this.setState({ prefs: data }); //made a state to pass to prefs.jsx
-    });
+    // axios.post('/update', data)
+    // .then( (response) => {
+    //   this.setState({ prefs: data }); //made a state to pass to prefs.jsx
+    // });
 
 
     // axios.post('/group', {title: this.state.currentgroup, location: this.state.location, members: this.state.currentUser})
@@ -461,7 +461,7 @@ class Index extends React.Component {
               currentUser={this.state.currentUser}
               appView={this.state.appView}
               clickHandle={this.clickHandle} prefs={this.state.prefs}
-              updateGroup={this.updateGroup} />
+              updateGroup={this.updateGroup} submitForm={this.submitForm}/>
           </MuiThemeProvider>
       )
     } else if (this.state.appView === 'login') {
