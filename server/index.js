@@ -137,16 +137,14 @@ app.post('/events', (function(req, res) {
 
 
 //*New* get user's Prefs from db for preference.jsx
-app.get('/prefs', (function(req, res) {
-  console.log('Hellow from server/index.js line 79 USERNAME-------->', req.session.user );
-  db.User.find({username: req.session.user }, function(error, something) {
+app.get('/prefs', function(req, res) {
+  db.User.find({username: req.session.user }, function(error, user) {
     if (error) {
-      console.log('Error userinfo Get server/index.js line 82', error);
+      throw err;
     }
-    console.log('BENJI --------> line 84 sever/index.js', something)
-    res.status(200).send(something)
+    res.status(200).send(user)
   });
-}));
+});
 
 
 
@@ -154,10 +152,7 @@ app.post('/update', (req, res) => {
   console.log('line 94 SERVER/INDEX.JS REQ = ', req.body)
   db.User.findOneAndUpdate({ username: req.session.user },
     {
-      distance: req.body.distance,
-      location: req.body.location,
-      budget: req.body.budget,
-      foodType: req.body.wantToEat,
+      foodType: req.body.foodType,
       willNotEat: req.body.willNotEat,
       // username: 'dug' //TEMPORARY was  req.body.username but index.js of app was sending empty string.
     }, { upsert: true }, (err, user) => {

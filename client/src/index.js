@@ -255,7 +255,7 @@ class Index extends React.Component {
   updatePreference(cb) {
     var callback = cb;
     var data = {
-      wantToEat: this.state.wantToEat,
+      foodType: this.state.wantToEat,
       willNotEat: this.state.willNotEat
     }
     axios.post('/update', data)

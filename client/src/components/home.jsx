@@ -147,6 +147,7 @@ class Home extends React.Component {
       var members = response.data;
       axios.post('/joinGroup', { title: scope.state.searchGroup, members: members }).then((response) => {
         this.getGroup();
+        this.setState({ searchGroup: '' })
       })
     })
   }
