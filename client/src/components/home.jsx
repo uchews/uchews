@@ -164,6 +164,10 @@ class Home extends React.Component {
     this.setState({searchGroup: event.target.value})
   }
 
+  toggleAccount(event) {
+
+  }
+
 
 
   // showSearchResult() {
@@ -210,15 +214,20 @@ class Home extends React.Component {
             <TextField name="title" value={this.state.searchGroup} onChange={this.handleInputChange} /><br/>
             <RaisedButton style={style.button} primary={true} onClick={this.joinGroup} label="Search Group"/>
           </div>
-          <div id="blueberries"></div>
+          <div id="blueberries"></div><br />
           {/*<div id="strawberries"></div>
           <div id="oranges"></div>*/}
           <RaisedButton style={style.button1} label="See My Groups" onClick={this.toggleGroupList} labelPosition="after" default={true} icon={<Loyalty />}/>
 
-          <GroupList updateGroup={this.props.updateGroup} submitForm={this.props.submitForm} grouplist={this.state.grouplist}/>
+          <GroupList updateGroup={this.props.updateGroup} submitForm={this.props.submitForm} grouplist={this.state.grouplist}/><br /><br /><br />
+          <RaisedButton icon={<Face/>} style={style.button} default={true} onClick={this.toggleAccount} label="My Account"/>
+
+
           <Preference prefs={this.props.prefs} />
           <EventSearch />
           <Invitation currentUser={this.props.currentUser} />
+
+
         </Paper>
       </div>
     )
