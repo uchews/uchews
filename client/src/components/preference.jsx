@@ -6,6 +6,31 @@ const style = {
   button: {
     margin: '0 0 0 0'
   },
+  letterStyle1: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'optima',
+  },
+  letterStyle2: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'avant guard'
+  },
+  letterStyle3: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'helvetica'
+  },
+  letterStyle4: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'futura'
+  },
+  letterStyle5: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'copperplate'
+  }
 };
 
 class Preference extends React.Component {
@@ -35,7 +60,7 @@ class Preference extends React.Component {
   preferenceList() {
     return (
       <div id="div">
-        <h1 id="preferences">Preferences</h1>
+        <h1 id="preferences" style={style.letterStyle4}>Preferences</h1>
         {this.state.prefs[0].foodType.map((food) => {
           return (
             <div id="prefer">
@@ -50,7 +75,7 @@ class Preference extends React.Component {
   dealbreakerList() {
     return (
       <div id="div">
-        <h1 id="dealbreakers">Deal Breakers</h1>
+        <h1 id="dealbreakers" style={style.letterStyle5}>Deal Breakers</h1>
         {this.state.prefs[0].willNotEat.map((food) => {
           return (
             <div id="break">
@@ -72,8 +97,8 @@ class Preference extends React.Component {
     if (this.state.prefsClicked) {
       return(
       <div>
-        <h2>Your taste</h2>
-        <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Prefs" />
+        <h2 style={style.letterStyle4}>See Your Preferences:</h2>
+        <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Show My Preferences" />
         <div id="showpreferences">
           {this.preferenceList()}
           {this.dealbreakerList()}
@@ -83,8 +108,8 @@ class Preference extends React.Component {
     }
     return(
       <div>
-        <h2>Your taste</h2>
-        <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Prefs" />
+        <h2 style={style.letterStyle4}>Your Preferences:</h2>
+        <RaisedButton style={style.button} primary={true} onClick={this.getPrefs} label="Get My Preferences" />
       </div>
     )
   }

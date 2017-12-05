@@ -64,7 +64,7 @@ class Login extends React.Component {
         console.log(response.data)
         if (response.data === false) {
           this.setState({
-            floatUser: 'incorrect username or password'
+            floatUser: 'Incorrect username or password! Please try again!'
           })
         } else {
           $('#login')[0].id = "";
@@ -74,7 +74,7 @@ class Login extends React.Component {
       .catch((err) => {
         console.log('could not reach server')
         this.setState({
-            floatUser: 'incorrect username, try again'
+            floatUser: 'Incorrect username, please try again!'
         })
       })
   }
@@ -92,7 +92,7 @@ class Login extends React.Component {
             <Paper style={style.text} zDepth={1}>
                 <div>
                   <TextField
-                    hintText="Username Field"
+                    hintText="username"
                     floatingLabelText={this.state.floatUser}
                     underlineShow={false}
                     onChange={this.onUserChange}
@@ -103,7 +103,7 @@ class Login extends React.Component {
                 </div>
                 <div>
                   <TextField
-                    hintText="Password Field"
+                    hintText="password"
                     floatingLabelText="password"
                     type="password"
                     underlineShow={false}

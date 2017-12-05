@@ -41,8 +41,35 @@ const style = {
   },
   hungry: {
     margin: '37px 0 20px 0'
+  },
+   letterStyle1: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'optima',
+  },
+  letterStyle2: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'avant guard'
+  },
+  letterStyle3: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'helvetica'
+  },
+  letterStyle4: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'futura'
+  },
+  letterStyle5: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'copperplate'
   }
 };
+
+
 
 class Home extends React.Component {
   constructor(props) {
@@ -137,6 +164,10 @@ class Home extends React.Component {
     this.setState({searchGroup: event.target.value})
   }
 
+  toggleAccount(event) {
+
+  }
+
 
 
   // showSearchResult() {
@@ -171,7 +202,7 @@ class Home extends React.Component {
       <div>
         <Paper style={style.paper} zDepth={3}>
           <Avatar onClick={ () => this.props.betterUpdateState('image') } size={107} id="avatar" src={this.props.imageUrl}/>
-          <h1 style={style.hungry}>Hello {this.props.currentUser}!</h1>
+          <h1 style={style.letterStyle4}>Hello {this.props.currentUser}!</h1>
           {this.searchBar()}
           <RaisedButton style={style.button} default={true} onClick={() => {this.props.clickHandle('types')}} icon={<ActionAndroid />} label="Update your preferences!"/>
           <RaisedButton icon={<Face/>} style={style.button} default={true} onClick={this.toggleMake} label="Create a Group!"/>
@@ -179,19 +210,24 @@ class Home extends React.Component {
             updateGroup={this.props.updateGroup}/>
           <RaisedButton icon={<Favorite/>} style={style.button} default={true} onClick={this.toggleSearch} label="Join a Group!"/>
           <div id="searchGroup">
-            <h2>Let's join an existing group</h2>
+            <h2 style={style.letterStyle4}>Let's join an existing group</h2>
             <TextField name="title" value={this.state.searchGroup} onChange={this.handleInputChange} /><br/>
             <RaisedButton style={style.button} primary={true} onClick={this.joinGroup} label="Search Group"/>
           </div>
-          <div id="blueberries"></div>
+          <div id="blueberries"></div><br />
           {/*<div id="strawberries"></div>
           <div id="oranges"></div>*/}
-          <FlatButton style={style.button1} label="" onClick={this.toggleGroupList} labelPosition="before" default={true} icon={<Loyalty />}/>
+          <RaisedButton style={style.button1} label="See My Groups" onClick={this.toggleGroupList} labelPosition="after" default={true} icon={<Loyalty />}/>
 
-          <GroupList updateGroup={this.props.updateGroup} submitForm={this.props.submitForm} grouplist={this.state.grouplist}/>
+          <GroupList updateGroup={this.props.updateGroup} submitForm={this.props.submitForm} grouplist={this.state.grouplist}/><br /><br /><br />
+          <RaisedButton icon={<Face/>} style={style.button} default={true} onClick={this.toggleAccount} label="My Account"/>
+
+
           <Preference prefs={this.props.prefs} />
           <EventSearch />
           <Invitation currentUser={this.props.currentUser} />
+
+
         </Paper>
       </div>
     )
