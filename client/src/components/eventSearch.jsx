@@ -13,9 +13,15 @@ const style = {
     margin: '27.7px 0 47px 0'
   },
   hungry: {
-    margin: '57px 0 0 0'
+    margin: '57px 0 0 0',
+    fontFamily: 'futura'
+  },
+  letterStyle4: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'futura'
   }
-};
+}
 
 class EventSearch extends React.Component {
   constructor(props) {
@@ -89,7 +95,7 @@ class EventSearch extends React.Component {
     } else {
       return (
         <div id="findnearbyevents">
-          <h1 style={style.hungry}>Find Nearby Events</h1>
+          <h1 style={style.letterStyle4}>Find Nearby Events</h1>
           <TextField name="zip" hintText="Zip" value={this.state.zip} onChange={this.entryZip} /><br/>
           <TextField name="query" hintText="Type of Event" value={this.state.query} onChange={this.entryQuery} /><br/>
           <RaisedButton style={style.button} primary={true} onClick={this.postEvents} label="Show Events" />

@@ -213,7 +213,7 @@ class Home extends React.Component {
           <div id="blueberries"></div>
           {/*<div id="strawberries"></div>
           <div id="oranges"></div>*/}
-          <FlatButton style={style.button1} label="See My Groups" onClick={this.toggleGroupList} labelPosition="before" default={true} icon={<Loyalty />}/>
+          <RaisedButton style={style.button1} label="See My Groups" onClick={this.toggleGroupList} labelPosition="after" default={true} icon={<Loyalty />}/>
 
           <GroupList updateGroup={this.props.updateGroup} submitForm={this.props.submitForm} grouplist={this.state.grouplist}/>
           <Preference prefs={this.props.prefs} />

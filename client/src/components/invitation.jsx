@@ -19,12 +19,20 @@ const style = {
     margin: '0 0 100px 0'
   },
   hungry: {
-    margin: '20.7px 0 20px 0'
+    margin: '20.7px 0 20px 0',
+    fontFamily: 'copperplate'
   },
-  daniel: {
-    margin: '37px 0 20px 0'
+  menu: {
+    margin: '37px 0 20px 0',
+    fontFamily: 'copperplate'
+
   },
-};
+  letterStyle4: {
+    margin: '37px 0 20px 0',
+    textAlign: 'center',
+    fontFamily: 'futura'
+  }
+}
 
 class Invitation extends React.Component {
   constructor(props) {
@@ -60,10 +68,10 @@ class Invitation extends React.Component {
   render() {
     return (
       <div>
-          <h1 style={style.hungry}>Invite Guest</h1>
+          <h1 style={style.letterStyle4}>Invite A Friend!</h1>
           <TextField name="guest" hintText="Email" value={this.state.guest} onChange={this.handleChange} /><br/>
           <TextField name="group" hintText="Group" value={this.state.group} onChange={this.handleChange} />
-          <h2 style={style.daniel}>Hungry?</h2>
+          <h2 style={style.daniel}>Your Friends Are Waiting to Eat With You!</h2>
           <RaisedButton style={style.button} primary={true} onClick={this.sendEmail} label="Invite!" />
       </div>
     )
