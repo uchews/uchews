@@ -25,7 +25,19 @@ const style = {
   },
   letterStyle2: {
     textAlign: 'center',
+    fontFamily: 'avant guard'
+  },
+  letterStyle3: {
+    textAlign: 'center',
     fontFamily: 'helvetica'
+  },
+  letterStyle4: {
+    textAlign: 'center',
+    fontFamily: 'futura'
+  },
+  letterStyle5: {
+    textAlign: 'center',
+    fontFamily: 'copperplate'
   }
 }
 
@@ -53,11 +65,11 @@ class Types extends React.Component {
     return (
       <div>
       <Paper style={style.paper} zDepth={3}>
-        <h1 style={style.letterStyle2}>CHEWSER: #{this.props.counter}</h1>
-        <h2 style={style.letterStyle1}>Which cuisine types would you like to eat?</h2>
+        <h1 style={style.letterStyle5}>CHEWSER: #{this.props.counter}</h1>
+        <h2 style={style.letterStyle2}>Which cuisine types would you like to eat?</h2>
         {this.props.foodsYum()}
         <div style={style.container}></div>
-        <h2>Which cuisine types do you refuse to eat?</h2>
+        <h2 style={style.letterStyle2}>Which cuisine types do you refuse to eat?</h2>
 
         {this.props.foodsEww()}
         <div style={style.container}></div>
