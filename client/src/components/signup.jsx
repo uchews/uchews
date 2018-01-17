@@ -33,7 +33,8 @@ class Signup extends React.Component {
     this.state = {
       username: '',
       password: '',
-      floatUser: 'username'
+      floatUser: 'username',
+      imageUrl: ''
     }
     this.onUserChange = this.onUserChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -47,14 +48,21 @@ class Signup extends React.Component {
   }
 
   handleSubmit() {
+    var scope = this;
     axios.post('/signup', {
       username: this.state.username,
       password: this.state.password,
+      imageUrl: this.state.imageUrl
     })
       .then((response) => {
+        if (!scope.state.imageUrl) {
+          scope.props.updateImage('https://pbs.twimg.com/profile_images/839721704163155970/LI_TRk1z_400x400.jpg');
+        }
+        scope.props.updateUser(scope.state.username);
         this.setState({
           username: '',
-          password: ''
+          password: '',
+          imageUrl: ''
         })
         console.log(response.data)
         if (response.data === false) {
@@ -103,6 +111,16 @@ class Signup extends React.Component {
                     />
                     <Divider />
                   </div>
+                  <div>
+                    <TextField
+                      hintText="imageURL field"
+                      floatingLabelText="profile image URL"
+                      underlineShow={false}
+                      name="imageUrl" onChange={this.onUserChange}
+                      value={this.state.imageUrl}
+                    />
+                    <Divider />
+                  </div>
               </Paper>
                   <div>
                     <RaisedButton
@@ -111,7 +129,7 @@ class Signup extends React.Component {
                       label="SIGNUP"
                       onClick={this.handleSubmit}
                     />
-                    <h3>Have an account?</h3>
+                    <h3>Have an account already?</h3>
                     <RaisedButton
                       style={style.button}
                       label="login"

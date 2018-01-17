@@ -62,13 +62,13 @@ class MapContainer extends React.Component {
           name={this.props.results[1][0].name}
           address={this.props.results[1][0].formatted_address}
           position={{lat: this.props.results[1][0].geometry.location.lat, lng: this.props.results[1][0].geometry.location.lng}} />
-        <Marker
+        {/* <Marker
           label={`#3`}
           title={`Choice 3`}
           onClick={this.onMarkerClick}
           name={this.props.results[2][0].name}
           address={this.props.results[2][0].formatted_address}
-          position={{lat: this.props.results[2][0].geometry.location.lat, lng: this.props.results[2][0].geometry.location.lng}} />
+          position={{lat: this.props.results[2][0].geometry.location.lat, lng: this.props.results[2][0].geometry.location.lng}} />*/}
 
         <InfoWindow
           marker={this.state.activeMarker}
@@ -83,4 +83,4 @@ class MapContainer extends React.Component {
   }
 }
 
-export default GoogleApiWrapper({ apiKey: ('AIzaSyDZlPDfPJC0wH6fF-fTCMRWs3c78KzlnF4') })(MapContainer);
+export default GoogleApiWrapper({ apiKey: (process.env.GOOGLE_API_KEY) })(MapContainer);

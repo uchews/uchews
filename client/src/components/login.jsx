@@ -5,12 +5,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
+import $ from 'jquery';
 
 const style = {
   text: {
     height: '80%',
     width: '80%',
-    margin: 40,
+    marginTop: 27,
+    marginBottom: 11.7,
     textAlign: 'left',
     display: 'inline-block',
   },
@@ -43,12 +45,18 @@ class Login extends React.Component {
     })
   }
 
+  componentDidMount() {
+    $('body')[0].id = 'login';
+  }
+
+
   handleSubmit() {
     axios.post('/login', {
       username: this.state.username,
       password: this.state.password,
     })
       .then((response) => {
+        this.props.updateUser(this.state.username);
         this.setState({
           username: '',
           password: ''
@@ -56,16 +64,17 @@ class Login extends React.Component {
         console.log(response.data)
         if (response.data === false) {
           this.setState({
-            floatUser: 'incorrect username or password'
+            floatUser: 'Incorrect username or password! Please try again!'
           })
         } else {
+          $('#login')[0].id = "";
           this.props.clickHandle('home');
         }
       })
       .catch((err) => {
         console.log('could not reach server')
         this.setState({
-            floatUser: 'incorrect username, try again'
+            floatUser: 'Incorrect username, please try again!'
         })
       })
   }
@@ -83,7 +92,7 @@ class Login extends React.Component {
             <Paper style={style.text} zDepth={1}>
                 <div>
                   <TextField
-                    hintText="Username Field"
+                    hintText="username"
                     floatingLabelText={this.state.floatUser}
                     underlineShow={false}
                     onChange={this.onUserChange}
@@ -94,8 +103,8 @@ class Login extends React.Component {
                 </div>
                 <div>
                   <TextField
-                    hintText="Password Field"
-                    floatingLabelText="Password"
+                    hintText="password"
+                    floatingLabelText="password"
                     type="password"
                     underlineShow={false}
                     onChange={this.onUserChange}
@@ -127,8 +136,6 @@ class Login extends React.Component {
           </div>
         </Paper>
       </form>
-
-
     )
   }
 }

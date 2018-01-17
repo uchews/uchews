@@ -10,6 +10,18 @@ const db = require('../database/index.js');
 const google = require('./googlePlacesHelpers.js');
 const authenticate = require('./authenticate.js');
 const handleRestaurants = require('./handleRestaurants.js');
+var axios = require('axios');
+
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
+
+
+//EVENTS API ATTEMPT
+global.fetch = require('node-fetch')
+var phq = require('predicthq')
+var client = new phq.Client({access_token: "vcbZQQcuQvsXd2lwYDZyAfDxUbG6Sd"})
+// var phq = new Client({access_token: "vcbZQQcuQvsXd2lwYDZyAfDxUbG6Sd"})
+
 
 require('dotenv').config();
 
@@ -46,8 +58,9 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds163745.mlab.com:63745/uchews`})
+  store: new MongoStore({ url: `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds123956.mlab.com:23956/uchewstwo`})
 }));
+
 app.use(passport.initialize());
 //set up the route to Google for authentication
 app.get('/auth/google',
@@ -74,6 +87,158 @@ app.post('/signup', (req, res) => {
   });
 });
 
+app.post('/invitation', function(req, res) {
+  // console.log('EMAIL---line 82 SERVER/INDEX.JS REQ = ', req.body)
+  const msg = {
+      to: req.body.guest,
+      from: 'uchewsinvitation@uchews.com',
+      subject: `${req.body.currentUser} invites you!`,
+      text: `Simply enter the group name '${req.body.tableId}' to chews with ${req.body.currentUser}!`
+      // from: 'JediSchoolOfMasterDan@dan.com',
+      // subject: 'Jedi Mast Dan Kwon has summond you',
+    };
+    sgMail.send(msg).then(function() {
+      res.send('sent success');
+      res.end();
+    }
+  )
+})
+
+app.post('/events', (function(req, res) {
+  console.log('line 109 events get req.body =', req.body);
+
+  var geoLat;
+  var geoLong;
+  //get coordinates from zip:
+  axios.get('https://www.zipcodeapi.com/rest/boNLXhEF8B9vaJihdy8c1Sqs4h3uGshczS6pwsw2YTF2iuLymjwEZXkSPZ6jRUou/info.json/' + req.body.zip + '/degrees')
+    .then(function(response){
+      console.log('response.data', response.data);
+      console.log('response.status', response.status);
+      geoLat = response.data.lat;
+      geoLong =response.data.lng;
+      callEventsApi();
+    }).catch(function(error) {
+      console.log('ERROR ------line 121 server events =', error)
+    });
+
+  var callEventsApi = function() {
+    client.events.search({q: 'Jazz', within: '30km@' + geoLat + ',' + geoLong})
+      .then(function(results){
+        var events = results.toArray()
+        // for(var i=0; i < events.length; i++) {
+        //     console.info(events[i].rank, events[i].category, events[i].title, events[i].start, events[i].location )
+        //   }
+          console.log('EVENTS WAS SUCCESSFUL =', events)
+      res.status(200).send(events)
+      })
+        // console.log('BENJI --------> line 11 sever/index.js', results)
+  }
+}));
+
+
+
+
+//*New* get user's Prefs from db for preference.jsx
+app.get('/prefs', function(req, res) {
+  db.User.find({username: req.session.user }, function(error, user) {
+    if (error) {
+      throw err;
+    }
+    res.status(200).send(user)
+  });
+});
+
+
+
+app.post('/update', (req, res) => {
+  console.log('line 94 SERVER/INDEX.JS REQ = ', req.body)
+  db.User.findOneAndUpdate({ username: req.session.user },
+    {
+      foodType: req.body.foodType,
+      willNotEat: req.body.willNotEat,
+      // username: 'dug' //TEMPORARY was  req.body.username but index.js of app was sending empty string.
+    }, { upsert: true }, (err, user) => {
+      res.send('success');
+      res.end();
+    }
+  )
+})
+
+app.get('/group', (req, res) => {
+  var userGroups = [];
+  var username = req.session.user;
+  db.Group.find({}, function(err, groups) {
+    if (err) {
+      console.log("current user not found as member of any group")
+    }
+    groups.forEach(function(group) {
+      // console.log("GROUP: ", group);
+      if (group.members && group.members.includes(username)) {
+        userGroups.push(group);
+      }
+    });
+    res.send(userGroups);
+    res.end();
+  });
+
+});
+
+
+
+app.post('/group', (req, res) => {
+  db.Group.findOneAndUpdate({ title: req.body.title },
+    { members: [req.session.user], location: req.body.location, radius: req.body.radius, budget: req.body.radius, wantToEat: [], willNotEat: []}, { upsert: true, new: true }, (err, group) => {
+      res.send(group);
+      res.end();
+    }
+  )
+})
+
+app.post('/searchGroup', (req, res) => {
+  var group = db.Group.find({ title: req.body.title },(err, group) => {
+    if (err) throw err;
+    var members = group[0].members
+    res.send(members);
+    res.end();
+  });
+})
+
+app.post('/joinGroup', (req, res) => {
+  var members = req.body.members;
+  if (!members.includes(req.session.user)) {
+    members = members.concat(req.session.user);
+  }
+  var members = req.body.members.concat(req.session.user);
+  db.Group.findOneAndUpdate({ title: req.body.title }, { members: members }, { new: true }, (err, update) => {
+    if (err) throw err;
+    res.send(update);
+    res.end();
+  })
+})
+
+
+// --------- We are currently using username1 but as soon as Mike implement session.user we will change it to req.session.user
+app.get('/image', (req, res) => {
+  console.log('THIS IS THE CURRENT SESSION USER', req.session.user);
+  db.User.find({ username: req.session.user }, function(err, user) {
+    if (err) throw err;
+    console.log('THIS IS THE USER', user)
+    res.send(user[0].imageUrl);
+    res.end();
+  })
+})
+
+app.post('/image', (req, res) => {
+  const username = req.body.currentUser;
+  const imageUrl = req.body.imageUrl;
+  db.User.findOneAndUpdate({ username: username }, { imageUrl: imageUrl }, { new: true }, (err, updatedUser) => {
+    if (err) throw err;
+    console.log('SUCCESSFULLY SAVED IMAGEURL TO USER');
+    res.send('success');
+    res.end();
+  })
+})
+// --------- We are currently using username1 but as soon as Mike implement session.user we will change it to req.session.user
 
 app.post('/login', (req, res) => {
   const user = req.body;
@@ -81,10 +246,11 @@ app.post('/login', (req, res) => {
     if (!user) {
       res.send(false);
     } else {
+      req.session.user = req.body.username;
       bcrypt.compare(req.body.password, user.password, (err2, result) => {
         if (result) {
           db.User.findOneAndUpdate({ username: req.body.username }, { sessionID: req.sessionID }, { new: true }, (err, updatedUser) => {
-            res.send(result);
+            res.send('hello world');
           });
         } else {
           res.send(result);
@@ -95,6 +261,7 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
+  console.log('request session', req.session);
   req.session.destroy((err) => {
     if (err) {
       console.log('error on logout: ', err);
@@ -120,11 +287,95 @@ app.get('/checkSession', (req, res) => {
   });
 });
 
+// app.post('/compilePreferences', (req, res) => {
+//   var data = {
+//     title: req.body.title
+//   }
+//   db.Group.findOne({title: title}, function(err, group) {
+//     data[budget] = group.budget;
+//     data[location] = group.location;
+//     data[radius] = group.radius
+//     group.members.forEach((member) => {
+//       db.User.find({username: member}, function(err, user) {
+//         data[wantToEat].concat(user.foodType)
+
+//       })
+//     })
+//   })
+
+// })
+
+// var iterate = function(members) {
+//   members.forEach((member) => {
+//     console.log('FOUND FOR MEMBER', member);
+//     db.User.find({username: member}, function(err, user) {
+//       data[wantToEat].concat(user.foodType);
+//       data[willNotEat].concat(user.willNotEat);
+//     })
+//   })
+// }
+
+// var query = function(req, res) {
+//   google.handleQueries(req.body, (results) => {
+//     res.send(results);
+//     res.end();
+//   })
+// }
+
+
+// var handleQueries = function(cb1, cb2) {
+
+// }
+
+
 //Client sends survey results to /input/findRestaurants for API querying and ranking
 app.post('/input/findRestaurants', (req, res) => {
-  google.handleQueries(req.body, (results) => {
-    res.send(results);
-  });
+  {/*radius, wantToEat, willNotEat, location, budget*/}
+  var data = {
+    title: req.body.title
+  }
+  db.Group.findOne({title: data.title}, function(err, group) {
+    var length = group.length;
+    var counter = 0;
+    var promises = [];
+    console.log('FOUND THIS', group);
+    data['budget'] = group.budget;
+    data['location'] = group.location;
+    data['radius'] = group.radius;
+    data['wantToEat'] = [];
+    data['willNotEat'] = [];
+    // var memberNumber = group.members.length;
+    group.members.forEach((member) => {
+      console.log('FOUND FOR MEMBER', member);
+      promises.push(db.User.findOne({username: member}, function(err, user) {
+        data['wantToEat'] = data['wantToEat'].concat(user.foodType);
+        data['willNotEat'] = data['willNotEat'].concat(user.willNotEat);
+      }))
+    })
+    Promise.all(promises).then(function() {
+      google.handleQueries(data, (results) => {
+        res.send(results);
+        res.end();
+      })
+    })
+  })
+  // .then(() => {
+  //     console.log('HANDLE QUERIES HITTT');
+  //     google.handleQueries(data, (results) => {
+  //       res.send(results);
+  //       res.end();
+  //     })
+  //   })
+
+  // db.User.find({username: req.session.user}, (err, user) => {
+  //   if (err) {console.log('server post findRestaurants db err', err)};
+  //   req.body.wantToEat.push(user[0].wantToEat);
+  //   req.body.willNotEat.push(user[0].willNotEat);
+  //   console.log('server post merge user prefs', req.body)
+  // } )
+  // google.handleQueries(req.body, (results) => {
+  //   res.send(results);
+  // });
 });
 
 
